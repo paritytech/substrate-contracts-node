@@ -1,11 +1,11 @@
 [package]
-name = "node-template-runtime"
+name = "contracts-node-runtime"
 version = "3.0.0"
-authors = ["Substrate DevHub <https://github.com/substrate-developer-hub>"]
+authors = ["Parity Technologies <admin@parity.io>"]
 edition = "2018"
 license = "Unlicense"
-homepage = "https://substrate.dev"
-repository = "https://github.com/substrate-developer-hub/substrate-node-template/"
+homepage = "https://github.com/paritytech/substrate-contracts-node"
+repository = "https://github.com/paritytech/substrate-contracts-node"
 publish = false
 
 [package.metadata.docs.rs]
@@ -14,44 +14,53 @@ targets = ["x86_64-unknown-linux-gnu"]
 [dependencies]
 codec = { package = "parity-scale-codec", version = "2.0.0", default-features = false, features = ["derive"] }
 
-pallet-aura = { version = "4.0.0-dev", default-features = false, path = "../../../frame/aura" }
-pallet-balances = { version = "4.0.0-dev", default-features = false, path = "../../../frame/balances" }
-frame-support = { version = "4.0.0-dev", default-features = false, path = "../../../frame/support" }
-pallet-grandpa = { version = "4.0.0-dev", default-features = false, path = "../../../frame/grandpa" }
-pallet-randomness-collective-flip = { version = "4.0.0-dev", default-features = false, path = "../../../frame/randomness-collective-flip" }
-pallet-sudo = { version = "4.0.0-dev", default-features = false, path = "../../../frame/sudo" }
-frame-system = { version = "4.0.0-dev", default-features = false, path = "../../../frame/system" }
-pallet-timestamp = { version = "4.0.0-dev", default-features = false, path = "../../../frame/timestamp" }
-pallet-transaction-payment = { version = "4.0.0-dev", default-features = false, path = "../../../frame/transaction-payment" }
-frame-executive = { version = "4.0.0-dev", default-features = false, path = "../../../frame/executive" }
-sp-api = { version = "4.0.0-dev", default-features = false, path = "../../../primitives/api" }
-sp-block-builder = { path = "../../../primitives/block-builder", default-features = false, version = "4.0.0-dev"}
-sp-consensus-aura = { version = "0.10.0-dev", default-features = false, path = "../../../primitives/consensus/aura" }
-sp-core = { version = "4.0.0-dev", default-features = false, path = "../../../primitives/core" }
-sp-inherents = { path = "../../../primitives/inherents", default-features = false, version = "4.0.0-dev"}
-sp-offchain = { version = "4.0.0-dev", default-features = false, path = "../../../primitives/offchain" }
-sp-runtime = { version = "4.0.0-dev", default-features = false, path = "../../../primitives/runtime" }
-sp-session = { version = "4.0.0-dev", default-features = false, path = "../../../primitives/session" }
-sp-std = { version = "4.0.0-dev", default-features = false, path = "../../../primitives/std" }
-sp-transaction-pool = { version = "4.0.0-dev", default-features = false, path = "../../../primitives/transaction-pool" }
-sp-version = { version = "4.0.0-dev", default-features = false, path = "../../../primitives/version" }
+pallet-aura = { git = "https://github.com/paritytech/substrate", package = "pallet-aura", default-features = false }
+pallet-balances = { git = "https://github.com/paritytech/substrate", package = "pallet-balances", default-features = false }
+frame-support = { git = "https://github.com/paritytech/substrate", package = "frame-support", default-features = false }
+pallet-grandpa = { git = "https://github.com/paritytech/substrate", package = "pallet-grandpa", default-features = false }
+pallet-randomness-collective-flip = { git = "https://github.com/paritytech/substrate", package = "pallet-randomness-collective-flip", default-features = false }
+pallet-sudo = { git = "https://github.com/paritytech/substrate", package = "pallet-sudo", default-features = false }
+frame-system = { git = "https://github.com/paritytech/substrate", package = "frame-system", default-features = false }
+pallet-timestamp = { git = "https://github.com/paritytech/substrate", package = "pallet-timestamp", default-features = false }
+pallet-transaction-payment = { git = "https://github.com/paritytech/substrate", package = "pallet-transaction-payment", default-features = false }
+frame-executive = { git = "https://github.com/paritytech/substrate", package = "frame-executive", default-features = false }
+sp-api = { git = "https://github.com/paritytech/substrate", package = "sp-api", default-features = false }
+sp-block-builder = { git = "https://github.com/paritytech/substrate", package = "sp-block-builder", default-features = false }
+sp-consensus-aura = { git = "https://github.com/paritytech/substrate", package = "sp-consensus-aura", default-features = false }
+sp-core = { git = "https://github.com/paritytech/substrate", package = "sp-core", default-features = false }
+sp-inherents = { git = "https://github.com/paritytech/substrate", package = "sp-inherents", default-features = false }
+sp-offchain = { git = "https://github.com/paritytech/substrate", package = "sp-offchain", default-features = false }
+sp-runtime = { git = "https://github.com/paritytech/substrate", package = "sp-runtime", default-features = false }
+sp-session = { git = "https://github.com/paritytech/substrate", package = "sp-session", default-features = false }
+sp-std = { git = "https://github.com/paritytech/substrate", package = "sp-std", default-features = false }
+sp-transaction-pool = { git = "https://github.com/paritytech/substrate", package = "sp-transaction-pool", default-features = false }
+sp-version = { git = "https://github.com/paritytech/substrate", package = "sp-version", default-features = false }
 
 # Used for the node template's RPCs
-frame-system-rpc-runtime-api = { version = "4.0.0-dev", default-features = false, path = "../../../frame/system/rpc/runtime-api/" }
-pallet-transaction-payment-rpc-runtime-api = { version = "4.0.0-dev", default-features = false, path = "../../../frame/transaction-payment/rpc/runtime-api/" }
+frame-system-rpc-runtime-api = { git = "https://github.com/paritytech/substrate", package = "frame-system-rpc-runtime-api", default-features = false }
+pallet-transaction-payment-rpc-runtime-api = { git = "https://github.com/paritytech/substrate", package = "pallet-transaction-payment-rpc-runtime-api", default-features = false }
 
 # Used for runtime benchmarking
-frame-benchmarking = { version = "4.0.0-dev", default-features = false, path = "../../../frame/benchmarking", optional = true }
-frame-system-benchmarking = { version = "4.0.0-dev", default-features = false, path = "../../../frame/system/benchmarking", optional = true }
+frame-benchmarking = { git = "https://github.com/paritytech/substrate", default-features = false, package = "frame-benchmarking", optional = true }
+frame-system-benchmarking = { git = "https://github.com/paritytech/substrate", default-features = false, package = "frame-system-benchmarking", optional = true }
 hex-literal = { version = "0.3.1", optional = true }
 
 pallet-template = { version = "3.0.0", default-features = false, path = "../pallets/template" }
 
+# Contracts specific packages
+pallet-contracts = { git = "https://github.com/paritytech/substrate", package = "pallet-contracts", default-features = false }
+pallet-contracts-primitives = { git = "https://github.com/paritytech/substrate", package = "pallet-contracts-primitives", default-features = false }
+pallet-contracts-rpc-runtime-api = { git = "https://github.com/paritytech/substrate", package = "pallet-contracts-rpc-runtime-api", default-features = false }
+
 [build-dependencies]
-substrate-wasm-builder = { version = "5.0.0-dev", path = "../../../utils/wasm-builder" }
+substrate-wasm-builder =  { git = "https://github.com/paritytech/substrate", package = "substrate-wasm-builder" }
 
 [features]
-default = ["std"]
+default = [
+	"std",
+	# temporarily enable unstable contracts features by default, remove this before using on a production chain.
+	"contracts-unstable-interface",
+]
 std = [
 	"codec/std",
 	"frame-executive/std",
@@ -78,6 +87,9 @@ std = [
 	"sp-std/std",
 	"sp-transaction-pool/std",
 	"sp-version/std",
+	"pallet-contracts/std",
+	"pallet-contracts-primitives/std",
+	"pallet-contracts-rpc-runtime-api/std",
 ]
 runtime-benchmarks = [
 	"frame-benchmarking",
@@ -89,4 +101,9 @@ runtime-benchmarks = [
 	"pallet-template/runtime-benchmarks",
 	"pallet-timestamp/runtime-benchmarks",
 	"sp-runtime/runtime-benchmarks",
+]
+# Make contract callable functions marked as __unstable__ available. Do not enable
+# on live chains as those are subject to change.
+contracts-unstable-interface = [
+	"pallet-contracts/unstable-interface"
 ]
