@@ -129,6 +129,26 @@ pub fn native_version() -> NativeVersion {
 
 const NORMAL_DISPATCH_RATIO: Perbill = Perbill::from_percent(75);
 
+/// We assume that ~10% of the block weight is consumed by `on_initialize` handlers.
+/// This is used to limit the maximal weight of a single extrinsic.
+const AVERAGE_ON_INITIALIZE_RATIO: Perbill = Perbill::from_percent(10);
+
+/// We allow for 2 seconds of compute with a 6 second average block time.
+const MAXIMUM_BLOCK_WEIGHT: Weight = 2 * WEIGHT_PER_SECOND;
+
+// Prints debug output of the `contracts` pallet to stdout if the node is
+// started with `-lruntime::contracts=debug`.
+pub const CONTRACTS_DEBUG_OUTPUT: bool = true;
+
+// Unit = the base number of indivisible units for balances
+pub const UNIT: Balance = 1_000_000_000_000;
+pub const MILLIUNIT: Balance = 1_000_000_000;
+pub const MICROUNIT: Balance = 1_000_000;
+
+const fn deposit(items: u32, bytes: u32) -> Balance {
+	items as Balance * 15 * UNIT + (bytes as Balance) * 6 * UNIT
+}
+
 parameter_types! {
 	pub const Version: RuntimeVersion = VERSION;
 	pub const BlockHashCount: BlockNumber = 2400;
@@ -285,6 +305,59 @@ impl pallet_transaction_payment::Config for Runtime {
 impl pallet_sudo::Config for Runtime {
 	type Event = Event;
 	type Call = Call;
+}
+
+parameter_types! {
+	pub TombstoneDeposit: Balance = deposit(
+		1,
+		<pallet_contracts::Pallet<Runtime>>::contract_info_size(),
+	);
+	pub DepositPerContract: Balance = TombstoneDeposit::get();
+	pub const DepositPerStorageByte: Balance = deposit(0, 1);
+	pub const DepositPerStorageItem: Balance = deposit(1, 0);
+	pub RentFraction: Perbill = Perbill::from_rational(1u32, 30 * DAYS);
+	pub const SurchargeReward: Balance = 150 * MILLIUNIT;
+	pub const SignedClaimHandicap: u32 = 2;
+	// The lazy deletion runs inside on_initialize.
+	pub DeletionWeightLimit: Weight = AVERAGE_ON_INITIALIZE_RATIO *
+		RuntimeBlockWeights::get().max_block;
+	// The weight needed for decoding the queue should be less or equal than a fifth
+	// of the overall weight dedicated to the lazy deletion.
+	pub DeletionQueueDepth: u32 = ((DeletionWeightLimit::get() / (
+			<Runtime as pallet_contracts::Config>::WeightInfo::on_initialize_per_queue_item(1) -
+			<Runtime as pallet_contracts::Config>::WeightInfo::on_initialize_per_queue_item(0)
+		)) / 5) as u32;
+	pub Schedule: pallet_contracts::Schedule<Runtime> = Default::default();
+}
+
+impl pallet_contracts::Config for Runtime {
+	type Time = Timestamp;
+	type Randomness = RandomnessCollectiveFlip;
+	type Currency = Balances;
+	type Event = Event;
+	type Call = Call;
+	/// The safest default is to allow no calls at all.
+	///
+	/// Runtimes should whitelist dispatchables that are allowed to be called from contracts
+	/// and make sure they are stable. Dispatchables exposed to contracts are not allowed to
+	/// change because that would break already deployed contracts. The `Call` structure itself
+	/// is not allowed to change the indices of existing pallets, too.
+	type CallFilter = frame_support::traits::Nothing;
+	type RentPayment = ();
+	type SignedClaimHandicap = SignedClaimHandicap;
+	type TombstoneDeposit = TombstoneDeposit;
+	type DepositPerContract = DepositPerContract;
+	type DepositPerStorageByte = DepositPerStorageByte;
+	type DepositPerStorageItem = DepositPerStorageItem;
+	type RentFraction = RentFraction;
+	type SurchargeReward = SurchargeReward;
+	type WeightPrice = pallet_transaction_payment::Pallet<Self>;
+	type WeightInfo = pallet_contracts::weights::SubstrateWeight<Self>;
+	type ChainExtension = ();
+	type DeletionQueueDepth = DeletionQueueDepth;
+	type DeletionWeightLimit = DeletionWeightLimit;
+	type Schedule = Schedule;
+	type CallStack = [pallet_contracts::Frame<Self>; 31];
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
@@ -556,77 +629,4 @@ impl_runtime_apis! {
 			Contracts::rent_projection(address)
 		}
 	}
-}
-
-/// We assume that ~10% of the block weight is consumed by `on_initialize` handlers.
-/// This is used to limit the maximal weight of a single extrinsic.
-const AVERAGE_ON_INITIALIZE_RATIO: Perbill = Perbill::from_percent(10);
-
-/// We allow for 2 seconds of compute with a 6 second average block time.
-const MAXIMUM_BLOCK_WEIGHT: Weight = 2 * WEIGHT_PER_SECOND;
-
-// Prints debug output of the `contracts` pallet to stdout if the node is
-// started with `-lruntime::contracts=debug`.
-pub const CONTRACTS_DEBUG_OUTPUT: bool = true;
-
-// Unit = the base number of indivisible units for balances
-pub const UNIT: Balance = 1_000_000_000_000;
-pub const MILLIUNIT: Balance = 1_000_000_000;
-pub const MICROUNIT: Balance = 1_000_000;
-
-const fn deposit(items: u32, bytes: u32) -> Balance {
-	items as Balance * 15 * UNIT + (bytes as Balance) * 6 * UNIT
-}
-
-parameter_types! {
-	pub TombstoneDeposit: Balance = deposit(
-		1,
-		<pallet_contracts::Pallet<Runtime>>::contract_info_size(),
-	);
-	pub DepositPerContract: Balance = TombstoneDeposit::get();
-	pub const DepositPerStorageByte: Balance = deposit(0, 1);
-	pub const DepositPerStorageItem: Balance = deposit(1, 0);
-	pub RentFraction: Perbill = Perbill::from_rational(1u32, 30 * DAYS);
-	pub const SurchargeReward: Balance = 150 * MILLIUNIT;
-	pub const SignedClaimHandicap: u32 = 2;
-	// The lazy deletion runs inside on_initialize.
-	pub DeletionWeightLimit: Weight = AVERAGE_ON_INITIALIZE_RATIO *
-		RuntimeBlockWeights::get().max_block;
-	// The weight needed for decoding the queue should be less or equal than a fifth
-	// of the overall weight dedicated to the lazy deletion.
-	pub DeletionQueueDepth: u32 = ((DeletionWeightLimit::get() / (
-			<Runtime as pallet_contracts::Config>::WeightInfo::on_initialize_per_queue_item(1) -
-			<Runtime as pallet_contracts::Config>::WeightInfo::on_initialize_per_queue_item(0)
-		)) / 5) as u32;
-	pub Schedule: pallet_contracts::Schedule<Runtime> = Default::default();
-}
-
-impl pallet_contracts::Config for Runtime {
-	type Time = Timestamp;
-	type Randomness = RandomnessCollectiveFlip;
-	type Currency = Balances;
-	type Event = Event;
-	type Call = Call;
-	/// The safest default is to allow no calls at all.
-	///
-	/// Runtimes should whitelist dispatchables that are allowed to be called from contracts
-	/// and make sure they are stable. Dispatchables exposed to contracts are not allowed to
-	/// change because that would break already deployed contracts. The `Call` structure itself
-	/// is not allowed to change the indices of existing pallets, too.
-	type CallFilter = frame_support::traits::Nothing;
-	type RentPayment = ();
-	type SignedClaimHandicap = SignedClaimHandicap;
-	type TombstoneDeposit = TombstoneDeposit;
-	type DepositPerContract = DepositPerContract;
-	type DepositPerStorageByte = DepositPerStorageByte;
-	type DepositPerStorageItem = DepositPerStorageItem;
-	type RentFraction = RentFraction;
-	type SurchargeReward = SurchargeReward;
-	type WeightPrice = pallet_transaction_payment::Pallet<Self>;
-	type WeightInfo = pallet_contracts::weights::SubstrateWeight<Self>;
-	type ChainExtension = ();
-	type DeletionQueueDepth = DeletionQueueDepth;
-	type DeletionWeightLimit = DeletionWeightLimit;
-	type Schedule = Schedule;
-	type CallStack = [pallet_contracts::Frame<Self>; 31];
 }
