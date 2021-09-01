@@ -22,7 +22,7 @@ cargo install substrate-contracts-node --git https://github.com/paritytech/subst
 Since this repository is tracking Substrate's `master` it might not yet have been adjusted to support
 the super-recent Substrate changes.
 
-Thus if you get an error when building/installing, add the cargo `--locked` flag. The installation process
+Thus, if you get an error when building or installing add the cargo `--locked` flag. The installation process
 will then use the same versions as the `Cargo.lock` in this repository to ensure that the
 most recent working version of Substrate will be used.
 
@@ -37,3 +37,13 @@ substrate-contracts-node --dev --tmp
 ```
 The `--tmp` implies that a new chain will be created each time the command
 is executed. If you want to persist chain state across runs leave it out.
+
+### Show only Errors and Contract Debug Output
+
+To have only errors and contract debug output show up on the console you can
+supply `-lerror,runtime::contracts=debug` when starting the node. 
+
+Important: Debug output is only printed for RPC calls or off-chain tests ‒ not for transactions!
+
+See our FAQ for more details: 
+[How do I print something to the console from the runtime?](https://paritytech.github.io/ink-docs/faq/#how-do-i-print-something-to-the-console-from-the-runtime).
