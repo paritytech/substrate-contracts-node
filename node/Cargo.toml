@@ -1,6 +1,6 @@
 [package]
 name = "contracts-node"
-version = "3.0.0"
+version = "0.1.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 description = "Substrate node configured for smart contracts via `pallet-contracts`."
 edition = "2018"
@@ -55,7 +55,7 @@ pallet-contracts-rpc = { git = "https://github.com/paritytech/substrate", packag
 frame-benchmarking = { git = "https://github.com/paritytech/substrate", package = "frame-benchmarking" }
 frame-benchmarking-cli = { git = "https://github.com/paritytech/substrate", package = "frame-benchmarking-cli" }
 
-contracts-node-runtime = { version = "3.0.0", path = "../runtime" }
+contracts-node-runtime = { path = "../runtime" }
 
 [build-dependencies]
 substrate-build-script-utils = { git = "https://github.com/paritytech/substrate", package = "substrate-build-script-utils" }
