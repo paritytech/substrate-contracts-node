@@ -236,9 +236,14 @@ impl frame_system::Config for Runtime {
 
 impl pallet_randomness_collective_flip::Config for Runtime {}
 
+parameter_types! {
+	pub const MaxAuthorities: u32 = 32;
+}
+
 impl pallet_aura::Config for Runtime {
 	type AuthorityId = AuraId;
 	type DisabledValidators = ();
+	type MaxAuthorities = MaxAuthorities;
 }
 
 impl pallet_grandpa::Config for Runtime {
@@ -308,16 +313,10 @@ impl pallet_sudo::Config for Runtime {
 }
 
 parameter_types! {
-	pub TombstoneDeposit: Balance = deposit(
+	pub ContractDeposit: Balance = deposit(
 		1,
-		<pallet_contracts::Pallet<Runtime>>::contract_info_size(),
-	);
-	pub DepositPerContract: Balance = TombstoneDeposit::get();
-	pub const DepositPerStorageByte: Balance = deposit(0, 1);
-	pub const DepositPerStorageItem: Balance = deposit(1, 0);
-	pub RentFraction: Perbill = Perbill::from_rational(1u32, 30 * DAYS);
-	pub const SurchargeReward: Balance = 150 * MILLIUNIT;
-	pub const SignedClaimHandicap: u32 = 2;
+	  	<pallet_contracts::Pallet<Runtime>>::contract_info_size(),
+    );
 	// The lazy deletion runs inside on_initialize.
 	pub DeletionWeightLimit: Weight = AVERAGE_ON_INITIALIZE_RATIO *
 		RuntimeBlockWeights::get().max_block;
@@ -343,14 +342,7 @@ impl pallet_contracts::Config for Runtime {
 	/// change because that would break already deployed contracts. The `Call` structure itself
 	/// is not allowed to change the indices of existing pallets, too.
 	type CallFilter = frame_support::traits::Nothing;
-	type RentPayment = ();
-	type SignedClaimHandicap = SignedClaimHandicap;
-	type TombstoneDeposit = TombstoneDeposit;
-	type DepositPerContract = DepositPerContract;
-	type DepositPerStorageByte = DepositPerStorageByte;
-	type DepositPerStorageItem = DepositPerStorageItem;
-	type RentFraction = RentFraction;
-	type SurchargeReward = SurchargeReward;
+	type ContractDeposit = ContractDeposit;
 	type WeightPrice = pallet_transaction_payment::Pallet<Self>;
 	type WeightInfo = pallet_contracts::weights::SubstrateWeight<Self>;
 	type ChainExtension = ();
@@ -470,7 +462,7 @@ impl_runtime_apis! {
 		}
 
 		fn authorities() -> Vec<AuraId> {
-			Aura::authorities()
+			Aura::authorities().into_inner()
 		}
 	}
 
@@ -611,9 +603,9 @@ impl_runtime_apis! {
 			code: pallet_contracts_primitives::Code<Hash>,
 			data: Vec<u8>,
 			salt: Vec<u8>,
-		) -> pallet_contracts_primitives::ContractInstantiateResult<AccountId, BlockNumber>
+		) -> pallet_contracts_primitives::ContractInstantiateResult<AccountId>
 		{
-			Contracts::bare_instantiate(origin, endowment, gas_limit, code, data, salt, true, CONTRACTS_DEBUG_OUTPUT)
+			Contracts::bare_instantiate(origin, endowment, gas_limit, code, data, salt, CONTRACTS_DEBUG_OUTPUT)
 		}
 
 		fn get_storage(
@@ -621,12 +613,6 @@ impl_runtime_apis! {
 			key: [u8; 32],
 		) -> pallet_contracts_primitives::GetStorageResult {
 			Contracts::get_storage(address, key)
-		}
-
-		fn rent_projection(
-			address: AccountId,
-		) -> pallet_contracts_primitives::RentProjectionResult<BlockNumber> {
-			Contracts::rent_projection(address)
 		}
 	}
 }
