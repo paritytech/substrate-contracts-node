@@ -19,7 +19,7 @@ cargo install substrate-contracts-node --git https://github.com/paritytech/subst
 
 The `--locked` flag makes the installation use the same versions
 as the `Cargo.lock` in those repositories ‒ ensuring that the last
-known-to-work version of the dependencies is used.
+known-to-work version of the dependencies are used.
 
 The latest confirmed working Substrate commit which will then be used is
 [b391b82954ad95a927a921035e3017c4a0aad516](https://github.com/paritytech/substrate/tree/b391b82954ad95a927a921035e3017c4a0aad516).
