@@ -14,17 +14,12 @@ to set up all Substrate prerequisites.
 Afterwards you can install this node via
 
 ```bash
-cargo install substrate-contracts-node --git https://github.com/paritytech/substrate-contracts-node.git --force
+cargo install substrate-contracts-node --git https://github.com/paritytech/substrate-contracts-node.git --force --locked
 ```
 
-### Build Failure?
-
-Since this repository is tracking Substrate's `master` it might not yet have been adjusted to support
-the super-recent Substrate changes.
-
-Thus, if you get an error when building or installing add the cargo `--locked` flag. The installation process
-will then use the same versions as the `Cargo.lock` in this repository to ensure that the
-most recent working version of Substrate will be used.
+The `--locked` flag makes the installation use the same versions
+as the `Cargo.lock` in those repositories ‒ ensuring that the last
+known-to-work version of the dependencies is used.
 
 The latest confirmed working Substrate commit which will then be used is
 [b391b82954ad95a927a921035e3017c4a0aad516](https://github.com/paritytech/substrate/tree/b391b82954ad95a927a921035e3017c4a0aad516).
