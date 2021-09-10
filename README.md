@@ -14,7 +14,7 @@ to set up all Substrate prerequisites.
 Afterwards you can install this node via
 
 ```bash
-cargo install substrate-contracts-node --git https://github.com/paritytech/substrate-contracts-node.git --force --locked
+cargo install contracts-node --git https://github.com/paritytech/substrate-contracts-node.git --force --locked
 ```
 
 The `--locked` flag makes the installation use the same versions
