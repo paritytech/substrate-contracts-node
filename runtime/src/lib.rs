@@ -315,8 +315,8 @@ impl pallet_sudo::Config for Runtime {
 parameter_types! {
 	pub ContractDeposit: Balance = deposit(
 		1,
-	  	<pallet_contracts::Pallet<Runtime>>::contract_info_size(),
-    );
+		  <pallet_contracts::Pallet<Runtime>>::contract_info_size(),
+	);
 	// The lazy deletion runs inside on_initialize.
 	pub DeletionWeightLimit: Weight = AVERAGE_ON_INITIALIZE_RATIO *
 		RuntimeBlockWeights::get().max_block;
