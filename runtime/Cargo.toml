@@ -2,10 +2,11 @@
 name = "contracts-node-runtime"
 version = "0.1.0"
 authors = ["Parity Technologies <admin@parity.io>"]
-edition = "2018"
+edition = "2021"
 license = "Unlicense"
 homepage = "https://github.com/paritytech/substrate-contracts-node"
 repository = "https://github.com/paritytech/substrate-contracts-node"
+build = "build.rs"
 publish = false
 
 [package.metadata.docs.rs]
@@ -13,6 +14,7 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 codec = { package = "parity-scale-codec", version = "2.0.0", default-features = false, features = ["derive"] }
+scale-info = { version = "1.0", default-features = false, features = ["derive"] }
 
 pallet-aura = { git = "https://github.com/paritytech/substrate", package = "pallet-aura", default-features = false }
 pallet-balances = { git = "https://github.com/paritytech/substrate", package = "pallet-balances", default-features = false }
@@ -43,7 +45,7 @@ pallet-transaction-payment-rpc-runtime-api = { git = "https://github.com/parityt
 # Used for runtime benchmarking
 frame-benchmarking = { git = "https://github.com/paritytech/substrate", default-features = false, package = "frame-benchmarking", optional = true }
 frame-system-benchmarking = { git = "https://github.com/paritytech/substrate", default-features = false, package = "frame-system-benchmarking", optional = true }
-hex-literal = { version = "0.3.1", optional = true }
+hex-literal = { version = "0.3.3", optional = true }
 
 # Contracts specific packages
 pallet-contracts = { git = "https://github.com/paritytech/substrate", package = "pallet-contracts", default-features = false }
@@ -61,6 +63,7 @@ default = [
 ]
 std = [
 	"codec/std",
+	"scale-info/std",
 	"frame-executive/std",
 	"frame-support/std",
 	"frame-system-rpc-runtime-api/std",
