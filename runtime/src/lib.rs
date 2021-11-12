@@ -338,7 +338,7 @@ parameter_types! {
 		// to deploy their contracts. We are currently introducing a number of optimizations
 		// into ink! which should bring the contract sizes lower. In the meantime we don't
 		// want to pose additional friction on developers.
-		schedule.limits.code_len = 1024 * 1024;
+		schedule.limits.code_len = 256 * 1024;
 		schedule
 	};
 }
