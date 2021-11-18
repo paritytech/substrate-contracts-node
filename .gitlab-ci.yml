@@ -130,7 +130,7 @@ publish:
     VAULT_AUTH_ROLE:               "cicd_gitlab_parity_${CI_PROJECT_NAME}"
   secrets:
     GITHUB_TOKEN:
-      vault:                       cicd/gitlab/$CI_PROJECT_PATH/GITHUB_TOKEN@kv
+      vault:                       cicd/gitlab/parity/GITHUB_TOKEN@kv
       file:                        false
   script:
     - git describe --tags
