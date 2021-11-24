@@ -45,7 +45,7 @@ pallet-transaction-payment-rpc-runtime-api = { git = "https://github.com/parityt
 # Used for runtime benchmarking
 frame-benchmarking = { git = "https://github.com/paritytech/substrate", default-features = false, package = "frame-benchmarking", optional = true }
 frame-system-benchmarking = { git = "https://github.com/paritytech/substrate", default-features = false, package = "frame-system-benchmarking", optional = true }
-hex-literal = { version = "0.3.3", optional = true }
+hex-literal = { version = "0.3.4", optional = true }
 
 # Contracts specific packages
 pallet-contracts = { git = "https://github.com/paritytech/substrate", package = "pallet-contracts", default-features = false }
