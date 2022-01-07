@@ -76,6 +76,8 @@ pub fn development_config() -> Result<ChainSpec, String> {
 		None,
 		// Protocol ID
 		Some("rpc"),
+		// Fork ID
+		None,
 		// Properties
 		None,
 		// Extensions
@@ -123,6 +125,8 @@ pub fn local_testnet_config() -> Result<ChainSpec, String> {
 		None,
 		// Protocol ID
 		Some("rpc"),
+		// Fork ID
+		None,
 		// Properties
 		None,
 		// Extensions
@@ -155,7 +159,7 @@ fn testnet_genesis(
 		},
 		sudo: SudoConfig {
 			// Assign network admin rights.
-			key: root_key,
+			key: Some(root_key),
 		},
 		transaction_payment: Default::default(),
 	}
