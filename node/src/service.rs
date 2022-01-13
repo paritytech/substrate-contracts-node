@@ -12,7 +12,6 @@ use sp_consensus::SlotData;
 use sp_consensus_aura::sr25519::AuthorityPair as AuraPair;
 use std::{sync::Arc, time::Duration};
 
-
 // Our native executor instance.
 pub struct ExecutorDispatch;
 
