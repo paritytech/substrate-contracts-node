@@ -29,7 +29,7 @@ frame-executive = { git = "https://github.com/paritytech/substrate", package = "
 sp-api = { git = "https://github.com/paritytech/substrate", package = "sp-api", default-features = false }
 sp-block-builder = { git = "https://github.com/paritytech/substrate", package = "sp-block-builder", default-features = false }
 sp-consensus-aura = { git = "https://github.com/paritytech/substrate", package = "sp-consensus-aura", default-features = false }
-sp-core = { git = "https://github.com/paritytech/substrate", version = "4.1.0-dev", package = "sp-core", default-features = false }
+sp-core = { git = "https://github.com/paritytech/substrate", package = "sp-core", default-features = false }
 sp-inherents = { git = "https://github.com/paritytech/substrate", package = "sp-inherents", default-features = false }
 sp-offchain = { git = "https://github.com/paritytech/substrate", package = "sp-offchain", default-features = false }
 sp-runtime = { git = "https://github.com/paritytech/substrate", package = "sp-runtime", default-features = false }
