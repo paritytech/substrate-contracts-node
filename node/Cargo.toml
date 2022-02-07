@@ -18,7 +18,7 @@ name = "substrate-contracts-node"
 path = "src/main.rs"
 
 [dependencies]
-structopt = "0.3.25"
+clap = { version = "3.0", features = ["derive"] }
 
 sc-cli = { git = "https://github.com/paritytech/substrate", package = "sc-cli", features = ["wasmtime"] }
 sp-core = { git = "https://github.com/paritytech/substrate", package = "sp-core" }
