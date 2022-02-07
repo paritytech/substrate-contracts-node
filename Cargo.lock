@@ -786,7 +786,7 @@ checksum = "245097e9a4535ee1e3e3931fcfcd55a796a44c643e8596ff6566d68f09b87bbc"
 
 [[package]]
 name = "contracts-node"
-version = "0.5.0"
+version = "0.6.0"
 dependencies = [
  "contracts-node-runtime",
  "frame-benchmarking",
@@ -825,7 +825,7 @@ dependencies = [
 
 [[package]]
 name = "contracts-node-runtime"
-version = "0.5.0"
+version = "0.6.0"
 dependencies = [
  "frame-benchmarking",
  "frame-executive",
