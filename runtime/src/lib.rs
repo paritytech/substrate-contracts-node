@@ -143,7 +143,6 @@ const CONTRACTS_DEBUG_OUTPUT: bool = true;
 // Unit = the base number of indivisible units for balances
 const UNIT: Balance = 1_000_000_000_000;
 const MILLIUNIT: Balance = 1_000_000_000;
-const MICROUNIT: Balance = 1_000_000;
 const EXISTENTIAL_DEPOSIT: Balance = MILLIUNIT;
 
 const fn deposit(items: u32, bytes: u32) -> Balance {
