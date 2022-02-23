@@ -27,11 +27,14 @@ The latest confirmed working Substrate commit which will then be used is
 ## Usage
 
 To run a local dev node execute
+
+```bash
+substrate-contracts-node --dev
 ```
-substrate-contracts-node --dev --tmp
-```
-The `--tmp` implies that a new chain will be created each time the command
-is executed. If you want to persist chain state across runs leave it out.
+
+A new chain in temporary directory will be created each time the command is executed. This is the
+default for `--dev` chain specs. If you want to persist chain state across runs you need to
+specify a directory with `--base-path`.
 
 ### Show only Errors and Contract Debug Output
 
