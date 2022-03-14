@@ -14,7 +14,7 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false, features = ["derive"] }
-scale-info = { version = "2.0", default-features = false, features = ["derive"] }
+scale-info = { version = "2.0.1", default-features = false, features = ["derive"] }
 
 pallet-aura = { git = "https://github.com/paritytech/substrate", package = "pallet-aura", default-features = false }
 pallet-balances = { git = "https://github.com/paritytech/substrate", package = "pallet-balances", default-features = false }
@@ -23,6 +23,7 @@ pallet-grandpa = { git = "https://github.com/paritytech/substrate", package = "p
 pallet-randomness-collective-flip = { git = "https://github.com/paritytech/substrate", package = "pallet-randomness-collective-flip", default-features = false }
 pallet-sudo = { git = "https://github.com/paritytech/substrate", package = "pallet-sudo", default-features = false }
 frame-system = { git = "https://github.com/paritytech/substrate", package = "frame-system", default-features = false }
+frame-try-runtime = { git = "https://github.com/paritytech/substrate", package = "frame-try-runtime", default-features = false, optional = true }
 pallet-timestamp = { git = "https://github.com/paritytech/substrate", package = "pallet-timestamp", default-features = false }
 pallet-transaction-payment = { git = "https://github.com/paritytech/substrate", package = "pallet-transaction-payment", default-features = false }
 frame-executive = { git = "https://github.com/paritytech/substrate", package = "frame-executive", default-features = false }
@@ -101,6 +102,18 @@ runtime-benchmarks = [
 	"pallet-timestamp/runtime-benchmarks",
 	"sp-runtime/runtime-benchmarks",
 ]
+try-runtime = [
+	"frame-executive/try-runtime",
+	"frame-try-runtime",
+	"frame-system/try-runtime",
+	"pallet-balances/try-runtime",
+	"pallet-grandpa/try-runtime",
+	"pallet-randomness-collective-flip/try-runtime",
+	"pallet-sudo/try-runtime",
+	"pallet-timestamp/try-runtime",
+	"pallet-transaction-payment/try-runtime",
+]
+
 # Make contract callable functions marked as __unstable__ available. Do not enable
 # on live chains as those are subject to change.
 contracts-unstable-interface = [
