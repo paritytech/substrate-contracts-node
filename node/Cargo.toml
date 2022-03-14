@@ -1,6 +1,6 @@
 [package]
 name = "contracts-node"
-version = "0.8.0"
+version = "0.9.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 description = "Substrate node configured for smart contracts via `pallet-contracts`."
 edition = "2021"
@@ -18,7 +18,7 @@ name = "substrate-contracts-node"
 path = "src/main.rs"
 
 [dependencies]
-clap = { version = "3.0", features = ["derive"] }
+clap = { version = "3.1.6", features = ["derive"] }
 
 sc-cli = { git = "https://github.com/paritytech/substrate", package = "sc-cli", features = ["wasmtime"] }
 sp-core = { git = "https://github.com/paritytech/substrate", package = "sp-core" }
@@ -57,6 +57,9 @@ frame-benchmarking-cli = { git = "https://github.com/paritytech/substrate", pack
 
 contracts-node-runtime = { path = "../runtime" }
 
+# CLI-specific dependencies
+try-runtime-cli = { git = "https://github.com/paritytech/substrate", package = "try-runtime-cli", optional = true }
+
 [build-dependencies]
 substrate-build-script-utils = { git = "https://github.com/paritytech/substrate", package = "substrate-build-script-utils" }
 
@@ -65,3 +68,6 @@ default = []
 runtime-benchmarks = [
 	"contracts-node-runtime/runtime-benchmarks",
 ]
+# Enable features that allow the runtime to be tried and debugged. Name might be subject to change
+# in the near future.
+try-runtime = ["contracts-node-runtime/try-runtime", "try-runtime-cli"]
