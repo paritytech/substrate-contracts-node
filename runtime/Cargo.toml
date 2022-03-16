@@ -16,10 +16,9 @@ targets = ["x86_64-unknown-linux-gnu"]
 codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false, features = ["derive"] }
 scale-info = { version = "2.0.1", default-features = false, features = ["derive"] }
 
-pallet-aura = { git = "https://github.com/paritytech/substrate", package = "pallet-aura", default-features = false }
+pallet-authorship = { git = "https://github.com/paritytech/substrate", package = "pallet-authorship", default-features = false }
 pallet-balances = { git = "https://github.com/paritytech/substrate", package = "pallet-balances", default-features = false }
 frame-support = { git = "https://github.com/paritytech/substrate", package = "frame-support", default-features = false }
-pallet-grandpa = { git = "https://github.com/paritytech/substrate", package = "pallet-grandpa", default-features = false }
 pallet-randomness-collective-flip = { git = "https://github.com/paritytech/substrate", package = "pallet-randomness-collective-flip", default-features = false }
 pallet-sudo = { git = "https://github.com/paritytech/substrate", package = "pallet-sudo", default-features = false }
 frame-system = { git = "https://github.com/paritytech/substrate", package = "frame-system", default-features = false }
@@ -29,7 +28,6 @@ pallet-transaction-payment = { git = "https://github.com/paritytech/substrate", 
 frame-executive = { git = "https://github.com/paritytech/substrate", package = "frame-executive", default-features = false }
 sp-api = { git = "https://github.com/paritytech/substrate", package = "sp-api", default-features = false }
 sp-block-builder = { git = "https://github.com/paritytech/substrate", package = "sp-block-builder", default-features = false }
-sp-consensus-aura = { git = "https://github.com/paritytech/substrate", package = "sp-consensus-aura", default-features = false }
 sp-core = { git = "https://github.com/paritytech/substrate", package = "sp-core", default-features = false }
 sp-inherents = { git = "https://github.com/paritytech/substrate", package = "sp-inherents", default-features = false }
 sp-offchain = { git = "https://github.com/paritytech/substrate", package = "sp-offchain", default-features = false }
@@ -69,9 +67,7 @@ std = [
 	"frame-support/std",
 	"frame-system-rpc-runtime-api/std",
 	"frame-system/std",
-	"pallet-aura/std",
 	"pallet-balances/std",
-	"pallet-grandpa/std",
 	"pallet-randomness-collective-flip/std",
 	"pallet-sudo/std",
 	"pallet-timestamp/std",
@@ -79,7 +75,6 @@ std = [
 	"pallet-transaction-payment/std",
 	"sp-api/std",
 	"sp-block-builder/std",
-	"sp-consensus-aura/std",
 	"sp-core/std",
 	"sp-inherents/std",
 	"sp-offchain/std",
@@ -91,6 +86,7 @@ std = [
 	"pallet-contracts/std",
 	"pallet-contracts-primitives/std",
 	"pallet-contracts-rpc-runtime-api/std",
+	"pallet-authorship/std",
 ]
 runtime-benchmarks = [
 	"frame-benchmarking/runtime-benchmarks",
@@ -107,7 +103,6 @@ try-runtime = [
 	"frame-try-runtime",
 	"frame-system/try-runtime",
 	"pallet-balances/try-runtime",
-	"pallet-grandpa/try-runtime",
 	"pallet-randomness-collective-flip/try-runtime",
 	"pallet-sudo/try-runtime",
 	"pallet-timestamp/try-runtime",
