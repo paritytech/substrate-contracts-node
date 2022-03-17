@@ -67,6 +67,7 @@ std = [
 	"frame-support/std",
 	"frame-system-rpc-runtime-api/std",
 	"frame-system/std",
+	"pallet-authorship/std",
 	"pallet-balances/std",
 	"pallet-randomness-collective-flip/std",
 	"pallet-sudo/std",
@@ -86,7 +87,6 @@ std = [
 	"pallet-contracts/std",
 	"pallet-contracts-primitives/std",
 	"pallet-contracts-rpc-runtime-api/std",
-	"pallet-authorship/std",
 ]
 runtime-benchmarks = [
 	"frame-benchmarking/runtime-benchmarks",
