@@ -29,12 +29,9 @@ sc-keystore = { git = "https://github.com/paritytech/substrate", package = "sc-k
 sp-inherents = { git = "https://github.com/paritytech/substrate", package = "sp-inherents" }
 sc-transaction-pool = { git = "https://github.com/paritytech/substrate", package = "sc-transaction-pool" }
 sc-transaction-pool-api = { git = "https://github.com/paritytech/substrate", package = "sc-transaction-pool-api" }
-sc-consensus-aura = { git = "https://github.com/paritytech/substrate", package = "sc-consensus-aura" }
-sp-consensus-aura = { git = "https://github.com/paritytech/substrate", package = "sp-consensus-aura" }
 sp-consensus = { git = "https://github.com/paritytech/substrate", package = "sp-consensus" }
 sc-consensus = { git = "https://github.com/paritytech/substrate", package = "sc-consensus" }
-sc-finality-grandpa = { git = "https://github.com/paritytech/substrate", package = "sc-finality-grandpa" }
-sp-finality-grandpa = { git = "https://github.com/paritytech/substrate", package = "sp-finality-grandpa" }
+sc-consensus-manual-seal = { git = "https://github.com/paritytech/substrate", package = "sc-consensus-manual-seal" }
 sc-client-api = { git = "https://github.com/paritytech/substrate", package = "sc-client-api" }
 sp-runtime = { git = "https://github.com/paritytech/substrate", package = "sp-runtime" }
 sp-timestamp = { git = "https://github.com/paritytech/substrate", package = "sp-timestamp" }
