@@ -52,3 +52,4 @@ Once the node template is running locally, you can connect to it with the **Polk
 frontend to interact with your chain.
 [Click here](https://polkadot.js.org/apps/#/explorer?rpc=ws://localhost:9944) to connect the frontend
 to your local node.
+
