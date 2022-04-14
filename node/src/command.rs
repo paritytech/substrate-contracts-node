@@ -119,7 +119,7 @@ pub fn run() -> sc_cli::Result<()> {
 
 						cmd.run::<Block, ExecutorDispatch>(config)
 					},
-					_ => Ok(())
+					_ => Ok(()),
 				}
 			})
 		},
