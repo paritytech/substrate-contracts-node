@@ -1,13 +1,13 @@
-use frame_benchmarking_cli::BenchmarkCmd;
 use crate::{
 	chain_spec,
 	cli::{Cli, Subcommand},
 	service,
+	service::ExecutorDispatch,
 };
 use contracts_node_runtime::Block;
+use frame_benchmarking_cli::BenchmarkCmd;
 use sc_cli::{ChainSpec, RuntimeVersion, SubstrateCli};
 use sc_service::PartialComponents;
-use crate::service::ExecutorDispatch;
 
 impl SubstrateCli for Cli {
 	fn impl_name() -> String {
