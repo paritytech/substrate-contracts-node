@@ -1,6 +1,7 @@
 use crate::{
 	chain_spec,
 	cli::{Cli, Subcommand},
+	command_helper::{inherent_benchmark_data, BenchmarkExtrinsicBuilder},
 	service,
 	service::ExecutorDispatch,
 };
@@ -8,6 +9,7 @@ use contracts_node_runtime::Block;
 use frame_benchmarking_cli::BenchmarkCmd;
 use sc_cli::{ChainSpec, RuntimeVersion, SubstrateCli};
 use sc_service::PartialComponents;
+use std::sync::Arc;
 
 impl SubstrateCli for Cli {
 	fn impl_name() -> String {
@@ -119,7 +121,24 @@ pub fn run() -> sc_cli::Result<()> {
 
 						cmd.run::<Block, ExecutorDispatch>(config)
 					},
-					_ => Ok(()),
+					BenchmarkCmd::Block(cmd) => {
+						let PartialComponents { client, .. } = service::new_partial(&config)?;
+						cmd.run(client)
+					},
+					BenchmarkCmd::Storage(cmd) => {
+						let PartialComponents { client, backend, .. } =
+							service::new_partial(&config)?;
+						let db = backend.expose_db();
+						let storage = backend.expose_storage();
+						cmd.run(config, client, db, storage)
+					},
+					BenchmarkCmd::Overhead(cmd) => {
+						let PartialComponents { client, .. } = service::new_partial(&config)?;
+						let ext_builder = BenchmarkExtrinsicBuilder::new(client.clone());
+
+						cmd.run(config, client, inherent_benchmark_data()?, Arc::new(ext_builder))
+					},
+					BenchmarkCmd::Machine(cmd) => cmd.run(&config),
 				}
 			})
 		},

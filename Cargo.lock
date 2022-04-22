@@ -833,14 +833,16 @@ checksum = "245097e9a4535ee1e3e3931fcfcd55a796a44c643e8596ff6566d68f09b87bbc"
 
 [[package]]
 name = "contracts-node"
-version = "0.12.0"
+version = "0.13.0"
 dependencies = [
  "clap",
  "contracts-node-runtime",
  "frame-benchmarking",
  "frame-benchmarking-cli",
+ "frame-system",
  "jsonrpc-core",
  "pallet-contracts-rpc",
+ "pallet-transaction-payment",
  "pallet-transaction-payment-rpc",
  "sc-basic-authorship",
  "sc-cli",
@@ -861,6 +863,7 @@ dependencies = [
  "sp-consensus",
  "sp-core",
  "sp-inherents",
+ "sp-keyring",
  "sp-runtime",
  "sp-timestamp",
  "substrate-build-script-utils",
@@ -870,7 +873,7 @@ dependencies = [
 
 [[package]]
 name = "contracts-node-runtime"
-version = "0.12.0"
+version = "0.13.0"
 dependencies = [
  "frame-benchmarking",
  "frame-executive",
