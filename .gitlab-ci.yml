@@ -124,14 +124,6 @@ publish:
       artifacts: true
     - job: build-mac
       artifacts: true
-  variables:
-    VAULT_SERVER_URL:              "https://vault.parity-mgmt-vault.parity.io"
-    VAULT_AUTH_PATH:               "gitlab-parity-io-jwt"
-    VAULT_AUTH_ROLE:               "cicd_gitlab_parity_${CI_PROJECT_NAME}"
-  secrets:
-    GITHUB_TOKEN:
-      vault:                       cicd/gitlab/parity/GITHUB_TOKEN@kv
-      file:                        false
   script:
     - git describe --tags
     - TAG_NAME=`git describe --tags`
