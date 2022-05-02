@@ -29,7 +29,7 @@ impl SubstrateCli for Cli {
 	}
 
 	fn support_url() -> String {
-		"https://github.com/paritytech/canvas-node/issues/new".into()
+		"https://github.com/paritytech/substrate-contracts-node/issues/new".into()
 	}
 
 	fn copyright_start_year() -> i32 {
