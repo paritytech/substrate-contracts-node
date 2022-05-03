@@ -6,8 +6,8 @@ configured to include Substrate's [`pallet-contracts`](https://github.com/parity
 
 This repository is tracking Substrate's `master`.
 
-_It contains a couple of modifications that make it unsuitable for
-production, but a great fit for development and testing:_
+_It contains a couple of modifications that make it unsuitable for a
+production deployment, but a great fit for development and testing:_
 
 * The unstable features of the [`pallet-contracts`](https://github.com/paritytech/substrate/tree/master/frame/contracts)
   are enabled by default (see the [`runtime/Cargo.toml`](https://github.com/paritytech/substrate-contracts-node/blob/main/runtime/Cargo.toml)).
