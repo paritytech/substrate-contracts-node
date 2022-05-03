@@ -6,7 +6,32 @@ configured to include Substrate's [`pallet-contracts`](https://github.com/parity
 
 This repository is tracking Substrate's `master`.
 
+_It contains a couple of modifications that make it unsuitable for a
+production deployment, but a great fit for development and testing:_
+
+* The unstable features of the [`pallet-contracts`](https://github.com/paritytech/substrate/tree/master/frame/contracts)
+  are enabled by default (see the [`runtime/Cargo.toml`](https://github.com/paritytech/substrate-contracts-node/blob/main/runtime/Cargo.toml)).
+* The consensus algorithm has been switched to `manual-seal` in
+  [#42](https://github.com/paritytech/substrate-contracts-node/pull/42).
+  Hereby blocks are authored immediately at every transaction, so there
+  is none of the typical six seconds block time associated with `grandpa` or `aura`.
+* If no CLI arguments are passed the node is started in development mode
+  by default.
+
+If you are looking for a node suitable for production see these configurations:
+
+* [Substrate Node Template](https://github.com/paritytech/substrate/tree/master/bin/node-template)
+* [Substrate Cumulus Parachain Template](https://github.com/paritytech/cumulus/tree/master/parachain-template)
+* [Canvas Parachain Configuration for Rococo](https://github.com/paritytech/cumulus/tree/master/polkadot-parachains/canvas-kusama)
+
 ## Installation
+
+### Download Binary
+
+The easiest way is to download a binary release from [our releases page](https://github.com/paritytech/substrate-contracts-node/releases)
+and just execute `./substrate-contracts-node --dev`.
+
+### Build Locally
 
 Follow the [official installation steps](https://docs.substrate.io/v3/getting-started/installation/)
 to set up all Substrate prerequisites.
