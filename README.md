@@ -15,8 +15,11 @@ production deployment, but a great fit for development and testing:_
   [#42](https://github.com/paritytech/substrate-contracts-node/pull/42).
   Hereby blocks are authored immediately at every transaction, so there
   is none of the typical six seconds block time associated with `grandpa` or `aura`.
-* If no CLI arguments are passed the node is started in development mode
-  by default.
+* _If no CLI arguments are passed the node is started in development mode
+  by default._
+* _With each start of the node process the chain starts from genesis ‒ so no
+  chain state is retained, all contracts will be lost! If you want to retain
+  chain state you have to supply a `--base-path`._
 
 If you are looking for a node suitable for production see these configurations:
 
