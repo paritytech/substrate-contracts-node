@@ -6,9 +6,9 @@
 #[cfg(feature = "std")]
 include!(concat!(env!("OUT_DIR"), "/wasm_binary.rs"));
 
-use frame_support::weights::DispatchClass;
+use frame_support::{traits::OnRuntimeUpgrade, weights::DispatchClass};
 use frame_system::limits::{BlockLength, BlockWeights};
-use pallet_contracts::{weights::WeightInfo, DefaultContractAccessWeight};
+use pallet_contracts::{migration, weights::WeightInfo, DefaultContractAccessWeight};
 use sp_api::impl_runtime_apis;
 use sp_core::{crypto::KeyTypeId, OpaqueMetadata};
 use sp_runtime::{
@@ -323,6 +323,13 @@ impl pallet_contracts::Config for Runtime {
 	type CallStack = [pallet_contracts::Frame<Self>; 31];
 	type AddressGenerator = pallet_contracts::DefaultAddressGenerator;
 	type ContractAccessWeight = DefaultContractAccessWeight<RuntimeBlockWeights>;
+}
+
+pub struct Migrations;
+impl OnRuntimeUpgrade for Migrations {
+	fn on_runtime_upgrade() -> Weight {
+		migration::migrate::<Runtime>()
+	}
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
