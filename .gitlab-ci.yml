@@ -109,7 +109,7 @@ build-mac:
     - unset CARGO_TARGET_DIR
   script:
     - time cargo build --release --target aarch64-apple-darwin
-    - time cargo build --release
+    - time cargo build --release --target x86_64-apple-darwin
     - mkdir -p ./artifacts/substrate-contracts-node-mac/
     - 'lipo
         ./target/release/substrate-contracts-node
