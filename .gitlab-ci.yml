@@ -108,9 +108,14 @@ build-mac:
   before_script:
     - unset CARGO_TARGET_DIR
   script:
-    - time cargo build --release
+    - time cargo build --release --target aarch64-apple-darwin
+    - time cargo build --release --target x86_64-apple-darwin
     - mkdir -p ./artifacts/substrate-contracts-node-mac/
-    - cp target/release/substrate-contracts-node ./artifacts/substrate-contracts-node-mac/substrate-contracts-node
+    - 'lipo
+        ./target/release/substrate-contracts-node
+        ./target/aarch64-apple-darwin/release/substrate-contracts-node
+        -create
+        -output ./artifacts/substrate-contracts-node-mac/substrate-contracts-node'
   tags:
     - osx
 
@@ -129,7 +134,7 @@ publish:
     - TAG_NAME=`git describe --tags`
     - echo "tag name ${TAG_NAME}"
     - tar -czvf ./substrate-contracts-node-linux.tar.gz ./artifacts/substrate-contracts-node-linux/substrate-contracts-node
-    - tar -czvf ./substrate-contracts-node-mac.tar.gz ./artifacts/substrate-contracts-node-mac/substrate-contracts-node
+    - tar -czvf ./substrate-contracts-node-mac-universal.tar.gz ./artifacts/substrate-contracts-node-mac/substrate-contracts-node
     - 'curl https://api.github.com/repos/paritytech/substrate-contracts-node/releases
         --fail-with-body
         -H "Cookie: logged_in=no"
@@ -167,9 +172,9 @@ publish:
         -H "Authorization: token ${GITHUB_TOKEN}"
         -H "Content-Type: application/octet-stream"
         --data-binary @"./substrate-contracts-node-linux.tar.gz"'
-    - 'curl -X "POST" "https://uploads.github.com/repos/paritytech/substrate-contracts-node/releases/$RELEASE_ID/assets?name=substrate-contracts-node-mac.tar.gz"
+    - 'curl -X "POST" "https://uploads.github.com/repos/paritytech/substrate-contracts-node/releases/$RELEASE_ID/assets?name=substrate-contracts-node-mac-universal.tar.gz"
         --fail-with-body
         -H "Cookie: logged_in=no"
         -H "Authorization: token ${GITHUB_TOKEN}"
         -H "Content-Type: application/octet-stream"
-        --data-binary @"./substrate-contracts-node-mac.tar.gz"'
+        --data-binary @"./substrate-contracts-node-mac-universal.tar.gz"'
