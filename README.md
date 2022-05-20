@@ -25,7 +25,7 @@ If you are looking for a node suitable for production see these configurations:
 
 * [Substrate Node Template](https://github.com/paritytech/substrate/tree/master/bin/node-template)
 * [Substrate Cumulus Parachain Template](https://github.com/paritytech/cumulus/tree/master/parachain-template)
-* [Canvas Parachain Configuration for Rococo](https://github.com/paritytech/cumulus/tree/master/polkadot-parachains/canvas-kusama)
+* [Contracts Parachain Configuration for Rococo](https://github.com/paritytech/cumulus/tree/master/parachains/runtimes/contracts/contracts-rococo)
 
 ## Installation
 
