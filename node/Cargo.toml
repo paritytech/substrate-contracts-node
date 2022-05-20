@@ -1,6 +1,6 @@
 [package]
 name = "contracts-node"
-version = "0.15.0"
+version = "0.16.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 description = "Substrate node configured for smart contracts via `pallet-contracts`."
 edition = "2021"
@@ -18,7 +18,7 @@ name = "substrate-contracts-node"
 path = "src/main.rs"
 
 [dependencies]
-clap = { version = "3.1.6", features = ["derive"] }
+clap = { version = "3.1.18", features = ["derive"] }
 
 sc-cli = { git = "https://github.com/paritytech/substrate", package = "sc-cli", features = ["wasmtime"] }
 sp-core = { git = "https://github.com/paritytech/substrate", package = "sp-core" }
