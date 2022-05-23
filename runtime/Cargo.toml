@@ -1,6 +1,6 @@
 [package]
 name = "contracts-node-runtime"
-version = "0.15.0"
+version = "0.16.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 edition = "2021"
 license = "Unlicense"
@@ -14,7 +14,7 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false, features = ["derive"] }
-scale-info = { version = "2.0.1", default-features = false, features = ["derive"] }
+scale-info = { version = "2.1.1", default-features = false, features = ["derive"] }
 
 pallet-authorship = { git = "https://github.com/paritytech/substrate", package = "pallet-authorship", default-features = false }
 pallet-balances = { git = "https://github.com/paritytech/substrate", package = "pallet-balances", default-features = false }

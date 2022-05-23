@@ -20,6 +20,10 @@ production deployment, but a great fit for development and testing:_
 * _With each start of the node process the chain starts from genesis ‒ so no
   chain state is retained, all contracts will be lost! If you want to retain
   chain state you have to supply a `--base-path`._
+* For `pallet_contracts::Config` we increased the allowed contract sizes. This
+  avoids running into `CodeTooLarge` when uploading contracts during development.
+  See the comment in [`runtime/src/lib.rs`](https://github.com/paritytech/substrate-contracts-node/blob/main/runtime/src/lib.rs)
+  for more details.
 
 If you are looking for a node suitable for production see these configurations:
 
@@ -50,7 +54,7 @@ as the `Cargo.lock` in those repositories ‒ ensuring that the last
 known-to-work version of the dependencies are used.
 
 The latest confirmed working Substrate commit which will then be used is
-[7d233c2446b5a60662400a0a4bcfb78bb3b79ff7](https://github.com/paritytech/substrate/tree/7d233c2446b5a60662400a0a4bcfb78bb3b79ff7).
+[c0ee2adaa54b22ee0df5d1592cd0430961afd95c](https://github.com/paritytech/substrate/tree/c0ee2adaa54b22ee0df5d1592cd0430961afd95c).
 
 ## Usage
 
