@@ -5,3 +5,20 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: frame-*
+        versions:
+          - ">= 0"
+      - dependency-name: pallet-*
+        versions:
+          - ">= 0"
+      - dependency-name: sc-*
+        versions:
+          - ">= 0"
+      - dependency-name: sp-*
+        versions:
+          - ">= 0"
+      - dependency-name: substrate-*
+        versions:
+          - ">= 0"
