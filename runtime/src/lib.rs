@@ -315,6 +315,13 @@ impl pallet_contracts::Config for Runtime {
 	type Schedule = Schedule;
 	type AddressGenerator = pallet_contracts::DefaultAddressGenerator;
 	type ContractAccessWeight = DefaultContractAccessWeight<RuntimeBlockWeights>;
+	// We decided to **temporarily* increase the default allowed contract size here
+	// (the default is `128 * 1024`).
+	//
+	// Our reasoning is that a number of people ran into `CodeTooLarge` when trying
+	// to deploy their contracts. We are currently introducing a number of optimizations
+	// into ink! which should bring the contract sizes lower. In the meantime we don't
+	// want to pose additional friction on developers.
 	type MaxCodeLen = ConstU32<{ 256 * 1024 }>;
 	type RelaxedMaxCodeLen = ConstU32<{ 512 * 1024 }>;
 }
