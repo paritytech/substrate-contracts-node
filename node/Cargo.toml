@@ -40,7 +40,7 @@ frame-system = { git = "https://github.com/paritytech/substrate", package = "fra
 pallet-transaction-payment = { git = "https://github.com/paritytech/substrate", package = "pallet-transaction-payment" }
 
 # These dependencies are used for the node's RPCs
-jsonrpsee = { version = "0.13.0", features = ["server"] }
+jsonrpsee = { version = "0.13.1", features = ["server"] }
 sc-rpc = { git = "https://github.com/paritytech/substrate", package = "sc-rpc" }
 sp-api = { git = "https://github.com/paritytech/substrate", package = "sp-api" }
 sc-rpc-api = { git = "https://github.com/paritytech/substrate", package = "sc-rpc-api" }
