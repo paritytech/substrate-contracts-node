@@ -315,8 +315,8 @@ impl pallet_contracts::Config for Runtime {
 	type Schedule = Schedule;
 	type AddressGenerator = pallet_contracts::DefaultAddressGenerator;
 	type ContractAccessWeight = DefaultContractAccessWeight<RuntimeBlockWeights>;
-	type MaxCodeLen = ConstU32<{ 128 * 1024 }>;
-	type RelaxedMaxCodeLen = ConstU32<{ 256 * 1024 }>;
+	type MaxCodeLen = ConstU32<{ 256 * 1024 }>;
+	type RelaxedMaxCodeLen = ConstU32<{ 512 * 1024 }>;
 }
 
 pub struct Migrations;
