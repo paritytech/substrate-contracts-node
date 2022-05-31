@@ -9,6 +9,8 @@ use std::sync::Arc;
 
 use contracts_node_runtime::{opaque::Block, AccountId, Balance, BlockNumber, Hash, Index};
 use jsonrpsee::RpcModule;
+use sc_client_api::BlockBackend;
+use sc_rpc::dev::{Dev, DevApiServer};
 use sc_transaction_pool_api::TransactionPool;
 use sp_api::ProvideRuntimeApi;
 use sp_block_builder::BlockBuilder;
@@ -32,6 +34,7 @@ pub fn create_full<C, P>(
 ) -> Result<RpcModule<()>, Box<dyn std::error::Error + Send + Sync>>
 where
 	C: ProvideRuntimeApi<Block>,
+	C: BlockBackend<Block>,
 	C: HeaderBackend<Block> + HeaderMetadata<Block, Error = BlockChainError> + 'static,
 	C: Send + Sync + 'static,
 	C::Api: substrate_frame_rpc_system::AccountNonceApi<Block, AccountId, Index>,
@@ -56,7 +59,10 @@ where
 	// `module.merge(YourRpcTrait::into_rpc(YourRpcStruct::new(ReferenceToClient, ...)))?;`
 
 	// Contracts RPC API extension
-	module.merge(Contracts::new(client).into_rpc())?;
+	module.merge(Contracts::new(client.clone()).into_rpc())?;
+
+	// Dev RPC API extension
+	module.merge(Dev::new(client, deny_unsafe).into_rpc())?;
 
 	Ok(module)
 }
