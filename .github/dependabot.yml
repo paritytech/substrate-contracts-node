@@ -22,3 +22,9 @@ updates:
       - dependency-name: substrate-*
         versions:
           - ">= 0"
+      - dependency-name: try-runtime-cli
+        versions:
+          - ">= 0"
+      - dependency-name: jsonrpsee
+        versions:
+          - ">= 0"
