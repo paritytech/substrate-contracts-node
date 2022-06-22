@@ -1,5 +1,6 @@
 use contracts_node_runtime::{
-	AccountId, BalancesConfig, GenesisConfig, Signature, SudoConfig, SystemConfig, WASM_BINARY,
+	AccountId, BalancesConfig, GenesisConfig, MixerVerifierBn254Config, Signature, SudoConfig,
+	SystemConfig, WASM_BINARY,
 };
 use sc_service::ChainType;
 use sp_core::{sr25519, Pair, Public};
@@ -129,6 +130,17 @@ fn testnet_genesis(
 	endowed_accounts: Vec<AccountId>,
 	_enable_println: bool,
 ) -> GenesisConfig {
+	/*let curve_bn254 = Curve::Bn254;
+
+	log::info!("Bn254 x5 w3 params");
+	let bn254_x5_3_params = setup_params::<ark_bn254::Fr>(curve_bn254, 5, 3);*/
+
+	//log::info!("Verifier params for mixer");
+	let mixer_verifier_bn254_params = {
+		let vk_bytes =
+			include_bytes!("/Users/Damilare/Documents/Webb/protocol-substrate/protocol-substrate-fixtures/mixer/bn254/x5/verifying_key.bin");
+		vk_bytes.to_vec()
+	};
 	GenesisConfig {
 		system: SystemConfig {
 			// Add Wasm runtime to storage.
@@ -136,12 +148,16 @@ fn testnet_genesis(
 		},
 		balances: BalancesConfig {
 			// Configure endowed accounts with initial balance of 1 << 60.
-			balances: endowed_accounts.iter().cloned().map(|k| (k, 1 << 60)).collect(),
+			balances: endowed_accounts.iter().cloned().map(|k| (k, 1u128 << 50)).collect(),
 		},
 		sudo: SudoConfig {
 			// Assign network admin rights.
 			key: Some(root_key),
 		},
 		transaction_payment: Default::default(),
+		mixer_verifier_bn_254: MixerVerifierBn254Config {
+			parameters: Some(mixer_verifier_bn254_params),
+			phantom: Default::default(),
+		},
 	}
 }

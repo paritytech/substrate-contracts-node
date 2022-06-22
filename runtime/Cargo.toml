@@ -51,8 +51,12 @@ pallet-contracts = { git = "https://github.com/paritytech/substrate", package = 
 pallet-contracts-primitives = { git = "https://github.com/paritytech/substrate", package = "pallet-contracts-primitives", default-features = false }
 pallet-contracts-rpc-runtime-api = { git = "https://github.com/paritytech/substrate", package = "pallet-contracts-rpc-runtime-api", default-features = false }
 
+pallet-verifier = {path = "../pallets/verifier", default-features = false}
+webb-primitives = {path = "../primitives", default-features = false, features = ["hashing"]}
+
 [build-dependencies]
 substrate-wasm-builder =  { git = "https://github.com/paritytech/substrate", package = "substrate-wasm-builder" }
+
 
 [features]
 default = [
@@ -87,6 +91,9 @@ std = [
 	"pallet-contracts/std",
 	"pallet-contracts-primitives/std",
 	"pallet-contracts-rpc-runtime-api/std",
+
+	"pallet-verifier/std",
+	"webb-primitives/std",
 ]
 runtime-benchmarks = [
 	"frame-benchmarking/runtime-benchmarks",
