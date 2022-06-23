@@ -54,7 +54,7 @@ as the `Cargo.lock` in those repositories ‒ ensuring that the last
 known-to-work version of the dependencies are used.
 
 The latest confirmed working Substrate commit which will then be used is
-[c0ee2adaa54b22ee0df5d1592cd0430961afd95c](https://github.com/paritytech/substrate/tree/c0ee2adaa54b22ee0df5d1592cd0430961afd95c).
+[16bae92](https://github.com/paritytech/substrate/tree/16bae92b3f257f9c15525ae3d0a23d036bd59715).
 
 ## Usage
 

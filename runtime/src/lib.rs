@@ -25,7 +25,7 @@ use sp_version::RuntimeVersion;
 // A few exports that help ease life for downstream crates.
 pub use frame_support::{
 	construct_runtime, parameter_types,
-	traits::{ConstU32, KeyOwnerProofSystem, Randomness, StorageInfo},
+	traits::{ConstU32, ConstU8, KeyOwnerProofSystem, Randomness, StorageInfo},
 	weights::{
 		constants::{BlockExecutionWeight, ExtrinsicBaseWeight, RocksDbWeight, WEIGHT_PER_SECOND},
 		IdentityFee, Weight,
@@ -256,13 +256,10 @@ impl pallet_balances::Config for Runtime {
 	type WeightInfo = pallet_balances::weights::SubstrateWeight<Runtime>;
 }
 
-parameter_types! {
-	pub OperationalFeeMultiplier: u8 = 5;
-}
-
 impl pallet_transaction_payment::Config for Runtime {
+	type Event = Event;
 	type OnChargeTransaction = CurrencyAdapter<Balances, ()>;
-	type OperationalFeeMultiplier = OperationalFeeMultiplier;
+	type OperationalFeeMultiplier = ConstU8<5>;
 	type WeightToFee = IdentityFee<Balance>;
 	type LengthToFee = IdentityFee<Balance>;
 	type FeeMultiplierUpdate = ();
@@ -325,6 +322,7 @@ impl pallet_contracts::Config for Runtime {
 	// just more lax.
 	type MaxCodeLen = ConstU32<{ 256 * 1024 }>;
 	type RelaxedMaxCodeLen = ConstU32<{ 512 * 1024 }>;
+	type MaxStorageKeyLen = ConstU32<128>;
 }
 
 pub struct Migrations;
@@ -571,7 +569,7 @@ impl_runtime_apis! {
 
 		fn get_storage(
 			address: AccountId,
-			key: [u8; 32],
+			key: Vec<u8>,
 		) -> pallet_contracts_primitives::GetStorageResult {
 			Contracts::get_storage(address, key)
 		}
