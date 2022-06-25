@@ -1,0 +1,49 @@
+[package]
+authors = ["Webb Technologies Inc."]
+description = "FRAME pallet template for defining custom runtime logic."
+edition = "2018"
+homepage = "https://substrate.dev"
+license = "Unlicense"
+name = "pallet-verifier"
+repository = "https://github.com/webb-tools/protocol-substrate"
+version = "1.0.0"
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+codec = { package = "parity-scale-codec", version = "3", default-features = false, features = ["derive", "max-encoded-len"] }
+scale-info = { version = "2.1.1", default-features = false, features = ["derive"] }
+log = { version = "0.4.14", default-features = false }
+frame-support = { default-features = false, git = "https://github.com/paritytech/substrate.git"}
+frame-system = { default-features = false, git = "https://github.com/paritytech/substrate.git" }
+sp-runtime = { default-features = false, git = "https://github.com/paritytech/substrate.git"}
+sp-std = { default-features = false, git = "https://github.com/paritytech/substrate.git"}
+webb-primitives = { path = "../../primitives", default-features = false, features = ["verifying"] }
+
+frame-system-benchmarking = { default-features = false, git = "https://github.com/paritytech/substrate.git", optional = true }
+frame-benchmarking = { default-features = false, git = "https://github.com/paritytech/substrate.git", optional = true }
+
+[dev-dependencies]
+serde = { version = "1.0.119" }
+sp-core = { default-features = false, git = "https://github.com/paritytech/substrate.git"}
+sp-io = { default-features = false, git = "https://github.com/paritytech/substrate.git"}
+sp-runtime = { default-features = false, git = "https://github.com/paritytech/substrate.git"}
+pallet-balances = { git = "https://github.com/paritytech/substrate.git"}
+ark-crypto-primitives = { version = "^0.3.0", features = ["r1cs"], default-features = false }
+
+[features]
+default = ["std"]
+std = [
+	"codec/std",
+	"frame-support/std",
+	"frame-system/std",
+	"sp-runtime/std",
+	"sp-std/std",
+	"webb-primitives/std",
+]
+runtime-benchmarks = [
+	"frame-benchmarking",
+	"frame-system/runtime-benchmarks",
+	"frame-support/runtime-benchmarks",
+]
