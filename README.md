@@ -78,9 +78,7 @@ Important: Debug output is only printed for RPC calls or off-chain tests ‒ not
 See our FAQ for more details:
 [How do I print something to the console from the runtime?](https://paritytech.github.io/ink-docs/faq/#how-do-i-print-something-to-the-console-from-the-runtime).
 
-## Connect with Polkadot-JS Apps Front-end
+## Connect with frontend
 
-Once the node template is running locally, you can connect to it with the **Polkadot-JS Apps**
-frontend to interact with your chain.
-[Click here](https://polkadot.js.org/apps/#/explorer?rpc=ws://localhost:9944) to connect the frontend
-to your local node.
+Once the node template is running locally, you can connect to it with frontends like [Contracts UI](https://contracts-ui.substrate.io/#/?rpc=ws://127.0.0.1:9944) or [Polkadot-JS Apps](https://polkadot.js.org/apps/#/explorer?rpc=ws://localhost:9944) and interact with your chain.
+
