@@ -5,9 +5,11 @@ configured to include Substrate's [`pallet-contracts`](https://github.com/parity
 ‒ a smart contract module.
 
 This repository is tracking Substrate's `master`.
+The last time it was synchronized with Substrate was up to
+[16bae92](https://github.com/paritytech/substrate/tree/16bae92b3f257f9c15525ae3d0a23d036bd59715).
 
-_It contains a couple of modifications that make it unsuitable for a
-production deployment, but a great fit for development and testing:_
+_This repository contains a couple of modifications that make it unsuitable
+for a production deployment, but a great fit for development and testing:_
 
 * The unstable features of the [`pallet-contracts`](https://github.com/paritytech/substrate/tree/master/frame/contracts)
   are enabled by default (see the [`runtime/Cargo.toml`](https://github.com/paritytech/substrate-contracts-node/blob/main/runtime/Cargo.toml)).
@@ -82,3 +84,36 @@ See our FAQ for more details:
 
 Once the node template is running locally, you can connect to it with frontends like [Contracts UI](https://contracts-ui.substrate.io/#/?rpc=ws://127.0.0.1:9944) or [Polkadot-JS Apps](https://polkadot.js.org/apps/#/explorer?rpc=ws://localhost:9944) and interact with your chain.
 
+## How to synchronize with Substrate
+
+- [ ] Check Substrate's [`node-template`](https://github.com/paritytech/substrate/commits/master/bin/node-template)
+      for new commits since the last time someone synchronized this
+			repository with Substrate. The commit hash of the last sync is
+			mentioned in this readme.
+- [ ] Apply each commit that happened in this `node-template` folder
+      since the last sync.
+- [ ] Check commits for [`pallet-contracts`](https://github.com/paritytech/substrate/tree/master/frame/contracts)
+      since the last time someone synchronized this repository with Substrate
+      in order to not miss any important changes.
+- [ ] Execute `cargo update -p pallet-contracts` for this repository. The
+      specific crate which is mentioned here is actually not important: since
+      Substrate uses git references for its Substrate dependencies it means
+      that once one package is updated all are.
+- [ ] Increment the minor version number in `node/Cargo.toml` and `runtime/Cargo.toml`.
+- [ ] Execute `cargo run --release -- --tmp`. If successful, it should produce blocks
+      and a new, up to date, `Cargo.lock` will be created.
+- [ ] Update this readme with the hash of the Substrate `master` commit
+      with which you synchronized. The hash appears two times in this
+			readme.
+- [ ] Create a PR with the changes, have it reviewed and merged.
+- [ ] Replace `XX` in this command with your incremeted version number and execute it:
+      `git checkout main && git pull && git tag v0.XX.0 && git push origin v0.XX.0`.
+			This will push a new tag with the version number to this repository.
+- [ ] We have set this repository up in a way that tags à la `vX.X.X` trigger
+      a CI run that creates a GitHub draft release. You can observe CI runs on
+      [GitLab](https://gitlab.parity.io/parity/mirrors/substrate-contracts-node/-/pipelines).
+      This draft release will contain a binary for Linux and Mac and appear
+      under [Releases](https://github.com/paritytech/substrate-contracts-node/releases).
+      Add a description in the style of "Synchronized with Substrate commit
+      [c0ee2a](https://github.com/paritytech/substrate/tree/c0ee2adaa54b22ee0df5d1592cd0430961afd95c)."
+      and publish it.
