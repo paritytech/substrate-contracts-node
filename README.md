@@ -93,11 +93,10 @@ Once the node template is running locally, you can connect to it with frontends 
 - [ ] Apply each commit that happened in this `node-template` folder
       since the last sync.
 - [ ] Check commits for [`pallet-contracts`](https://github.com/paritytech/substrate/tree/master/frame/contracts)
-      since the last time someone synchronized this repository with Substrate.
-      You can limit yourself to check commits that modified the
-			`pallet-contracts` configuration in Substrate's folder `bin/node/`.
-			This folder includes the `pallet-contracts`, so whenever a breaking
-			change is introduced in the pallet it will be reflected in `bin/node/`.
+      since the last time someone synchronized this repository with Substrate
+      in order to not miss any important changes.
+      Whenever a breaking change is introduced in the pallet it will be
+      reflected in Substrate's `bin/node/` folder.
 - [ ] Execute `cargo update -p pallet-contracts` for this repository. The
       specific crate which is mentioned here is actually not important: since
       Substrate uses git references for its Substrate dependencies it means
