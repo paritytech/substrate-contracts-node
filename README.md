@@ -98,7 +98,10 @@ Once the node template is running locally, you can connect to it with frontends 
 			`pallet-contracts` configuration in Substrate's folder `bin/node/`.
 			This folder includes the `pallet-contracts`, so whenever a breaking
 			change is introduced in the pallet it will be reflected in `bin/node/`.
-- [ ] Execute `rm Cargo.lock` for this repository.
+- [ ] Execute `cargo update -p pallet-contracts` for this repository. The
+      specific crate which is mentioned here is actually not important: since
+      Substrate uses git references for its Substrate dependencies it means
+      that once one package is updated all are.
 - [ ] Increment the minor version number in `node/Cargo.toml` and `runtime/Cargo.toml`.
 - [ ] Execute `cargo run --release -- --tmp`. If successful, it should produce blocks
       and a new, up to date, `Cargo.lock` will be created.
