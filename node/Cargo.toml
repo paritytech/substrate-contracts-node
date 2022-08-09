@@ -1,6 +1,6 @@
 [package]
 name = "contracts-node"
-version = "0.17.0"
+version = "0.18.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 description = "Substrate node configured for smart contracts via `pallet-contracts`."
 edition = "2021"
@@ -40,7 +40,7 @@ frame-system = { git = "https://github.com/paritytech/substrate", package = "fra
 pallet-transaction-payment = { git = "https://github.com/paritytech/substrate", package = "pallet-transaction-payment" }
 
 # These dependencies are used for the node's RPCs
-jsonrpsee = { version = "0.14.0", features = ["server"] }
+jsonrpsee = { version = "0.15.1", features = ["server"] }
 sc-rpc = { git = "https://github.com/paritytech/substrate", package = "sc-rpc" }
 sp-api = { git = "https://github.com/paritytech/substrate", package = "sp-api" }
 sc-rpc-api = { git = "https://github.com/paritytech/substrate", package = "sc-rpc-api" }
