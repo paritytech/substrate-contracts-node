@@ -6,7 +6,7 @@ configured to include Substrate's [`pallet-contracts`](https://github.com/parity
 
 This repository is tracking Substrate's `master`.
 The last time it was synchronized with Substrate was up to
-[74a6370](https://github.com/paritytech/substrate/tree/74a6370e805ebaf88b7939e496818531f762cadf).
+[6b85535](https://github.com/paritytech/substrate/tree/6b8553511112afd5ae7e8e6877dc2f467850f155).
 
 _This repository contains a couple of modifications that make it unsuitable
 for a production deployment, but a great fit for development and testing:_
@@ -19,6 +19,8 @@ for a production deployment, but a great fit for development and testing:_
   is none of the typical six seconds block time associated with `grandpa` or `aura`.
 * _If no CLI arguments are passed the node is started in development mode
   by default._
+* A custom logging filter is applied by default that hides block production noise
+  and prints the contracts debug buffer to the console.
 * _With each start of the node process the chain starts from genesis ‒ so no
   chain state is retained, all contracts will be lost! If you want to retain
   chain state you have to supply a `--base-path`._
@@ -38,7 +40,7 @@ If you are looking for a node suitable for production see these configurations:
 ### Download Binary
 
 The easiest way is to download a binary release from [our releases page](https://github.com/paritytech/substrate-contracts-node/releases)
-and just execute `./substrate-contracts-node --dev`.
+and just execute `./substrate-contracts-node`.
 
 ### Build Locally
 
@@ -63,11 +65,11 @@ The latest confirmed working Substrate commit which will then be used is
 To run a local dev node execute
 
 ```bash
-substrate-contracts-node --dev
+substrate-contracts-node
 ```
 
 A new chain in temporary directory will be created each time the command is executed. This is the
-default for `--dev` chain specs. If you want to persist chain state across runs you need to
+default for this node. If you want to persist chain state across runs you need to
 specify a directory with `--base-path`.
 
 ### Show only Errors and Contract Debug Output

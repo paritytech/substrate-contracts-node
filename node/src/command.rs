@@ -52,7 +52,22 @@ impl SubstrateCli for Cli {
 
 /// Parse and run command line arguments
 pub fn run() -> sc_cli::Result<()> {
-	let cli = Cli::from_args();
+	let mut cli = Cli::from_args();
+
+	// this is a development node: make dev chain spec the default
+	if cli.run.shared_params.chain.is_none() {
+		cli.run.shared_params.dev = true;
+	}
+
+	// remove block production noise and output contracts debug buffer by default
+	if cli.run.shared_params.log.is_empty() {
+		cli.run.shared_params.log = vec![
+			"runtime::contracts=debug".into(),
+			"sc_cli=info".into(),
+			"sc_rpc_server=info".into(),
+			"warn".into(),
+		];
+	}
 
 	match &cli.subcommand {
 		Some(Subcommand::Key(cmd)) => cmd.run(&cli),
