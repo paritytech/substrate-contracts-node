@@ -6,7 +6,7 @@ configured to include Substrate's [`pallet-contracts`](https://github.com/parity
 
 This repository is tracking Substrate's `master`.
 The last time it was synchronized with Substrate was up to
-[74a6370](https://github.com/paritytech/substrate/tree/74a6370e805ebaf88b7939e496818531f762cadf).
+[6b85535](https://github.com/paritytech/substrate/tree/6b8553511112afd5ae7e8e6877dc2f467850f155).
 
 _This repository contains a couple of modifications that make it unsuitable
 for a production deployment, but a great fit for development and testing:_
