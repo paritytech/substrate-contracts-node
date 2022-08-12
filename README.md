@@ -19,8 +19,8 @@ for a production deployment, but a great fit for development and testing:_
   is none of the typical six seconds block time associated with `grandpa` or `aura`.
 * _If no CLI arguments are passed the node is started in development mode
   by default._
-* A custom logging filter is applied by default that hides block production noise and prints the contracts debug
-  buffer to the console.
+* A custom logging filter is applied by default that hides block production noise
+  and prints the contracts debug buffer to the console.
 * _With each start of the node process the chain starts from genesis ‒ so no
   chain state is retained, all contracts will be lost! If you want to retain
   chain state you have to supply a `--base-path`._
