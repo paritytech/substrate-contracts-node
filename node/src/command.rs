@@ -59,6 +59,16 @@ pub fn run() -> sc_cli::Result<()> {
 		cli.run.shared_params.dev = true;
 	}
 
+	// remove block production noise and output contracts debug buffer by default
+	if cli.run.shared_params.log.is_empty() {
+		cli.run.shared_params.log = vec![
+			"runtime::contracts=debug".into(),
+			"sc_cli=info".into(),
+			"sc_rpc_server=info".into(),
+			"warn".into(),
+		];
+	}
+
 	match &cli.subcommand {
 		Some(Subcommand::Key(cmd)) => cmd.run(&cli),
 		Some(Subcommand::BuildSpec(cmd)) => {
