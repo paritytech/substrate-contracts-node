@@ -1,6 +1,6 @@
 [package]
 name = "contracts-node"
-version = "0.19.0"
+version = "0.20.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 description = "Substrate node configured for smart contracts via `pallet-contracts`."
 edition = "2021"
