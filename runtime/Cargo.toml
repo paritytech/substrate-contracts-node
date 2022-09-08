@@ -1,6 +1,6 @@
 [package]
 name = "contracts-node-runtime"
-version = "0.19.0"
+version = "0.20.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 edition = "2021"
 license = "Unlicense"
@@ -67,6 +67,7 @@ std = [
 	"frame-support/std",
 	"frame-system-rpc-runtime-api/std",
 	"frame-system/std",
+	"frame-try-runtime/std",
 	"pallet-authorship/std",
 	"pallet-balances/std",
 	"pallet-randomness-collective-flip/std",
@@ -102,6 +103,7 @@ try-runtime = [
 	"frame-executive/try-runtime",
 	"frame-try-runtime",
 	"frame-system/try-runtime",
+	"frame-support/try-runtime",
 	"pallet-balances/try-runtime",
 	"pallet-randomness-collective-flip/try-runtime",
 	"pallet-sudo/try-runtime",
