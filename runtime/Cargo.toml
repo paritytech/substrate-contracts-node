@@ -51,6 +51,10 @@ pallet-contracts = { git = "https://github.com/paritytech/substrate", package = 
 pallet-contracts-primitives = { git = "https://github.com/paritytech/substrate", package = "pallet-contracts-primitives", default-features = false , branch = "polkadot-v0.9.29" }
 pallet-contracts-rpc-runtime-api = { git = "https://github.com/paritytech/substrate", package = "pallet-contracts-rpc-runtime-api", default-features = false , branch = "polkadot-v0.9.29" }
 
+# Chain extension
+pallet-assets = { git = "https://github.com/paritytech/substrate", package = "pallet-assets", default-features = false }
+pallet-assets-chain-extension = { git = "https://github.com/Supercolony-net/pallet-assets-chain-extension", default-features = false, features = ["substrate"]  }
+
 [build-dependencies]
 substrate-wasm-builder =  { git = "https://github.com/paritytech/substrate", package = "substrate-wasm-builder" , branch = "polkadot-v0.9.29" }
 
@@ -86,6 +90,8 @@ std = [
 	"pallet-contracts/std",
 	"pallet-contracts-primitives/std",
 	"pallet-contracts-rpc-runtime-api/std",
+	"pallet-assets/std",
+	"pallet-assets-chain-extension/substrate-std",
 ]
 runtime-benchmarks = [
 	"frame-benchmarking/runtime-benchmarks",
@@ -94,6 +100,9 @@ runtime-benchmarks = [
 	"frame-system/runtime-benchmarks",
 	"hex-literal",
 	"pallet-balances/runtime-benchmarks",
+	"pallet-contracts/runtime-benchmarks",
+	"pallet-assets/runtime-benchmarks",
+	"pallet-assets-chain-extension/runtime-benchmarks",
 	"pallet-timestamp/runtime-benchmarks",
 	"sp-runtime/runtime-benchmarks",
 ]
