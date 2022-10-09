@@ -1,6 +1,6 @@
 [package]
 name = "contracts-node-runtime"
-version = "0.20.0"
+version = "0.21.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 edition = "2021"
 license = "Unlicense"
@@ -47,7 +47,7 @@ frame-system-benchmarking = { git = "https://github.com/paritytech/substrate", d
 hex-literal = { version = "0.3.4", optional = true }
 
 # Contracts specific packages
-pallet-contracts = { git = "https://github.com/paritytech/substrate", package = "pallet-contracts", default-features = false , branch = "polkadot-v0.9.29" }
+pallet-contracts = { git = "https://github.com/paritytech/substrate", package = "pallet-contracts", default-features = false, features = ["unstable-interface"], branch = "polkadot-v0.9.29" }
 pallet-contracts-primitives = { git = "https://github.com/paritytech/substrate", package = "pallet-contracts-primitives", default-features = false , branch = "polkadot-v0.9.29" }
 pallet-contracts-rpc-runtime-api = { git = "https://github.com/paritytech/substrate", package = "pallet-contracts-rpc-runtime-api", default-features = false , branch = "polkadot-v0.9.29" }
 
@@ -57,8 +57,6 @@ substrate-wasm-builder =  { git = "https://github.com/paritytech/substrate", pac
 [features]
 default = [
 	"std",
-	# temporarily enable unstable contracts features by default, remove this before using on a production chain.
-	"contracts-unstable-interface",
 ]
 std = [
 	"codec/std",
@@ -109,10 +107,4 @@ try-runtime = [
 	"pallet-sudo/try-runtime",
 	"pallet-timestamp/try-runtime",
 	"pallet-transaction-payment/try-runtime",
-]
-
-# Make contract callable functions marked as __unstable__ available. Do not enable
-# on live chains as those are subject to change.
-contracts-unstable-interface = [
-	"pallet-contracts/unstable-interface"
 ]
