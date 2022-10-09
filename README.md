@@ -4,9 +4,9 @@ This repository contains Substrate's [`node-template`](https://github.com/parity
 configured to include Substrate's [`pallet-contracts`](https://github.com/paritytech/substrate/tree/master/frame/contracts)
 ‒ a smart contract module.
 
-This repository is tracking Substrate's `master`.
-The last time it was synchronized with Substrate was up to
-[021f712](https://github.com/paritytech/substrate/tree/021f71264133d1cf0db5bd3e0112dbf8dcecdd9d).
+This repository is tracking Substrate's
+[`polkadot-v0.9.29`](https://github.com/paritytech/substrate/tree/polkadot-v0.9.29) branch.
+When new Polkadot releases come out we may update to those.
 
 _This repository contains a couple of modifications that make it unsuitable
 for a production deployment, but a great fit for development and testing:_
@@ -50,15 +50,8 @@ to set up all Substrate prerequisites.
 Afterwards you can install this node via
 
 ```bash
-cargo install contracts-node --git https://github.com/paritytech/substrate-contracts-node.git --force --locked
+cargo install contracts-node --git https://github.com/paritytech/substrate-contracts-node.git
 ```
-
-The `--locked` flag makes the installation use the same versions
-as the `Cargo.lock` in those repositories ‒ ensuring that the last
-known-to-work version of the dependencies are used.
-
-The latest confirmed working Substrate commit which will then be used is
-[021f712](https://github.com/paritytech/substrate/tree/021f71264133d1cf0db5bd3e0112dbf8dcecdd9d).
 
 ## Usage
 
@@ -72,13 +65,6 @@ A new chain in temporary directory will be created each time the command is exec
 default for this node. If you want to persist chain state across runs you need to
 specify a directory with `--base-path`.
 
-### Show only Errors and Contract Debug Output
-
-To have only errors and contract debug output show up on the console you can
-supply `-lerror,runtime::contracts=debug` when starting the node.
-
-Important: Debug output is only printed for RPC calls or off-chain tests ‒ not for transactions!
-
 See our FAQ for more details:
 [How do I print something to the console from the runtime?](https://paritytech.github.io/ink-docs/faq/#how-do-i-print-something-to-the-console-from-the-runtime).
 
@@ -86,19 +72,17 @@ See our FAQ for more details:
 
 Once the node template is running locally, you can connect to it with frontends like [Contracts UI](https://contracts-ui.substrate.io/#/?rpc=ws://127.0.0.1:9944) or [Polkadot-JS Apps](https://polkadot.js.org/apps/#/explorer?rpc=ws://localhost:9944) and interact with your chain.
 
-## How to synchronize with Substrate
+## How to upgrade to new Polkadot release
 
 - [ ] Check Substrate's [`node-template`](https://github.com/paritytech/substrate/commits/master/bin/node-template)
-      for new commits since the last time someone synchronized this
-			repository with Substrate. The commit hash of the last sync is
-			mentioned in this readme.
-- [ ] Apply each commit that happened in this `node-template` folder
-      since the last sync.
+      for new commits between the new polkadot release branch and the one this repository is currently synced with.
+      The current branch is mentioned in this readme.
+- [ ] Apply each commit that happened in this `node-template` folder since the last sync.
 - [ ] Check commits for [`pallet-contracts`](https://github.com/paritytech/substrate/tree/master/frame/contracts)
       since the last time someone synchronized this repository with Substrate
       in order to not miss any important changes.
-- [ ] Execute `cargo update -p pallet-contracts` for this repository. The
-      specific crate which is mentioned here is actually not important: since
+- [ ] Execute `diener -s --branch my_polkadot_release_branch` and then `cargo update -p pallet-contracts`
+      for this repository. The specific crate which is mentioned here is actually not important: since
       Substrate uses git references for its Substrate dependencies it means
       that once one package is updated all are.
 - [ ] Increment the minor version number in `node/Cargo.toml` and `runtime/Cargo.toml`.
