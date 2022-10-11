@@ -52,8 +52,8 @@ pallet-contracts-primitives = { git = "https://github.com/paritytech/substrate",
 pallet-contracts-rpc-runtime-api = { git = "https://github.com/paritytech/substrate", package = "pallet-contracts-rpc-runtime-api", default-features = false , branch = "polkadot-v0.9.29" }
 
 # Chain extension
-pallet-assets = { git = "https://github.com/paritytech/substrate", package = "pallet-assets", default-features = false }
-pallet-assets-chain-extension = { git = "https://github.com/Supercolony-net/pallet-assets-chain-extension", default-features = false, features = ["substrate"]  }
+pallet-assets = { git = "https://github.com/paritytech/substrate", package = "pallet-assets", default-features = false, branch = "polkadot-v0.9.29" }
+pallet-assets-chain-extension = { git = "https://github.com/Supercolony-net/pallet-assets-chain-extension", default-features = false, features = ["substrate"], branch = "polkadot-v0.9.29"  }
 
 [build-dependencies]
 substrate-wasm-builder =  { git = "https://github.com/paritytech/substrate", package = "substrate-wasm-builder" , branch = "polkadot-v0.9.29" }
