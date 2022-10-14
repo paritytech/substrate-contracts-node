@@ -101,8 +101,7 @@ build-mac:
   stage:                           build-mac
   <<:                              *docker-env
   <<:                              *collect-artifacts
-  # we run the mac build only when we actually want to publish
-  <<:                              *publish-refs
+  <<:                              *build-refs
   before_script:
     - unset CARGO_TARGET_DIR
   script:
