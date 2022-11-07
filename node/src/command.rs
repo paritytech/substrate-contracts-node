@@ -124,33 +124,11 @@ pub fn run() -> sc_cli::Result<()> {
 				// which sub-commands it wants to support.
 				// In the case of substrate-contract-node we only support benchmark for pallet
 				match cmd {
-					BenchmarkCmd::Pallet(cmd) => {
-						if !cfg!(feature = "runtime-benchmarks") {
-							return Err(
-								"Runtime benchmarking wasn't enabled when building the node. \
-							You can enable it with `--features runtime-benchmarks`."
-									.into(),
-							)
-						}
-
-						cmd.run::<Block, ExecutorDispatch>(config)
-					},
+					BenchmarkCmd::Pallet(_) | BenchmarkCmd::Storage(_) =>
+						Err("Runtime Benchmarking not supported.")?,
 					BenchmarkCmd::Block(cmd) => {
 						let PartialComponents { client, .. } = service::new_partial(&config)?;
 						cmd.run(client)
-					},
-					#[cfg(not(feature = "runtime-benchmarks"))]
-					BenchmarkCmd::Storage(_) => Err(
-						"Storage benchmarking can be enabled with `--features runtime-benchmarks`."
-							.into(),
-					),
-					#[cfg(feature = "runtime-benchmarks")]
-					BenchmarkCmd::Storage(cmd) => {
-						let PartialComponents { client, backend, .. } =
-							service::new_partial(&config)?;
-						let db = backend.expose_db();
-						let storage = backend.expose_storage();
-						cmd.run(config, client, db, storage)
 					},
 					BenchmarkCmd::Overhead(cmd) => {
 						let PartialComponents { client, .. } = service::new_partial(&config)?;

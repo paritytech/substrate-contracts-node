@@ -91,19 +91,6 @@ std = [
 	"pallet-assets/std",
 	"pallet-assets-chain-extension/substrate-std",
 ]
-runtime-benchmarks = [
-	"frame-benchmarking/runtime-benchmarks",
-	"frame-support/runtime-benchmarks",
-	"frame-system-benchmarking",
-	"frame-system/runtime-benchmarks",
-	"hex-literal",
-	"pallet-balances/runtime-benchmarks",
-	"pallet-contracts/runtime-benchmarks",
-	"pallet-assets/runtime-benchmarks",
-	"pallet-assets-chain-extension/runtime-benchmarks",
-	"pallet-timestamp/runtime-benchmarks",
-	"sp-runtime/runtime-benchmarks",
-]
 try-runtime = [
 	"frame-executive/try-runtime",
 	"frame-try-runtime",

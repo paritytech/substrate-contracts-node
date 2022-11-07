@@ -65,9 +65,6 @@ substrate-build-script-utils = { git = "https://github.com/paritytech/substrate"
 
 [features]
 default = []
-runtime-benchmarks = [
-	"contracts-node-runtime/runtime-benchmarks",
-]
 # Enable features that allow the runtime to be tried and debugged. Name might be subject to change
 # in the near future.
 try-runtime = ["contracts-node-runtime/try-runtime", "try-runtime-cli"]
