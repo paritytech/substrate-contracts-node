@@ -57,14 +57,8 @@ frame-benchmarking-cli = { git = "https://github.com/paritytech/substrate", pack
 # Local Dependencies
 contracts-node-runtime = { path = "../runtime" }
 
-# CLI-specific dependencies
-try-runtime-cli = { git = "https://github.com/paritytech/substrate", package = "try-runtime-cli", optional = true , branch = "polkadot-v0.9.31" }
-
 [build-dependencies]
 substrate-build-script-utils = { git = "https://github.com/paritytech/substrate", package = "substrate-build-script-utils" , branch = "polkadot-v0.9.31" }
 
 [features]
 default = []
-# Enable features that allow the runtime to be tried and debugged. Name might be subject to change
-# in the near future.
-try-runtime = ["contracts-node-runtime/try-runtime", "try-runtime-cli"]

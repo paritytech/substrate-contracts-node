@@ -23,7 +23,6 @@ frame-support = { git = "https://github.com/paritytech/substrate", package = "fr
 pallet-randomness-collective-flip = { git = "https://github.com/paritytech/substrate", package = "pallet-randomness-collective-flip", default-features = false , branch = "polkadot-v0.9.31" }
 pallet-sudo = { git = "https://github.com/paritytech/substrate", package = "pallet-sudo", default-features = false , branch = "polkadot-v0.9.31" }
 frame-system = { git = "https://github.com/paritytech/substrate", package = "frame-system", default-features = false , branch = "polkadot-v0.9.31" }
-frame-try-runtime = { git = "https://github.com/paritytech/substrate", package = "frame-try-runtime", default-features = false, optional = true , branch = "polkadot-v0.9.31" }
 pallet-timestamp = { git = "https://github.com/paritytech/substrate", package = "pallet-timestamp", default-features = false , branch = "polkadot-v0.9.31" }
 pallet-transaction-payment = { git = "https://github.com/paritytech/substrate", package = "pallet-transaction-payment", default-features = false , branch = "polkadot-v0.9.31" }
 frame-executive = { git = "https://github.com/paritytech/substrate", package = "frame-executive", default-features = false , branch = "polkadot-v0.9.31" }
@@ -68,7 +67,6 @@ std = [
 	"frame-support/std",
 	"frame-system-rpc-runtime-api/std",
 	"frame-system/std",
-	"frame-try-runtime/std",
 	"pallet-authorship/std",
 	"pallet-balances/std",
 	"pallet-randomness-collective-flip/std",
@@ -90,15 +88,4 @@ std = [
 	"pallet-contracts-primitives/std",
 	"pallet-assets/std",
 	"pallet-assets-chain-extension/substrate-std",
-]
-try-runtime = [
-	"frame-executive/try-runtime",
-	"frame-try-runtime",
-	"frame-system/try-runtime",
-	"frame-support/try-runtime",
-	"pallet-balances/try-runtime",
-	"pallet-randomness-collective-flip/try-runtime",
-	"pallet-sudo/try-runtime",
-	"pallet-timestamp/try-runtime",
-	"pallet-transaction-payment/try-runtime",
 ]
