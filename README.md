@@ -5,7 +5,7 @@ configured to include Substrate's [`pallet-contracts`](https://github.com/parity
 ‒ a smart contract module.
 
 This repository is tracking Substrate's
-[`polkadot-v0.9.29`](https://github.com/paritytech/substrate/tree/polkadot-v0.9.29) branch.
+[`polkadot-v0.9.31`](https://github.com/paritytech/substrate/tree/polkadot-v0.9.31) branch.
 When new Polkadot releases come out we may update to those.
 
 _This repository contains a couple of modifications that make it unsuitable
@@ -81,10 +81,11 @@ Once the node template is running locally, you can connect to it with frontends 
 - [ ] Check commits for [`pallet-contracts`](https://github.com/paritytech/substrate/tree/master/frame/contracts)
       since the last time someone synchronized this repository with Substrate
       in order to not miss any important changes.
-- [ ] Execute `diener -s --branch my_polkadot_release_branch` and then `cargo update -p pallet-contracts`
-      for this repository. The specific crate which is mentioned here is actually not important: since
-      Substrate uses git references for its Substrate dependencies it means
-      that once one package is updated all are.
+- [ ] Execute `diener update -s --branch my_polkadot_release_branch`. Manually upgrade the
+      `pallet-assets-chain-extension` dependency to the latest release branch and then
+      `cargo update -p palle-contracts` for this repository. The specific crate which is mentioned
+      here is actually not important: since Substrate uses git references for its Substrate
+      dependencies it means that once one package is updated all are.
 - [ ] Increment the minor version number in `node/Cargo.toml` and `runtime/Cargo.toml`.
 - [ ] Execute `cargo run --release -- --tmp`. If successful, it should produce blocks
       and a new, up to date, `Cargo.lock` will be created.
