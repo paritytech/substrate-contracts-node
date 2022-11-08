@@ -7,7 +7,7 @@
 
 use std::sync::Arc;
 
-use contracts_node_runtime::{opaque::Block, AccountId, Balance, BlockNumber, Hash, Index};
+use contracts_node_runtime::{opaque::Block, AccountId, Balance, Index};
 use jsonrpsee::RpcModule;
 use sc_client_api::BlockBackend;
 use sc_rpc::dev::{Dev, DevApiServer};
@@ -38,12 +38,10 @@ where
 	C: HeaderBackend<Block> + HeaderMetadata<Block, Error = BlockChainError> + 'static,
 	C: Send + Sync + 'static,
 	C::Api: substrate_frame_rpc_system::AccountNonceApi<Block, AccountId, Index>,
-	C::Api: pallet_contracts_rpc::ContractsRuntimeApi<Block, AccountId, Balance, BlockNumber, Hash>,
 	C::Api: pallet_transaction_payment_rpc::TransactionPaymentRuntimeApi<Block, Balance>,
 	C::Api: BlockBuilder<Block>,
 	P: TransactionPool + 'static,
 {
-	use pallet_contracts_rpc::{Contracts, ContractsApiServer};
 	use pallet_transaction_payment_rpc::{TransactionPayment, TransactionPaymentApiServer};
 	use substrate_frame_rpc_system::{System, SystemApiServer};
 
@@ -57,9 +55,6 @@ where
 	// `YourRpcStruct` should have a reference to a client, which is needed
 	// to call into the runtime.
 	// `module.merge(YourRpcTrait::into_rpc(YourRpcStruct::new(ReferenceToClient, ...)))?;`
-
-	// Contracts RPC API extension
-	module.merge(Contracts::new(client.clone()).into_rpc())?;
 
 	// Dev RPC API extension
 	module.merge(Dev::new(client, deny_unsafe).into_rpc())?;
