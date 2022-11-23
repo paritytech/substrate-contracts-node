@@ -20,10 +20,10 @@ path = "src/main.rs"
 [dependencies]
 clap = { version = "4", features = ["derive"] }
 
-sc-cli = { git = "https://github.com/paritytech/substrate", package = "sc-cli", features = ["wasmtime"] , branch = "polkadot-v0.9.32" }
+sc-cli = { git = "https://github.com/paritytech/substrate", package = "sc-cli", default-features = false, features = ["wasmtime"] , branch = "polkadot-v0.9.32" }
 sp-core = { git = "https://github.com/paritytech/substrate", package = "sp-core" , branch = "polkadot-v0.9.32" }
 sc-executor = { git = "https://github.com/paritytech/substrate", package = "sc-executor", features = ["wasmtime"] , branch = "polkadot-v0.9.32" }
-sc-service = { git = "https://github.com/paritytech/substrate", package = "sc-service", features = ["wasmtime"] , branch = "polkadot-v0.9.32" }
+sc-service = { git = "https://github.com/paritytech/substrate", package = "sc-service", default-features = false, features = ["wasmtime"] , branch = "polkadot-v0.9.32" }
 sc-telemetry = { git = "https://github.com/paritytech/substrate", package = "sc-telemetry" , branch = "polkadot-v0.9.32" }
 sc-keystore = { git = "https://github.com/paritytech/substrate", package = "sc-keystore" , branch = "polkadot-v0.9.32" }
 sc-transaction-pool = { git = "https://github.com/paritytech/substrate", package = "sc-transaction-pool" , branch = "polkadot-v0.9.32" }
