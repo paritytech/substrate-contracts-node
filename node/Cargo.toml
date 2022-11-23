@@ -50,10 +50,6 @@ sc-basic-authorship = { git = "https://github.com/paritytech/substrate", package
 substrate-frame-rpc-system = { git = "https://github.com/paritytech/substrate", package = "substrate-frame-rpc-system" , branch = "polkadot-v0.9.32" }
 pallet-transaction-payment-rpc = { git = "https://github.com/paritytech/substrate", package = "pallet-transaction-payment-rpc" , branch = "polkadot-v0.9.32" }
 
-# These dependencies are used for runtime benchmarking
-frame-benchmarking = { git = "https://github.com/paritytech/substrate", package = "frame-benchmarking" , branch = "polkadot-v0.9.32" }
-frame-benchmarking-cli = { git = "https://github.com/paritytech/substrate", package = "frame-benchmarking-cli" , branch = "polkadot-v0.9.32" }
-
 # Local Dependencies
 contracts-node-runtime = { path = "../runtime" }
 
