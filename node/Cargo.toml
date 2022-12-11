@@ -1,6 +1,6 @@
 [package]
 name = "contracts-node"
-version = "0.22.1"
+version = "0.23.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 description = "Substrate node configured for smart contracts via `pallet-contracts`."
 edition = "2021"
@@ -18,38 +18,38 @@ name = "substrate-contracts-node"
 path = "src/main.rs"
 
 [dependencies]
-clap = { version = "4", features = ["derive"] }
+clap = { version = "4.0.9", features = ["derive"] }
 
-sc-cli = { git = "https://github.com/paritytech/substrate", package = "sc-cli", default-features = false, features = ["wasmtime"] , branch = "polkadot-v0.9.32" }
-sp-core = { git = "https://github.com/paritytech/substrate", package = "sp-core" , branch = "polkadot-v0.9.32" }
-sc-executor = { git = "https://github.com/paritytech/substrate", package = "sc-executor", features = ["wasmtime"] , branch = "polkadot-v0.9.32" }
-sc-service = { git = "https://github.com/paritytech/substrate", package = "sc-service", default-features = false, features = ["wasmtime"] , branch = "polkadot-v0.9.32" }
-sc-telemetry = { git = "https://github.com/paritytech/substrate", package = "sc-telemetry" , branch = "polkadot-v0.9.32" }
-sc-keystore = { git = "https://github.com/paritytech/substrate", package = "sc-keystore" , branch = "polkadot-v0.9.32" }
-sc-transaction-pool = { git = "https://github.com/paritytech/substrate", package = "sc-transaction-pool" , branch = "polkadot-v0.9.32" }
-sc-transaction-pool-api = { git = "https://github.com/paritytech/substrate", package = "sc-transaction-pool-api" , branch = "polkadot-v0.9.32" }
-sc-consensus = { git = "https://github.com/paritytech/substrate", package = "sc-consensus" , branch = "polkadot-v0.9.32" }
-sc-consensus-manual-seal = { git = "https://github.com/paritytech/substrate", package = "sc-consensus-manual-seal" , branch = "polkadot-v0.9.32" }
-sc-client-api = { git = "https://github.com/paritytech/substrate", package = "sc-client-api" , branch = "polkadot-v0.9.32" }
-sp-runtime = { git = "https://github.com/paritytech/substrate", package = "sp-runtime" , branch = "polkadot-v0.9.32" }
-sp-timestamp = { git = "https://github.com/paritytech/substrate", package = "sp-timestamp" , branch = "polkadot-v0.9.32" }
+sc-cli = { git = "https://github.com/SkymanOne/substrate", package = "sc-cli", default-features = false, branch = "bump-1" }
+sp-core = { git = "https://github.com/SkymanOne/substrate", package = "sp-core", branch = "bump-1" }
+sc-executor = { git = "https://github.com/SkymanOne/substrate", package = "sc-executor", branch = "bump-1" }
+sc-service = { git = "https://github.com/SkymanOne/substrate", package = "sc-service", default-features = false, branch = "bump-1" }
+sc-telemetry = { git = "https://github.com/SkymanOne/substrate", package = "sc-telemetry", branch = "bump-1" }
+sc-keystore = { git = "https://github.com/SkymanOne/substrate", package = "sc-keystore", branch = "bump-1" }
+sc-transaction-pool = { git = "https://github.com/SkymanOne/substrate", package = "sc-transaction-pool", branch = "bump-1" }
+sc-transaction-pool-api = { git = "https://github.com/SkymanOne/substrate", package = "sc-transaction-pool-api", branch = "bump-1" }
+sc-consensus = { git = "https://github.com/SkymanOne/substrate", package = "sc-consensus", branch = "bump-1" }
+sc-consensus-manual-seal = { git = "https://github.com/SkymanOne/substrate", package = "sc-consensus-manual-seal", branch = "bump-1" }
+sc-client-api = { git = "https://github.com/SkymanOne/substrate", package = "sc-client-api", branch = "bump-1" }
+sp-runtime = { git = "https://github.com/SkymanOne/substrate", package = "sp-runtime", branch = "bump-1" }
+sp-timestamp = { git = "https://github.com/SkymanOne/substrate", package = "sp-timestamp", branch = "bump-1" }
 
 # These dependencies are used for the node's RPCs
 jsonrpsee = { version = "0.15.1", features = ["server"] }
-sc-rpc = { git = "https://github.com/paritytech/substrate", package = "sc-rpc" , branch = "polkadot-v0.9.32" }
-sp-api = { git = "https://github.com/paritytech/substrate", package = "sp-api" , branch = "polkadot-v0.9.32" }
-sc-rpc-api = { git = "https://github.com/paritytech/substrate", package = "sc-rpc-api" , branch = "polkadot-v0.9.32" }
-sp-blockchain = { git = "https://github.com/paritytech/substrate", package = "sp-blockchain" , branch = "polkadot-v0.9.32" }
-sp-block-builder = { git = "https://github.com/paritytech/substrate", package = "sp-block-builder" , branch = "polkadot-v0.9.32" }
-sc-basic-authorship = { git = "https://github.com/paritytech/substrate", package = "sc-basic-authorship" , branch = "polkadot-v0.9.32" }
-substrate-frame-rpc-system = { git = "https://github.com/paritytech/substrate", package = "substrate-frame-rpc-system" , branch = "polkadot-v0.9.32" }
-pallet-transaction-payment-rpc = { git = "https://github.com/paritytech/substrate", package = "pallet-transaction-payment-rpc" , branch = "polkadot-v0.9.32" }
+sc-rpc = { git = "https://github.com/SkymanOne/substrate", package = "sc-rpc", branch = "bump-1" }
+sp-api = { git = "https://github.com/SkymanOne/substrate", package = "sp-api", branch = "bump-1" }
+sc-rpc-api = { git = "https://github.com/SkymanOne/substrate", package = "sc-rpc-api", branch = "bump-1" }
+sp-blockchain = { git = "https://github.com/SkymanOne/substrate", package = "sp-blockchain", branch = "bump-1" }
+sp-block-builder = { git = "https://github.com/SkymanOne/substrate", package = "sp-block-builder", branch = "bump-1" }
+sc-basic-authorship = { git = "https://github.com/SkymanOne/substrate", package = "sc-basic-authorship", branch = "bump-1" }
+substrate-frame-rpc-system = { git = "https://github.com/SkymanOne/substrate", package = "substrate-frame-rpc-system", branch = "bump-1" }
+pallet-transaction-payment-rpc = { git = "https://github.com/SkymanOne/substrate", package = "pallet-transaction-payment-rpc", branch = "bump-1" }
 
 # Local Dependencies
 contracts-node-runtime = { path = "../runtime" }
 
 [build-dependencies]
-substrate-build-script-utils = { git = "https://github.com/paritytech/substrate", package = "substrate-build-script-utils" , branch = "polkadot-v0.9.32" }
+substrate-build-script-utils = { git = "https://github.com/SkymanOne/substrate", package = "substrate-build-script-utils", branch = "bump-1" }
 
 [features]
 default = []
