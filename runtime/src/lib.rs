@@ -352,7 +352,7 @@ impl pallet_contracts::Config for Runtime {
 	// just more lax.
 	type MaxCodeLen = ConstU32<{ 256 * 1024 }>;
 	type MaxStorageKeyLen = ConstU32<128>;
-	type UnsafeUnstableInterface = ConstBool<false>;
+	type UnsafeUnstableInterface = ConstBool<true>;
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
