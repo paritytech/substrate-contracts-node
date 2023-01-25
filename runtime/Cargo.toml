@@ -36,6 +36,7 @@ sp-session = { git = "https://github.com/paritytech/substrate", package = "sp-se
 sp-std = { git = "https://github.com/paritytech/substrate", package = "sp-std", default-features = false, branch = "polkadot-v0.9.34" }
 sp-transaction-pool = { git = "https://github.com/paritytech/substrate", package = "sp-transaction-pool", default-features = false, branch = "polkadot-v0.9.34" }
 sp-version = { git = "https://github.com/paritytech/substrate", package = "sp-version", default-features = false, branch = "polkadot-v0.9.34" }
+pallet-utility = { git = "https://github.com/paritytech/substrate", package = "pallet-utility", default-features = false, branch = "polkadot-v0.9.34" }
 
 # Used for the node's RPCs
 frame-system-rpc-runtime-api = { git = "https://github.com/paritytech/substrate", package = "frame-system-rpc-runtime-api", default-features = false, branch = "polkadot-v0.9.34" }
