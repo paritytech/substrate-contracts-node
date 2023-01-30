@@ -20,36 +20,36 @@ path = "src/main.rs"
 [dependencies]
 clap = { version = "4.0.9", features = ["derive"] }
 
-sc-cli = { git = "https://github.com/paritytech/substrate", package = "sc-cli", default-features = false, branch = "polkadot-v0.9.34" }
-sp-core = { git = "https://github.com/paritytech/substrate", package = "sp-core", branch = "polkadot-v0.9.34" }
-sc-executor = { git = "https://github.com/paritytech/substrate", package = "sc-executor", branch = "polkadot-v0.9.34" }
-sc-service = { git = "https://github.com/paritytech/substrate", package = "sc-service", default-features = false, branch = "polkadot-v0.9.34" }
-sc-telemetry = { git = "https://github.com/paritytech/substrate", package = "sc-telemetry", branch = "polkadot-v0.9.34" }
-sc-keystore = { git = "https://github.com/paritytech/substrate", package = "sc-keystore", branch = "polkadot-v0.9.34" }
-sc-transaction-pool = { git = "https://github.com/paritytech/substrate", package = "sc-transaction-pool", branch = "polkadot-v0.9.34" }
-sc-transaction-pool-api = { git = "https://github.com/paritytech/substrate", package = "sc-transaction-pool-api", branch = "polkadot-v0.9.34" }
-sc-consensus = { git = "https://github.com/paritytech/substrate", package = "sc-consensus", branch = "polkadot-v0.9.34" }
-sc-consensus-manual-seal = { git = "https://github.com/paritytech/substrate", package = "sc-consensus-manual-seal", branch = "polkadot-v0.9.34" }
-sc-client-api = { git = "https://github.com/paritytech/substrate", package = "sc-client-api", branch = "polkadot-v0.9.34" }
-sp-runtime = { git = "https://github.com/paritytech/substrate", package = "sp-runtime", branch = "polkadot-v0.9.34" }
-sp-timestamp = { git = "https://github.com/paritytech/substrate", package = "sp-timestamp", branch = "polkadot-v0.9.34" }
+sc-cli = { git = "https://github.com/paritytech/substrate", package = "sc-cli", default-features = false, branch = "polkadot-v0.9.37" }
+sp-core = { git = "https://github.com/paritytech/substrate", package = "sp-core", branch = "polkadot-v0.9.37" }
+sc-executor = { git = "https://github.com/paritytech/substrate", package = "sc-executor", branch = "polkadot-v0.9.37" }
+sc-service = { git = "https://github.com/paritytech/substrate", package = "sc-service", default-features = false, branch = "polkadot-v0.9.37" }
+sc-telemetry = { git = "https://github.com/paritytech/substrate", package = "sc-telemetry", branch = "polkadot-v0.9.37" }
+sc-keystore = { git = "https://github.com/paritytech/substrate", package = "sc-keystore", branch = "polkadot-v0.9.37" }
+sc-transaction-pool = { git = "https://github.com/paritytech/substrate", package = "sc-transaction-pool", branch = "polkadot-v0.9.37" }
+sc-transaction-pool-api = { git = "https://github.com/paritytech/substrate", package = "sc-transaction-pool-api", branch = "polkadot-v0.9.37" }
+sc-consensus = { git = "https://github.com/paritytech/substrate", package = "sc-consensus", branch = "polkadot-v0.9.37" }
+sc-consensus-manual-seal = { git = "https://github.com/paritytech/substrate", package = "sc-consensus-manual-seal", branch = "polkadot-v0.9.37" }
+sc-client-api = { git = "https://github.com/paritytech/substrate", package = "sc-client-api", branch = "polkadot-v0.9.37" }
+sp-runtime = { git = "https://github.com/paritytech/substrate", package = "sp-runtime", branch = "polkadot-v0.9.37" }
+sp-timestamp = { git = "https://github.com/paritytech/substrate", package = "sp-timestamp", branch = "polkadot-v0.9.37" }
 
 # These dependencies are used for the node's RPCs
-jsonrpsee = { version = "0.15.1", features = ["server"] }
-sc-rpc = { git = "https://github.com/paritytech/substrate", package = "sc-rpc", branch = "polkadot-v0.9.34" }
-sp-api = { git = "https://github.com/paritytech/substrate", package = "sp-api", branch = "polkadot-v0.9.34" }
-sc-rpc-api = { git = "https://github.com/paritytech/substrate", package = "sc-rpc-api", branch = "polkadot-v0.9.34" }
-sp-blockchain = { git = "https://github.com/paritytech/substrate", package = "sp-blockchain", branch = "polkadot-v0.9.34" }
-sp-block-builder = { git = "https://github.com/paritytech/substrate", package = "sp-block-builder", branch = "polkadot-v0.9.34" }
-sc-basic-authorship = { git = "https://github.com/paritytech/substrate", package = "sc-basic-authorship", branch = "polkadot-v0.9.34" }
-substrate-frame-rpc-system = { git = "https://github.com/paritytech/substrate", package = "substrate-frame-rpc-system", branch = "polkadot-v0.9.34" }
-pallet-transaction-payment-rpc = { git = "https://github.com/paritytech/substrate", package = "pallet-transaction-payment-rpc", branch = "polkadot-v0.9.34" }
+jsonrpsee = { version = "0.16.2", features = ["server"] }
+sc-rpc = { git = "https://github.com/paritytech/substrate", package = "sc-rpc", branch = "polkadot-v0.9.37" }
+sp-api = { git = "https://github.com/paritytech/substrate", package = "sp-api", branch = "polkadot-v0.9.37" }
+sc-rpc-api = { git = "https://github.com/paritytech/substrate", package = "sc-rpc-api", branch = "polkadot-v0.9.37" }
+sp-blockchain = { git = "https://github.com/paritytech/substrate", package = "sp-blockchain", branch = "polkadot-v0.9.37" }
+sp-block-builder = { git = "https://github.com/paritytech/substrate", package = "sp-block-builder", branch = "polkadot-v0.9.37" }
+sc-basic-authorship = { git = "https://github.com/paritytech/substrate", package = "sc-basic-authorship", branch = "polkadot-v0.9.37" }
+substrate-frame-rpc-system = { git = "https://github.com/paritytech/substrate", package = "substrate-frame-rpc-system", branch = "polkadot-v0.9.37" }
+pallet-transaction-payment-rpc = { git = "https://github.com/paritytech/substrate", package = "pallet-transaction-payment-rpc", branch = "polkadot-v0.9.37" }
 
 # Local Dependencies
 contracts-node-runtime = { path = "../runtime" }
 
 [build-dependencies]
-substrate-build-script-utils = { git = "https://github.com/paritytech/substrate", package = "substrate-build-script-utils", branch = "polkadot-v0.9.34" }
+substrate-build-script-utils = { git = "https://github.com/paritytech/substrate", package = "substrate-build-script-utils", branch = "polkadot-v0.9.37" }
 
 [features]
 default = []
