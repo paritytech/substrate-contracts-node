@@ -78,7 +78,7 @@ build-linux:
     - time cargo build --release
     - time cargo test --release --all
     - mkdir -p ./artifacts/substrate-contracts-node-linux/
-    - cp ${CARGO_TARGET_DIR}/release/substrate-contracts-node ./artifacts/substrate-contracts-node-linux/substrate-contracts-node
+    - cp target/release/substrate-contracts-node ./artifacts/substrate-contracts-node-linux/substrate-contracts-node
 
 ### stage:                         build-mac
 
