@@ -4,6 +4,14 @@
 #
 # pipelines can be triggered manually in the web
 
+default:
+  interruptible:                   true
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - unknown_failure
+      - api_failure
 
 stages:
   - fmt
@@ -15,12 +23,6 @@ variables:
   GIT_STRATEGY:                    fetch
   GIT_DEPTH:                       100
   CARGO_INCREMENTAL:               0
-  CARGO_TARGET_DIR:                "/ci-cache/${CI_PROJECT_NAME}/targets/${CI_COMMIT_REF_NAME}/${CI_JOB_NAME}"
-
-workflow:
-  rules:
-    - if: $CI_COMMIT_TAG
-    - if: $CI_COMMIT_BRANCH
 
 .collect-artifacts:                &collect-artifacts
   artifacts:
@@ -37,27 +39,10 @@ workflow:
     - rustc -vV
     - rustup show
     - bash --version
-    - mkdir -p ${CARGO_TARGET_DIR}
-    - ./scripts/ci/pre_cache.sh
-    - sccache -s
-  interruptible:                   true
-  retry:
-    max: 2
-    when:
-      - runner_system_failure
-      - unknown_failure
-      - api_failure
   tags:
-    - linux-docker
+    - linux-docker-vm-c2
 
 .kubernetes-env:                   &kubernetes-env
-  retry:
-    max: 2
-    when:
-      - runner_system_failure
-      - unknown_failure
-      - api_failure
-  interruptible:                   true
   tags:
     - kubernetes-parity-build
 
@@ -93,7 +78,7 @@ build-linux:
     - time cargo build --release
     - time cargo test --release --all
     - mkdir -p ./artifacts/substrate-contracts-node-linux/
-    - cp ${CARGO_TARGET_DIR}/release/substrate-contracts-node ./artifacts/substrate-contracts-node-linux/substrate-contracts-node
+    - cp target/release/substrate-contracts-node ./artifacts/substrate-contracts-node-linux/substrate-contracts-node
 
 ### stage:                         build-mac
 
