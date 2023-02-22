@@ -87,15 +87,15 @@ Once the node template is running locally, you can connect to it with frontends 
       here is actually not important: since Substrate uses git references for its Substrate
       dependencies it means that once one package is updated all are.
 - [ ] Increment the minor version number in `node/Cargo.toml` and `runtime/Cargo.toml`.
-- [ ] Execute `cargo run --release -- --tmp`. If successful, it should produce blocks
+- [ ] Execute `cargo run --release`. If successful, it should produce blocks
       and a new, up to date, `Cargo.lock` will be created.
 - [ ] Update this readme with the hash of the Substrate `master` commit
       with which you synchronized. The hash appears two times in this
-			readme.
+      readme.
 - [ ] Create a PR with the changes, have it reviewed and merged.
 - [ ] Replace `XX` in this command with your incremeted version number and execute it:
       `git checkout main && git pull && git tag v0.XX.0 && git push origin v0.XX.0`.
-			This will push a new tag with the version number to this repository.
+      This will push a new tag with the version number to this repository.
 - [ ] We have set this repository up in a way that tags à la `vX.X.X` trigger
       a CI run that creates a GitHub draft release. You can observe CI runs on
       [GitLab](https://gitlab.parity.io/parity/mirrors/substrate-contracts-node/-/pipelines).
