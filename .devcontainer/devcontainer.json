@@ -3,5 +3,6 @@
   "features": {
     "ghcr.io/devcontainers/features/rust:1": {},
     "devwasm.azurecr.io/dev-wasm/dev-wasm-feature/rust-wasi:0": {}
-  }
+  },
+  "postCreateCommand": "cargo build --release"
 }
