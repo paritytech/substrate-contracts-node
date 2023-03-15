@@ -10,4 +10,5 @@ PROTOC_VERSION=$(curl -s "https://api.github.com/repos/protocolbuffers/protobuf/
 curl -Lo protoc.zip "https://github.com/protocolbuffers/protobuf/releases/latest/download/protoc-${PROTOC_VERSION}-linux-x86_64.zip"
 sudo unzip -q protoc.zip bin/protoc -d /usr/local
 sudo chmod a+x /usr/local/bin/protoc
+rm -rf protoc.zip
 cargo build --release --locked
