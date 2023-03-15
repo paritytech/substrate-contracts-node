@@ -12,3 +12,4 @@ sudo unzip -q protoc.zip bin/protoc -d /usr/local
 sudo chmod a+x /usr/local/bin/protoc
 rm -rf protoc.zip
 cargo build --release --locked
+cargo install --force --locked cargo-contract --version 2.0.0-rc
