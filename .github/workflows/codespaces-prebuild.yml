@@ -1,0 +1,15 @@
+name: Prebuild Codespaces
+
+on:
+  push:
+
+jobs:
+  prebuild:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Create Codespace prebuild
+      uses: github/codespaces-prebuild@v1
