@@ -38,6 +38,7 @@ sp-std = { git = "https://github.com/paritytech/substrate", package = "sp-std", 
 sp-transaction-pool = { git = "https://github.com/paritytech/substrate", package = "sp-transaction-pool", default-features = false, branch = "polkadot-v0.9.37" }
 sp-version = { git = "https://github.com/paritytech/substrate", package = "sp-version", default-features = false, branch = "polkadot-v0.9.37" }
 pallet-utility = { git = "https://github.com/paritytech/substrate", package = "pallet-utility", default-features = false, branch = "polkadot-v0.9.37" }
+frame-try-runtime = { git = "https://github.com/paritytech/substrate", package = "frame-try-runtime", default-features = false, branch = "polkadot-v0.9.37", optional = true }
 
 # Used for the node's RPCs
 frame-system-rpc-runtime-api = { git = "https://github.com/paritytech/substrate", package = "frame-system-rpc-runtime-api", default-features = false, branch = "polkadot-v0.9.37" }
@@ -86,4 +87,16 @@ std = [
 	"pallet-assets/std",
 	"pallet-assets-chain-extension/substrate-std",
 	"substrate-wasm-builder",
+	"frame-try-runtime/std",
+]
+try-runtime = [
+	"frame-try-runtime/try-runtime",
+	"frame-executive/try-runtime",
+	"frame-system/try-runtime",
+	"frame-support/try-runtime",
+	"pallet-authorship/try-runtime",
+	"pallet-balances/try-runtime",
+	"pallet-sudo/try-runtime",
+	"pallet-timestamp/try-runtime",
+	"pallet-transaction-payment/try-runtime",
 ]

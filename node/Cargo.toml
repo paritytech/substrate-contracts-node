@@ -33,6 +33,7 @@ sc-consensus-manual-seal = { git = "https://github.com/paritytech/substrate", pa
 sc-client-api = { git = "https://github.com/paritytech/substrate", package = "sc-client-api", branch = "polkadot-v0.9.37" }
 sp-runtime = { git = "https://github.com/paritytech/substrate", package = "sp-runtime", branch = "polkadot-v0.9.37" }
 sp-timestamp = { git = "https://github.com/paritytech/substrate", package = "sp-timestamp", branch = "polkadot-v0.9.37" }
+sp-io = { git = "https://github.com/paritytech/substrate", package = "sp-io", branch = "polkadot-v0.9.37" }
 
 # These dependencies are used for the node's RPCs
 jsonrpsee = { version = "0.16.2", features = ["server"] }
@@ -48,8 +49,14 @@ pallet-transaction-payment-rpc = { git = "https://github.com/paritytech/substrat
 # Local Dependencies
 contracts-node-runtime = { path = "../runtime" }
 
+# CLI-specific dependencies
+try-runtime-cli = { git = "https://github.com/paritytech/substrate", package = "try-runtime-cli", branch = "polkadot-v0.9.37", optional = true }
+
 [build-dependencies]
 substrate-build-script-utils = { git = "https://github.com/paritytech/substrate", package = "substrate-build-script-utils", branch = "polkadot-v0.9.37" }
 
 [features]
 default = []
+# Enable features that allow the runtime to be tried and debugged. Name might be subject to change
+# in the near future.
+try-runtime = ["contracts-node-runtime/try-runtime", "try-runtime-cli/try-runtime"]
