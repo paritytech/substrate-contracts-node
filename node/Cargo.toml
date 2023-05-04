@@ -35,7 +35,7 @@ sp-runtime = { git = "https://github.com/paritytech/substrate", package = "sp-ru
 sp-timestamp = { git = "https://github.com/paritytech/substrate", package = "sp-timestamp", branch = "polkadot-v0.9.42" }
 
 # These dependencies are used for the node's RPCs
-jsonrpsee = { version = "0.18.1", features = ["server"] }
+jsonrpsee = { version = "0.16.2", features = ["server"] }
 sc-rpc = { git = "https://github.com/paritytech/substrate", package = "sc-rpc", branch = "polkadot-v0.9.42" }
 sp-api = { git = "https://github.com/paritytech/substrate", package = "sp-api", branch = "polkadot-v0.9.42" }
 sc-rpc-api = { git = "https://github.com/paritytech/substrate", package = "sc-rpc-api", branch = "polkadot-v0.9.42" }
