@@ -226,12 +226,8 @@ parameter_types! {
 
 impl pallet_authorship::Config for Runtime {
 	type FindAuthor = ();
-	type UncleGenerations = UncleGenerations;
-	type FilterUncle = ();
 	type EventHandler = ();
 }
-
-impl pallet_randomness_collective_flip::Config for Runtime {}
 
 parameter_types! {
 	pub const MinimumPeriod: u64 = 5;
@@ -261,6 +257,10 @@ impl pallet_balances::Config for Runtime {
 	type ExistentialDeposit = ConstU128<EXISTENTIAL_DEPOSIT>;
 	type AccountStore = System;
 	type WeightInfo = pallet_balances::weights::SubstrateWeight<Runtime>;
+	type FreezeIdentifier = ();
+	type MaxFreezes = ();
+	type HoldIdentifier = ();
+	type MaxHolds = ();
 }
 
 impl pallet_transaction_payment::Config for Runtime {
@@ -332,7 +332,6 @@ impl pallet_utility::Config for Runtime {
 
 impl pallet_contracts::Config for Runtime {
 	type Time = Timestamp;
-	type Randomness = RandomnessCollectiveFlip;
 	type Currency = Balances;
 	type RuntimeEvent = RuntimeEvent;
 	type RuntimeCall = RuntimeCall;
@@ -349,8 +348,6 @@ impl pallet_contracts::Config for Runtime {
 	type WeightPrice = pallet_transaction_payment::Pallet<Self>;
 	type WeightInfo = pallet_contracts::weights::SubstrateWeight<Self>;
 	type ChainExtension = pallet_assets_chain_extension::substrate::AssetsExtension;
-	type DeletionQueueDepth = DeletionQueueDepth;
-	type DeletionWeightLimit = DeletionWeightLimit;
 	type Schedule = Schedule;
 	type AddressGenerator = pallet_contracts::DefaultAddressGenerator;
 	// This node is geared towards development and testing of contracts.
@@ -377,7 +374,6 @@ construct_runtime!(
 	{
 		System: frame_system,
 		Utility: pallet_utility,
-		RandomnessCollectiveFlip: pallet_randomness_collective_flip,
 		Timestamp: pallet_timestamp,
 		Balances: pallet_balances,
 		Authorship: pallet_authorship,
@@ -438,6 +434,13 @@ impl_runtime_apis! {
 	impl sp_api::Metadata<Block> for Runtime {
 		fn metadata() -> OpaqueMetadata {
 			OpaqueMetadata::new(Runtime::metadata().into())
+		}
+		fn metadata_at_version(version: u32) -> Option<OpaqueMetadata> {
+			Runtime::metadata_at_version(version)
+		}
+
+		fn metadata_versions() -> sp_std::vec::Vec<u32> {
+			Runtime::metadata_versions()
 		}
 	}
 

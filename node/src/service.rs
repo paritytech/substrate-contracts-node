@@ -56,12 +56,7 @@ pub fn new_partial(
 		})
 		.transpose()?;
 
-	let executor = NativeElseWasmExecutor::<ExecutorDispatch>::new(
-		config.wasm_method,
-		config.default_heap_pages,
-		config.max_runtime_instances,
-		config.runtime_cache_size,
-	);
+	let executor = sc_service::new_native_or_wasm_executor(&config);
 
 	let (client, backend, keystore_container, task_manager) =
 		sc_service::new_full_parts::<Block, RuntimeApi, _>(
@@ -118,24 +113,13 @@ pub fn new_full(config: Configuration) -> Result<TaskManager, ServiceError> {
 		backend,
 		mut task_manager,
 		import_queue,
-		mut keystore_container,
+		keystore_container,
 		select_chain,
 		transaction_pool,
 		other: (mut telemetry,),
 	} = new_partial(&config)?;
 
-	if let Some(url) = &config.keystore_remote {
-		match remote_keystore(url) {
-			Ok(k) => keystore_container.set_remote_keystore(k),
-			Err(e) =>
-				return Err(ServiceError::Other(format!(
-					"Error hooking up remote keystore for {}: {}",
-					url, e
-				))),
-		};
-	}
-
-	let (network, system_rpc_tx, tx_handler_controller, network_starter) =
+	let (network, system_rpc_tx, tx_handler_controller, network_starter, sync_service) =
 		sc_service::build_network(sc_service::BuildNetworkParams {
 			config: &config,
 			client: client.clone(),
@@ -143,7 +127,7 @@ pub fn new_full(config: Configuration) -> Result<TaskManager, ServiceError> {
 			spawn_handle: task_manager.spawn_handle(),
 			import_queue,
 			block_announce_validator_builder: None,
-			warp_sync: None,
+			warp_sync_params: None,
 		})?;
 
 	if config.offchain_worker.enabled {
@@ -170,13 +154,14 @@ pub fn new_full(config: Configuration) -> Result<TaskManager, ServiceError> {
 	let _rpc_handlers = sc_service::spawn_tasks(sc_service::SpawnTasksParams {
 		network,
 		client: client.clone(),
-		keystore: keystore_container.sync_keystore(),
+		keystore: keystore_container.keystore(),
 		task_manager: &mut task_manager,
 		transaction_pool: transaction_pool.clone(),
 		rpc_builder: rpc_extensions_builder,
 		backend,
 		system_rpc_tx,
 		tx_handler_controller,
+		sync_service,
 		config,
 		telemetry: telemetry.as_mut(),
 	})?;
