@@ -991,7 +991,7 @@ dependencies = [
 
 [[package]]
 name = "contracts-node-runtime"
-version = "0.24.0"
+version = "0.25.0"
 dependencies = [
  "frame-executive",
  "frame-support",
