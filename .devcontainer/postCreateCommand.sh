@@ -5,6 +5,7 @@ curl https://sh.rustup.rs -sSf | sh -s -- -y
 rustup default stable
 rustup update
 rustup update nightly
+rustup target add wasm32-unknown-unknown
 rustup target add wasm32-unknown-unknown --toolchain nightly
 
 echo "Installing protoc..."
