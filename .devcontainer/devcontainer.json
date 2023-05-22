@@ -4,5 +4,5 @@
     "ghcr.io/devcontainers/features/rust:1": {},
     "devwasm.azurecr.io/dev-wasm/dev-wasm-feature/rust-wasi:0": {}
   },
-  "updateContentCommand": "./.devcontainer/postCreateCommand.sh"
+  "updateContentCommand": "./.devcontainer/updateContentCommand.sh"
 }
