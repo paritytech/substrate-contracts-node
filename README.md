@@ -44,8 +44,7 @@ and just execute `./substrate-contracts-node`.
 
 ### Build Locally
 
-Follow the [official installation steps](https://docs.substrate.io/v3/getting-started/installation/)
-to set up all Substrate prerequisites.
+Follow the [official installation steps](https://docs.substrate.io/install/) to set up all Substrate prerequisites.
 
 Afterwards you can install this node via
 
@@ -83,7 +82,7 @@ Once the node template is running locally, you can connect to it with frontends 
       in order to not miss any important changes.
 - [ ] Execute `diener update -s --branch my_polkadot_release_branch`. Manually upgrade the
       `pallet-assets-chain-extension` dependency to the latest release branch and then
-      `cargo update -p palle-contracts` for this repository. The specific crate which is mentioned
+      `cargo update -p pallet-contracts` for this repository. The specific crate which is mentioned
       here is actually not important: since Substrate uses git references for its Substrate
       dependencies it means that once one package is updated all are.
 - [ ] Increment the minor version number in `node/Cargo.toml` and `runtime/Cargo.toml`.
@@ -93,7 +92,7 @@ Once the node template is running locally, you can connect to it with frontends 
       with which you synchronized. The hash appears two times in this
       readme.
 - [ ] Create a PR with the changes, have it reviewed and merged.
-- [ ] Replace `XX` in this command with your incremeted version number and execute it:
+- [ ] Replace `XX` in this command with your incremented version number and execute it:
       `git checkout main && git pull && git tag v0.XX.0 && git push origin v0.XX.0`.
       This will push a new tag with the version number to this repository.
 - [ ] We have set this repository up in a way that tags à la `vX.X.X` trigger
