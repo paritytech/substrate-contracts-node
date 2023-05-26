@@ -330,7 +330,7 @@ pub enum AllowBalancesCall {}
 
 impl frame_support::traits::Contains<RuntimeCall> for AllowBalancesCall {
 	fn contains(call: &RuntimeCall) -> bool {
-		matches!(call, RuntimeCall::Balances(BalancesCall::transfer_allow_death {..}))
+		matches!(call, RuntimeCall::Balances(BalancesCall::transfer_allow_death { .. }))
 	}
 }
 
