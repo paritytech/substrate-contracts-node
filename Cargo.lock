@@ -964,6 +964,7 @@ version = "0.25.1"
 dependencies = [
  "clap",
  "contracts-node-runtime",
+ "enum-as-inner",
  "jsonrpsee",
  "pallet-transaction-payment-rpc",
  "sc-basic-authorship",
