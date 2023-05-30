@@ -48,6 +48,11 @@ pallet-transaction-payment-rpc = { git = "https://github.com/paritytech/substrat
 # Local Dependencies
 contracts-node-runtime = { path = "../runtime" }
 
+# yank this crate until
+# https://github.com/bluejekyll/enum-as-inner/issues/98
+# is fixed
+enum-as-inner = "=0.5.1"
+
 [build-dependencies]
 substrate-build-script-utils = { git = "https://github.com/paritytech/substrate", package = "substrate-build-script-utils", branch = "polkadot-v0.9.42" }
 
