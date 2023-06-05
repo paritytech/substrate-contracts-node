@@ -19,7 +19,7 @@ rm -rf protoc.zip
 
 SUBSTRATE_VERSION=$(curl -s "https://api.github.com/repos/paritytech/substrate-contracts-node/releases/latest" | grep -Po '"tag_name": "v\K[0-9.]+')
 curl -Lo substrate.tar.gz "https://github.com/paritytech/substrate-contracts-node/releases/download/${SUBSTRATE_VERSION}/substrate-contracts-node-linux.tar.gz"
-tar -xzf substrate.tar.gz -d /usr/local/bin
+sudo tar -xzf substrate.tar.gz bin/substrate-contracts-node -d /usr/local
 sudo chmod a+x /usr/local/bin/substrate-contracts-node
 rm -rf substrate.tar.gz
 
