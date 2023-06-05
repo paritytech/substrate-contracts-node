@@ -76,7 +76,7 @@ build-linux:
   <<:                              *build-refs
   script:
     - time cargo build --release
-    # - time cargo test --release --all
+    - time cargo test --release --all
     - mkdir -p ./artifacts/substrate-contracts-node-linux/
     - cp target/release/substrate-contracts-node ./artifacts/substrate-contracts-node-linux/substrate-contracts-node
 
@@ -91,6 +91,7 @@ build-mac:
     - unset CARGO_TARGET_DIR
   script:
     - time cargo build --release --target aarch64-apple-darwin
+    - rustup target add x86_64-apple-darwin
     - time cargo build --release --target x86_64-apple-darwin
     - mkdir -p ./artifacts/substrate-contracts-node-mac/
     - 'lipo
