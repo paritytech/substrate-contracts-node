@@ -1,8 +1,11 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "name": "Substrate Contracts Node",
+  "image": "benhayehudi/substrate-contracts-node-codespaces:latest",
+  "forwardPorts": [9944],
+  "postCreateCommand": "echo 'Substrate Contracts Node has been installed and is ready to use!'",
   "features": {
-    "ghcr.io/devcontainers/features/rust:1": {},
-    "devwasm.azurecr.io/dev-wasm/dev-wasm-feature/rust-wasi:0": {}
+      "ghcr.io/devcontainers/features/rust:1": {},
+      "devwasm.azurecr.io/dev-wasm/dev-wasm-feature/rust-wasi:0": {}
   },
   "updateContentCommand": "./.devcontainer/updateContentCommand.sh"
 }
