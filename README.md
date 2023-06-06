@@ -1,5 +1,7 @@
 # substrate-contracts-node
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paritytech/substrate-contracts-node)
+
 This repository contains Substrate's [`node-template`](https://github.com/paritytech/substrate/tree/master/bin/node-template)
 configured to include Substrate's [`pallet-contracts`](https://github.com/paritytech/substrate/tree/master/frame/contracts)
 ‒ a smart contract module.
