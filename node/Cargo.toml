@@ -18,11 +18,12 @@ name = "substrate-contracts-node"
 path = "src/main.rs"
 
 [dependencies]
-clap = { version = "4.0.9", features = ["derive"] }
+clap = { version = "4.2.7", features = ["derive"] }
 
 sc-cli = { git = "https://github.com/paritytech/substrate", package = "sc-cli", default-features = false, branch = "polkadot-v0.9.43" }
 sp-core = { git = "https://github.com/paritytech/substrate", package = "sp-core", branch = "polkadot-v0.9.43" }
 sc-executor = { git = "https://github.com/paritytech/substrate", package = "sc-executor", branch = "polkadot-v0.9.43" }
+sc-network = { git = "https://github.com/paritytech/substrate", package = "sc-network", branch = "polkadot-v0.9.43" }
 sc-service = { git = "https://github.com/paritytech/substrate", package = "sc-service", default-features = false, branch = "polkadot-v0.9.43" }
 sc-telemetry = { git = "https://github.com/paritytech/substrate", package = "sc-telemetry", branch = "polkadot-v0.9.43" }
 sc-keystore = { git = "https://github.com/paritytech/substrate", package = "sc-keystore", branch = "polkadot-v0.9.43" }
