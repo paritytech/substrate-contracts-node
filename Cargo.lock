@@ -975,7 +975,7 @@ checksum = "21a53c0a4d288377e7415b53dcfc3c04da5cdc2cc95c8d5ac178b58f0b861ad6"
 
 [[package]]
 name = "contracts-node"
-version = "0.26.0"
+version = "0.27.0"
 dependencies = [
  "clap",
  "contracts-node-runtime",
@@ -1008,7 +1008,7 @@ dependencies = [
 
 [[package]]
 name = "contracts-node-runtime"
-version = "0.26.0"
+version = "0.27.0"
 dependencies = [
  "frame-executive",
  "frame-support 4.0.0-dev (git+https://github.com/paritytech/substrate?branch=polkadot-v0.9.43)",
