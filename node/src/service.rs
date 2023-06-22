@@ -108,9 +108,12 @@ pub fn new_full(config: Configuration) -> Result<TaskManager, ServiceError> {
 		other: (mut telemetry,),
 	} = new_partial(&config)?;
 
+	let net_config = sc_network::config::FullNetworkConfiguration::new(&config.network);
+
 	let (network, system_rpc_tx, tx_handler_controller, network_starter, sync_service) =
 		sc_service::build_network(sc_service::BuildNetworkParams {
 			config: &config,
+			net_config,
 			client: client.clone(),
 			transaction_pool: transaction_pool.clone(),
 			spawn_handle: task_manager.spawn_handle(),
