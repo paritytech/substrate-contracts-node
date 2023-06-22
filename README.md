@@ -7,7 +7,7 @@ configured to include Substrate's [`pallet-contracts`](https://github.com/parity
 ‒ a smart contract module.
 
 This repository is tracking Substrate's
-[`polkadot-v0.9.42`](https://github.com/paritytech/substrate/tree/polkadot-v0.9.42) branch.
+[`polkadot-v0.9.43`](https://github.com/paritytech/substrate/tree/polkadot-v0.9.43) branch.
 When new Polkadot releases come out we may update to those.
 
 _This repository contains a couple of modifications that make it unsuitable
@@ -102,6 +102,5 @@ Once the node template is running locally, you can connect to it with frontends 
       [GitLab](https://gitlab.parity.io/parity/mirrors/substrate-contracts-node/-/pipelines).
       This draft release will contain a binary for Linux and Mac and appear
       under [Releases](https://github.com/paritytech/substrate-contracts-node/releases).
-      Add a description in the style of "Synchronized with Substrate commit
-      [c0ee2a](https://github.com/paritytech/substrate/tree/c0ee2adaa54b22ee0df5d1592cd0430961afd95c)."
+      Add a description in the style of "Synchronized with [`polkadot-v0.9.43`](https://github.com/paritytech/substrate/tree/polkadot-v0.9.43) branch."
       and publish it.
