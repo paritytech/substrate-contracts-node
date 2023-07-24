@@ -20,6 +20,6 @@
 * @cmichi @HCastano @athei @ascjones @agryaznov
 
 # CI
-/.github/ @paritytech/ci @cmichi @ascjones @HCastano @athei @agryaznov
-/scripts/ci/ @paritytech/ci @cmichi @ascjones @HCastano @athei @agryaznov
-/.gitlab-ci.yml @paritytech/ci @cmichi @ascjones @HCastano @athei @agryaznov
+/.github/ @paritytech/ci @cmichi @ascjones @athei @agryaznov
+/scripts/ci/ @paritytech/ci @cmichi @ascjones @athei @agryaznov
+/.gitlab-ci.yml @paritytech/ci @cmichi @ascjones @athei @agryaznov
