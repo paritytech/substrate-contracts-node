@@ -1,9 +1,12 @@
 //! Service and ServiceFactory implementation. Specialized wrapper over substrate service.
 
+use futures::FutureExt;
 use contracts_node_runtime::{self, opaque::Block, RuntimeApi};
+use sc_client_api::Backend;
 pub use sc_executor::NativeElseWasmExecutor;
 use sc_service::{error::Error as ServiceError, Configuration, TaskManager};
 use sc_telemetry::{Telemetry, TelemetryWorker};
+use sc_transaction_pool_api::OffchainTransactionPoolFactory;
 use std::sync::Arc;
 
 // Our native executor instance.
