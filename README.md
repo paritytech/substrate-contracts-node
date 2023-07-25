@@ -102,5 +102,5 @@ Once the node template is running locally, you can connect to it with frontends 
       [GitLab](https://gitlab.parity.io/parity/mirrors/substrate-contracts-node/-/pipelines).
       This draft release will contain a binary for Linux and Mac and appear
       under [Releases](https://github.com/paritytech/substrate-contracts-node/releases).
-      Add a description in the style of "Synchronized with [`polkadot-v0.9.43`](https://github.com/paritytech/substrate/tree/polkadot-v0.9.43) branch."
+      Add a description in the style of "Synchronized with [`polkadot-v1.0.0`](https://github.com/paritytech/substrate/tree/polkadot-v1.0.0) branch."
       and publish it.
