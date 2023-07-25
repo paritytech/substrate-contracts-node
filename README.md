@@ -7,7 +7,7 @@ configured to include Substrate's [`pallet-contracts`](https://github.com/parity
 ‒ a smart contract module.
 
 This repository is tracking Substrate's
-[`polkadot-v0.9.43`](https://github.com/paritytech/substrate/tree/polkadot-v0.9.43) branch.
+[`polkadot-v1.0.0`](https://github.com/paritytech/substrate/tree/polkadot-v1.0.0) branch.
 When new Polkadot releases come out we may update to those.
 
 _This repository contains a couple of modifications that make it unsuitable
