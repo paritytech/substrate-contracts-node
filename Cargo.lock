@@ -962,7 +962,7 @@ checksum = "f7144d30dcf0fafbce74250a3963025d8d52177934239851c917d29f1df280c2"
 
 [[package]]
 name = "contracts-node"
-version = "0.28.0"
+version = "0.30.0"
 dependencies = [
  "clap",
  "contracts-node-runtime",
@@ -997,7 +997,7 @@ dependencies = [
 
 [[package]]
 name = "contracts-node-runtime"
-version = "0.28.0"
+version = "0.30.0"
 dependencies = [
  "frame-executive",
  "frame-support",
