@@ -6,10 +6,6 @@ This repository contains Substrate's [`node-template`](https://github.com/parity
 configured to include Substrate's [`pallet-contracts`](https://github.com/paritytech/substrate/tree/master/frame/contracts)
 ‒ a smart contract module.
 
-This repository is tracking Substrate's
-[`polkadot-v1.0.0`](https://github.com/paritytech/substrate/tree/polkadot-v1.0.0) branch.
-When new Polkadot releases come out we may update to those.
-
 _This repository contains a couple of modifications that make it unsuitable
 for a production deployment, but a great fit for development and testing:_
 
@@ -51,7 +47,7 @@ Follow the [official installation steps](https://docs.substrate.io/install/) to 
 Afterwards you can install this node via
 
 ```bash
-cargo install contracts-node --git https://github.com/paritytech/substrate-contracts-node.git
+cargo install contracts-node
 ```
 
 ## Usage
@@ -74,6 +70,10 @@ See our FAQ for more details:
 Once the node template is running locally, you can connect to it with frontends like [Contracts UI](https://contracts-ui.substrate.io/#/?rpc=ws://127.0.0.1:9944) or [Polkadot-JS Apps](https://polkadot.js.org/apps/#/explorer?rpc=ws://localhost:9944) and interact with your chain.
 
 ## How to upgrade to new Polkadot release
+
+**Note: Now that this repo has upgraded to using dependencies from crates.io, this section
+needs to be updated to reflect the new process, once the first release of the crates from
+the new `polkadot-sdk` mono-repo happens**
 
 - [ ] Check Substrate's [`node-template`](https://github.com/paritytech/substrate/commits/master/bin/node-template)
       for new commits between the new polkadot release branch and the one this repository is currently synced with.
