@@ -48,7 +48,7 @@ substrate-frame-rpc-system = "22.0.0"
 pallet-transaction-payment-rpc = "24.0.0"
 
 # Local Dependencies
-contracts-node-runtime = { path = "../runtime" }
+contracts-node-runtime = { path = "../runtime", version = "0.31.0" }
 
 # yank this crate until
 # https://github.com/bluejekyll/enum-as-inner/issues/98
