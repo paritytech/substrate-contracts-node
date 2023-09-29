@@ -5,8 +5,8 @@ authors = ["Parity Technologies <admin@parity.io>"]
 description = "Runtime configured for smart contracts via `pallet-contracts`."
 edition = "2021"
 license = "Unlicense"
-homepage = "https://github.com/paritytech/polkadot-sdk-contracts-node"
-repository = "https://github.com/paritytech/polkadot-sdk-contracts-node"
+homepage = "https://github.com/paritytech/substrate-contracts-node"
+repository = "https://github.com/paritytech/substrate-contracts-node"
 build = "build.rs"
 
 [package.metadata.docs.rs]
