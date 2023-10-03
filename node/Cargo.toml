@@ -20,32 +20,32 @@ path = "src/main.rs"
 clap = { version = "4.2.7", features = ["derive"] }
 futures = { version = "0.3.21", features = ["thread-pool"]}
 
-sc-cli = { git = "https://github.com/paritytech/polkadot-sdk", package = "sc-cli", default-features = false }
-sp-core = { git = "https://github.com/paritytech/polkadot-sdk", package = "sp-core" }
-sc-executor = { git = "https://github.com/paritytech/polkadot-sdk", package = "sc-executor" }
-sc-network = { git = "https://github.com/paritytech/polkadot-sdk", package = "sc-network" }
-sc-service = { git = "https://github.com/paritytech/polkadot-sdk", package = "sc-service", default-features = false }
-sc-telemetry = { git = "https://github.com/paritytech/polkadot-sdk", package = "sc-telemetry" }
-sc-keystore = { git = "https://github.com/paritytech/polkadot-sdk", package = "sc-keystore" }
-sc-transaction-pool = { git = "https://github.com/paritytech/polkadot-sdk", package = "sc-transaction-pool" }
-sc-transaction-pool-api = { git = "https://github.com/paritytech/polkadot-sdk", package = "sc-transaction-pool-api" }
-sc-offchain = { git = "https://github.com/paritytech/polkadot-sdk", package = "sc-offchain" }
-sc-consensus = { git = "https://github.com/paritytech/polkadot-sdk", package = "sc-consensus" }
-sc-consensus-manual-seal = { git = "https://github.com/paritytech/polkadot-sdk", package = "sc-consensus-manual-seal" }
-sc-client-api = { git = "https://github.com/paritytech/polkadot-sdk", package = "sc-client-api" }
-sp-runtime = { git = "https://github.com/paritytech/polkadot-sdk", package = "sp-runtime" }
-sp-timestamp = { git = "https://github.com/paritytech/polkadot-sdk", package = "sp-timestamp" }
+sc-cli = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sc-cli", default-features = false }
+sp-core = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sp-core" }
+sc-executor = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sc-executor" }
+sc-network = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sc-network" }
+sc-service = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sc-service", default-features = false }
+sc-telemetry = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sc-telemetry" }
+sc-keystore = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sc-keystore" }
+sc-transaction-pool = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sc-transaction-pool" }
+sc-transaction-pool-api = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sc-transaction-pool-api" }
+sc-offchain = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sc-offchain" }
+sc-consensus = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sc-consensus" }
+sc-consensus-manual-seal = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sc-consensus-manual-seal" }
+sc-client-api = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sc-client-api" }
+sp-runtime = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sp-runtime" }
+sp-timestamp = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sp-timestamp" }
 
 # These dependencies are used for the node's RPCs
 jsonrpsee = { version = "0.16.2", features = ["server"] }
-sp-api = { git = "https://github.com/paritytech/polkadot-sdk", package = "sp-api" }
-sc-rpc = { git = "https://github.com/paritytech/polkadot-sdk", package = "sc-rpc" }
-sc-rpc-api = { git = "https://github.com/paritytech/polkadot-sdk", package = "sc-rpc-api" }
-sp-blockchain = { git = "https://github.com/paritytech/polkadot-sdk", package = "sp-blockchain" }
-sp-block-builder = { git = "https://github.com/paritytech/polkadot-sdk", package = "sp-block-builder" }
-sc-basic-authorship = { git = "https://github.com/paritytech/polkadot-sdk", package = "sc-basic-authorship" }
-substrate-frame-rpc-system = { git = "https://github.com/paritytech/polkadot-sdk", package = "substrate-frame-rpc-system" }
-pallet-transaction-payment-rpc = { git = "https://github.com/paritytech/polkadot-sdk", package = "pallet-transaction-payment-rpc" }
+sp-api = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sp-api" }
+sc-rpc = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sc-rpc" }
+sc-rpc-api = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sc-rpc-api" }
+sp-blockchain = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sp-blockchain" }
+sp-block-builder = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sp-block-builder" }
+sc-basic-authorship = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "sc-basic-authorship" }
+substrate-frame-rpc-system = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "substrate-frame-rpc-system" }
+pallet-transaction-payment-rpc = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "pallet-transaction-payment-rpc" }
 
 # Local Dependencies
 contracts-node-runtime = { path = "../runtime", version = "0.31.0" }
@@ -56,7 +56,7 @@ contracts-node-runtime = { path = "../runtime", version = "0.31.0" }
 enum-as-inner = "=0.5.1"
 
 [build-dependencies]
-substrate-build-script-utils = { git = "https://github.com/paritytech/polkadot-sdk", package = "substrate-build-script-utils" }
+substrate-build-script-utils = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.2.0", package = "substrate-build-script-utils" }
 
 [features]
 default = []
