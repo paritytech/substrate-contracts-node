@@ -1,6 +1,6 @@
 [package]
 name = "contracts-node-runtime"
-version = "0.31.0"
+version = "0.32.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 description = "Runtime configured for smart contracts via `pallet-contracts`."
 edition = "2021"
