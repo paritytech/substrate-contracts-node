@@ -256,11 +256,12 @@ impl pallet_timestamp::Config for Runtime {
 
 parameter_types! {
 	pub const MaxLocks: u32 = 50;
+	pub const MaxReserves: u32 = 50;
 }
 
 impl pallet_balances::Config for Runtime {
 	type MaxLocks = MaxLocks;
-	type MaxReserves = ();
+	type MaxReserves = MaxReserves;
 	type ReserveIdentifier = [u8; 8];
 	/// The type for recording an account's balance.
 	type Balance = Balance;
@@ -272,8 +273,8 @@ impl pallet_balances::Config for Runtime {
 	type WeightInfo = pallet_balances::weights::SubstrateWeight<Runtime>;
 	type FreezeIdentifier = ();
 	type MaxFreezes = ();
-	type RuntimeHoldReason = ();
-	type MaxHolds = ();
+	type RuntimeHoldReason = RuntimeHoldReason;
+	type MaxHolds = ConstU32<2>;
 }
 
 impl pallet_transaction_payment::Config for Runtime {
@@ -329,6 +330,8 @@ parameter_types! {
 	pub const DepositPerByte: Balance = deposit(0, 1);
 	pub Schedule: pallet_contracts::Schedule<Runtime> = schedule::<Runtime>();
 	pub const DefaultDepositLimit: Balance = deposit(1024, 1024 * 1024);
+	pub const CodeHashLockupDepositPercent: Perbill = Perbill::from_percent(0);
+	pub const MaxDelegateDependencies: u32 = 32;
 }
 
 impl pallet_utility::Config for Runtime {
@@ -381,6 +384,12 @@ impl pallet_contracts::Config for Runtime {
 	type MaxStorageKeyLen = ConstU32<128>;
 	type MaxDebugBufferLen = ConstU32<{ 2 * 1024 * 1024 }>;
 	type UnsafeUnstableInterface = ConstBool<true>;
+	type CodeHashLockupDepositPercent = CodeHashLockupDepositPercent;
+	type MaxDelegateDependencies = MaxDelegateDependencies;
+	type RuntimeHoldReason = RuntimeHoldReason;
+
+	type Environment = ();
+	type Debug = ();
 	type Migrations = ();
 }
 

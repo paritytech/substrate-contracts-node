@@ -38,7 +38,7 @@ pub fn new_partial(
 		FullClient,
 		FullBackend,
 		FullSelectChain,
-		sc_consensus::DefaultImportQueue<Block, FullClient>,
+		sc_consensus::DefaultImportQueue<Block>,
 		sc_transaction_pool::FullPool<Block, FullClient>,
 		(Option<Telemetry>,),
 	>,
@@ -123,6 +123,7 @@ pub fn new_full(config: Configuration) -> Result<TaskManager, ServiceError> {
 			import_queue,
 			block_announce_validator_builder: None,
 			warp_sync_params: None,
+			block_relay: None,
 		})?;
 
 	if config.offchain_worker.enabled {
