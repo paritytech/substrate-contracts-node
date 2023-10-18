@@ -1,6 +1,6 @@
 [package]
 name = "contracts-node"
-version = "0.32.0"
+version = "0.33.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 description = "Substrate node configured for smart contracts via `pallet-contracts`."
 edition = "2021"
@@ -48,7 +48,7 @@ substrate-frame-rpc-system = { version = "24.0.0", package = "substrate-frame-rp
 pallet-transaction-payment-rpc = { version = "26.0.0", package = "pallet-transaction-payment-rpc" }
 
 # Local Dependencies
-contracts-node-runtime = { path = "../runtime", version = "0.32.0" }
+contracts-node-runtime = { path = "../runtime", version = "0.33.0" }
 
 # yank this crate until
 # https://github.com/bluejekyll/enum-as-inner/issues/98
