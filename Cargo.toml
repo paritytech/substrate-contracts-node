@@ -1,9 +1,16 @@
+[workspace.package]
+authors = ["anonymous"]
+edition = "2021"
+license = "Unlicense"
+homepage = "https://github.com/paritytech/substrate-contracts-node"
+repository = "https://github.com/paritytech/substrate-contracts-node"
+
 [workspace]
 resolver = "2"
 members = [
-		"node",
-		"runtime",
-		"parachain-runtime",
+	"node",
+	"runtime",
+	"parachain-runtime",
 ]
 
 [profile.release]
