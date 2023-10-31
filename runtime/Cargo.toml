@@ -16,72 +16,116 @@ targets = ["x86_64-unknown-linux-gnu"]
 codec = { package = "parity-scale-codec", version = "3.6.5", default-features = false, features = ["derive"] }
 scale-info = { version = "2.9.0", default-features = false, features = ["derive"] }
 
-pallet-authorship = { version = "24.0.0", package = "pallet-authorship", default-features = false }
-pallet-assets = { version = "25.0.0", package = "pallet-assets", default-features = false }
-pallet-balances = { version = "24.0.0", package = "pallet-balances", default-features = false }
-frame-support = { version = "24.0.0", package = "frame-support", default-features = false }
-pallet-insecure-randomness-collective-flip = { version = "12.0.0", package = "pallet-insecure-randomness-collective-flip", default-features = false }
-pallet-sudo = { version = "24.0.0", package = "pallet-sudo", default-features = false }
-frame-system = { version = "24.0.0", package = "frame-system", default-features = false }
-pallet-timestamp = { version = "23.0.0", package = "pallet-timestamp", default-features = false }
-pallet-transaction-payment = { version = "24.0.0", package = "pallet-transaction-payment", default-features = false }
-frame-executive = { version = "24.0.0", package = "frame-executive", default-features = false }
-sp-api = { version = "22.0.0", package = "sp-api", default-features = false }
-sp-block-builder = { version = "22.0.0", package = "sp-block-builder", default-features = false }
-sp-core = { version = "24.0.0", package = "sp-core", default-features = false }
-sp-inherents = { version = "22.0.0", package = "sp-inherents", default-features = false }
-sp-offchain = { version = "22.0.0", package = "sp-offchain", default-features = false }
-sp-runtime = { version = "27.0.0", package = "sp-runtime", default-features = false }
-sp-io = { version = "26.0.0", package = "sp-io", default-features = false }
-sp-session = { version = "23.0.0", package = "sp-session", default-features = false }
-sp-std = { version = "11.0.0", package = "sp-std", default-features = false }
-sp-transaction-pool = { version = "22.0.0", package = "sp-transaction-pool", default-features = false }
-sp-version = { version = "25.0.0", package = "sp-version", default-features = false }
-sp-weights = { version = "23.0.0", package = "sp-weights", default-features = false }
-pallet-utility = { version = "24.0.0", package = "pallet-utility", default-features = false }
+pallet-aura = { workspace = true }
+pallet-balances = { workspace = true }
+frame-support = { workspace = true }
+pallet-grandpa = { workspace = true }
+pallet-sudo = { workspace = true }
+frame-system = { workspace = true }
+frame-try-runtime = { workspace = true, optional = true }
+pallet-timestamp = { workspace = true }
+pallet-transaction-payment = { workspace = true }
+frame-executive = { workspace = true }
+sp-api = { workspace = true }
+sp-block-builder = { workspace = true }
+sp-consensus-aura = { workspace = true }
+sp-consensus-grandpa = { workspace = true }
+sp-core = { workspace = true }
+sp-inherents = { workspace = true }
+sp-offchain = { workspace = true }
+sp-runtime = { workspace = true }
+sp-session = { workspace = true }
+sp-std = { workspace = true }
+sp-storage = { workspace = true }
+sp-transaction-pool = { workspace = true }
+sp-version = { workspace = true }
+sp-genesis-builder = { workspace = true }
 
-# Used for the node's RPCs
-frame-system-rpc-runtime-api = { version = "22.0.0", package = "frame-system-rpc-runtime-api", default-features = false }
-pallet-transaction-payment-rpc-runtime-api = { version = "24.0.0", package = "pallet-transaction-payment-rpc-runtime-api", default-features = false }
+# extra deps for setting up pallet-contracts
+pallet-contracts = { workspace = true }
+pallet-authorship  = { workspace = true }
+pallet-utility = { workspace = true }
+pallet-contracts-primitives = { workspace = true }
+pallet-insecure-randomness-collective-flip = { workspace = true }
+pallet-assets = { workspace = true }
 
-# Contracts specific packages
-pallet-contracts = { version = "23.0.0", package = "pallet-contracts", default-features = false }
-pallet-contracts-primitives = { version = "27.0.0", package = "pallet-contracts-primitives", default-features = false }
+# Used for the node template's RPCs
+frame-system-rpc-runtime-api = { workspace = true }
+pallet-transaction-payment-rpc-runtime-api = { workspace = true }
+
+# Used for runtime benchmarking
+frame-benchmarking = { workspace = true, optional = true }
+frame-system-benchmarking = { workspace = true , optional = true}
 
 [build-dependencies]
-substrate-wasm-builder =  { version = "13.0.0", package = "substrate-wasm-builder", optional = true }
+substrate-wasm-builder = { workspace = true, optional = true }
 
 [features]
-default = [
-	"std",
-]
+default = [ "std" ]
 std = [
 	"codec/std",
-	"scale-info/std",
+	"frame-benchmarking?/std",
 	"frame-executive/std",
 	"frame-support/std",
+	"frame-system-benchmarking?/std",
 	"frame-system-rpc-runtime-api/std",
 	"frame-system/std",
-	"pallet-authorship/std",
+	"frame-try-runtime?/std",
+	"pallet-aura/std",
 	"pallet-balances/std",
-	"pallet-insecure-randomness-collective-flip/std",
+	"pallet-grandpa/std",
 	"pallet-sudo/std",
 	"pallet-timestamp/std",
 	"pallet-transaction-payment-rpc-runtime-api/std",
 	"pallet-transaction-payment/std",
+	"pallet-contracts/std",
+	"pallet-assets/std",
+	"pallet-authorship/std",
+	"pallet-contracts-primitives/std",
+	"pallet-insecure-randomness-collective-flip/std",
+	"scale-info/std",
 	"sp-api/std",
 	"sp-block-builder/std",
+	"sp-consensus-aura/std",
+	"sp-consensus-grandpa/std",
 	"sp-core/std",
+	"sp-genesis-builder/std",
 	"sp-inherents/std",
 	"sp-offchain/std",
 	"sp-runtime/std",
 	"sp-session/std",
 	"sp-std/std",
+	"sp-storage/std",
 	"sp-transaction-pool/std",
 	"sp-version/std",
-	"sp-weights/std",
-	"pallet-contracts/std",
-	"pallet-contracts-primitives/std",
-	"pallet-assets/std",
 	"substrate-wasm-builder",
 ]
+runtime-benchmarks = [
+	"frame-benchmarking/runtime-benchmarks",
+	"frame-support/runtime-benchmarks",
+	"frame-system-benchmarking/runtime-benchmarks",
+	"frame-system/runtime-benchmarks",
+	"pallet-balances/runtime-benchmarks",
+	"pallet-grandpa/runtime-benchmarks",
+	"pallet-sudo/runtime-benchmarks",
+	"pallet-timestamp/runtime-benchmarks",
+	"pallet-contracts/runtime-benchmarks",
+	"pallet-assets/runtime-benchmarks",
+	"sp-runtime/runtime-benchmarks",
+]
+try-runtime = [
+	"frame-executive/try-runtime",
+	"frame-support/try-runtime",
+	"frame-system/try-runtime",
+	"frame-try-runtime/try-runtime",
+	"pallet-aura/try-runtime",
+	"pallet-balances/try-runtime",
+	"pallet-grandpa/try-runtime",
+	"pallet-sudo/try-runtime",
+	"pallet-timestamp/try-runtime",
+	"pallet-transaction-payment/try-runtime",
+	"pallet-contracts/try-runtime",
+	"pallet-assets/try-runtime",
+	"sp-runtime/try-runtime",
+]
+experimental = [ "pallet-aura/experimental" ]
