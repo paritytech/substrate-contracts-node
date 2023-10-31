@@ -7,10 +7,10 @@
 include!(concat!(env!("OUT_DIR"), "/wasm_binary.rs"));
 
 // mod contracts_config;
+mod assets_config;
+mod contracts_config;
 mod weights;
 mod xcm_config;
-mod contracts_config;
-mod assets_config;
 
 use cumulus_pallet_parachain_system::RelayNumberStrictlyIncreases;
 use smallvec::smallvec;

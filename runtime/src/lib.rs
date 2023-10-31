@@ -10,9 +10,7 @@ mod assets_config;
 mod contracts_config;
 
 use frame_support::dispatch::DispatchClass;
-use frame_system::{
-	limits::{BlockLength, BlockWeights},
-};
+use frame_system::limits::{BlockLength, BlockWeights};
 use sp_api::impl_runtime_apis;
 use sp_core::{crypto::KeyTypeId, OpaqueMetadata};
 use sp_runtime::{
@@ -532,4 +530,3 @@ impl_runtime_apis! {
 		}
 	}
 }
-

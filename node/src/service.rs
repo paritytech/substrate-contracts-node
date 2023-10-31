@@ -435,4 +435,3 @@ pub async fn start_parachain_node(
 ) -> sc_service::error::Result<(TaskManager, Arc<ParachainClient>)> {
 	start_node_impl(parachain_config, polkadot_config, collator_options, para_id, hwbench).await
 }
-
