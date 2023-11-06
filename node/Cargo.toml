@@ -17,46 +17,83 @@ name = "substrate-contracts-node"
 path = "src/main.rs"
 
 [dependencies]
-clap = { version = "4.4.6", features = ["derive"] }
-futures = { version = "0.3.28", features = ["thread-pool"]}
+clap = { workspace = true }
+log = { workspace = true }
+codec = { workspace = true }
+serde = { workspace = true }
+jsonrpsee = { workspace = true }
+futures = { workspace = true }
 
-sc-cli = { version = "0.32.0", package = "sc-cli", default-features = false }
-sp-core = { version = "24.0.0", package = "sp-core" }
-sc-executor = { version = "0.28.0", package = "sc-executor" }
-sc-network = { version = "0.30.0", package = "sc-network" }
-sc-service = { version = "0.31.0", package = "sc-service", default-features = false }
-sc-telemetry = { version = "11.0.0", package = "sc-telemetry" }
-sc-keystore = { version = "21.0.0", package = "sc-keystore" }
-sc-transaction-pool = { version = "24.0.0", package = "sc-transaction-pool" }
-sc-transaction-pool-api = { version = "24.0.0", package = "sc-transaction-pool-api" }
-sc-offchain = { version = "25.0.0", package = "sc-offchain" }
-sc-consensus = { version = "0.29.0", package = "sc-consensus" }
-sc-consensus-manual-seal = { version = "0.31.0", package = "sc-consensus-manual-seal" }
-sc-client-api = { version = "24.0.0", package = "sc-client-api" }
-sp-runtime = { version = "27.0.0", package = "sp-runtime" }
-sp-timestamp = { version = "22.0.0", package = "sp-timestamp" }
+# Local
+contracts-parachain-runtime = { path = "../parachain-runtime" }
+contracts-node-runtime = { path = "../runtime" }
 
-# These dependencies are used for the node's RPCs
-jsonrpsee = { version = "0.16.2", features = ["server"] }
-sp-api = { version = "22.0.0", package = "sp-api" }
-sc-rpc = { version = "25.0.0", package = "sc-rpc" }
-sc-rpc-api = { version = "0.29.0", package = "sc-rpc-api" }
-sp-blockchain = { version = "24.0.0", package = "sp-blockchain" }
-sp-block-builder = { version = "22.0.0", package = "sp-block-builder" }
-sc-basic-authorship = { version = "0.30.0", package = "sc-basic-authorship" }
-substrate-frame-rpc-system = { version = "24.0.0", package = "substrate-frame-rpc-system" }
-pallet-transaction-payment-rpc = { version = "26.0.0", package = "pallet-transaction-payment-rpc" }
+# Substrate
+frame-benchmarking = { workspace = true }
+frame-benchmarking-cli = { workspace = true }
+pallet-transaction-payment-rpc = { workspace = true }
+sc-basic-authorship = { workspace = true }
+sc-chain-spec = { workspace = true }
+sc-cli = { workspace = true }
+sc-client-api = { workspace = true }
+sc-offchain = { workspace = true }
+sc-consensus = { workspace = true }
+sc-executor = { workspace = true }
+sc-network = { workspace = true }
+sc-network-sync = { workspace = true }
+sc-rpc = { workspace = true }
+sc-service = { workspace = true }
+sc-sysinfo = { workspace = true }
+sc-telemetry = { workspace = true }
+sc-tracing = { workspace = true }
+sc-transaction-pool = { workspace = true }
+sc-transaction-pool-api = { workspace = true }
+sp-api = { workspace = true }
+sp-block-builder = { workspace = true }
+sp-blockchain = { workspace = true }
+sp-consensus-aura = { workspace = true }
+sp-core = { workspace = true }
+sp-keystore = { workspace = true }
+sp-io = { workspace = true }
+sp-runtime = { workspace = true }
+sp-timestamp = { workspace = true }
+substrate-frame-rpc-system = { workspace = true }
+substrate-prometheus-endpoint = { workspace = true }
+try-runtime-cli = { workspace = true, optional = true }
 
-# Local Dependencies
-contracts-node-runtime = { path = "../runtime", version = "0.33.0" }
+# extra for running solo-chain
+sp-consensus-grandpa = { workspace = true }
+sc-consensus-grandpa = { workspace = true }
+sc-consensus-aura = { workspace = true }
+sc-consensus-manual-seal = { workspace = true }
 
-# yank this crate until
-# https://github.com/bluejekyll/enum-as-inner/issues/98
-# is fixed
-enum-as-inner = "=0.6.0"
+# Polkadot
+polkadot-cli = { workspace = true }
+polkadot-primitives = { workspace = true }
+xcm = { workspace = true }
+
+# Cumulus
+cumulus-client-cli = { workspace = true }
+cumulus-client-collator = { workspace = true }
+cumulus-client-consensus-aura = { workspace = true }
+cumulus-client-consensus-common = { workspace = true }
+cumulus-client-consensus-proposer = { workspace = true }
+cumulus-client-service = { workspace = true }
+cumulus-primitives-core = { workspace = true }
+cumulus-primitives-parachain-inherent = { workspace = true }
+cumulus-relay-chain-interface = { workspace = true }
+color-print = { workspace = true }
 
 [build-dependencies]
-substrate-build-script-utils = { version = "8.0.0", package = "substrate-build-script-utils" }
+substrate-build-script-utils = { workspace = true }
 
 [features]
 default = []
+runtime-benchmarks = [
+	"contracts-parachain-runtime/runtime-benchmarks",
+	"polkadot-cli/runtime-benchmarks",
+]
+try-runtime = [
+	"try-runtime-cli/try-runtime",
+	"contracts-parachain-runtime/try-runtime"
+]

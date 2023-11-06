@@ -1,0 +1,1 @@
+../../runtime/src/contracts_config.rs
