@@ -101,7 +101,7 @@ pub fn new_partial(
 	})
 }
 
-pub fn new_full(config: Configuration) -> Result<TaskManager, ServiceError> {
+pub fn new_full(config: Configuration, finalize_delay_sec: Option<u64>) -> Result<TaskManager, ServiceError> {
 	let sc_service::PartialComponents {
 		client,
 		backend,
@@ -195,7 +195,7 @@ pub fn new_full(config: Configuration) -> Result<TaskManager, ServiceError> {
 	let params = sc_consensus_manual_seal::InstantSealParams {
 		block_import: client.clone(),
 		env: proposer,
-		client,
+		client: client.clone(),
 		pool: transaction_pool,
 		select_chain,
 		consensus_data_provider: None,
@@ -205,6 +205,20 @@ pub fn new_full(config: Configuration) -> Result<TaskManager, ServiceError> {
 	};
 
 	let authorship_future = sc_consensus_manual_seal::run_instant_seal(params);
+
+	if let Some(sec) = finalize_delay_sec {
+		let delayed_finalize_params = sc_consensus_manual_seal::DelayedFinalizeParams {
+			client,
+			spawn_handle: task_manager.spawn_handle(),
+			delay_sec: sec,
+		};
+
+		task_manager.spawn_essential_handle().spawn_blocking(
+			"delayed_finalize",
+			None,
+			sc_consensus_manual_seal::run_delayed_finalize(delayed_finalize_params),
+		);
+	}
 
 	task_manager
 		.spawn_essential_handle()

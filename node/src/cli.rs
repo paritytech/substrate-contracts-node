@@ -83,6 +83,10 @@ pub struct Cli {
 	/// Relay chain arguments
 	#[arg(raw = true)]
 	pub relay_chain_args: Vec<String>,
+
+	/// The number of seconds to delay before finalizing blocks. A value of `0` would lead to instant finalization.
+	#[clap(long)]
+	pub finalize_delay_sec: Option<u64>,
 }
 
 #[derive(Debug)]

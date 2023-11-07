@@ -225,7 +225,7 @@ pub fn run() -> Result<()> {
 
 			runner.run_node_until_exit(|config| async move {
 				if config.chain_spec.name() == "Development" { // TODO
-					return service::dev::new_full(config).map_err(sc_cli::Error::Service);
+					return service::dev::new_full(config, cli.finalize_delay_sec).map_err(sc_cli::Error::Service);
 				}
 
 				let hwbench = (!cli.no_hardware_benchmarks)

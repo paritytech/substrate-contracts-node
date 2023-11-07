@@ -15,6 +15,14 @@ for a production deployment, but a great fit for development and testing:_
   [#42](https://github.com/paritytech/substrate-contracts-node/pull/42).
   Hereby blocks are authored immediately at every transaction, so there
   is none of the typical six seconds block time associated with `grandpa` or `aura`.
+  * By default, either manual or instant seal does not result in block finalization unless the `engine_finalizeBlock` 
+    RPC is executed. However, it is possible to configure the finalization of sealed blocks to occur after a certain 
+    amount of time by setting the `--finalize-delay-sec` option to a specific value, which specifies the number of seconds 
+    to delay before finalizing the blocks. Using a value of `0` would lead to instant finalization, with the blocks being 
+    finalized immediately upon being sealed.
+    ```shell
+    ./target/release/substrate-contracts-node --finalize-delay-sec 5
+    ```
 * _If no CLI arguments are passed the node is started in development mode
   by default._
 * A custom logging filter is applied by default that hides block production noise
