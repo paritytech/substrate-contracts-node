@@ -101,7 +101,10 @@ pub fn new_partial(
 	})
 }
 
-pub fn new_full(config: Configuration, finalize_delay_sec: Option<u64>) -> Result<TaskManager, ServiceError> {
+pub fn new_full(
+	config: Configuration,
+	finalize_delay_sec: Option<u64>,
+) -> Result<TaskManager, ServiceError> {
 	let sc_service::PartialComponents {
 		client,
 		backend,
