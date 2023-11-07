@@ -56,13 +56,6 @@ where
 	AccountPublic::from(get_from_seed::<TPublic>(seed)).into_account()
 }
 
-/// Generate the session keys from individual elements.
-///
-/// The input must be a tuple of individual keys (a single arg for now since we have just one key).
-pub fn template_session_keys(keys: AuraId) -> contracts_parachain_runtime::SessionKeys {
-	contracts_parachain_runtime::SessionKeys { aura: keys }
-}
-
 pub fn local_testnet_config() -> ChainSpec {
 	// Give your base currency a unit name and decimal places
 	let mut properties = sc_chain_spec::Properties::new();
@@ -155,9 +148,9 @@ fn testnet_genesis(
 				.into_iter()
 				.map(|(acc, aura)| {
 					(
-						acc.clone(),                 // account id
-						acc,                         // validator id
-						template_session_keys(aura), // session keys
+						acc.clone(), // account id
+						acc,         // validator id
+						contracts_parachain_runtime::SessionKeys { aura },
 					)
 				})
 				.collect(),
