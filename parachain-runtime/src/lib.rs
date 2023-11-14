@@ -345,8 +345,8 @@ impl pallet_balances::Config for Runtime {
 	type ReserveIdentifier = [u8; 8];
 	type RuntimeHoldReason = RuntimeHoldReason;
 	type FreezeIdentifier = ();
-	type MaxHolds = ConstU32<0>;
-	type MaxFreezes = ConstU32<0>;
+	type MaxHolds = ConstU32<50>;
+	type MaxFreezes = ConstU32<50>;
 }
 
 parameter_types! {
@@ -491,37 +491,33 @@ impl pallet_utility::Config for Runtime {
 construct_runtime!(
 	pub enum Runtime
 	{
-		// System support stuff.
-		System: frame_system = 0,
-		ParachainSystem: cumulus_pallet_parachain_system = 1,
-		Timestamp: pallet_timestamp = 2,
-		ParachainInfo: parachain_info = 3,
-
-		// Monetary stuff.
-		Balances: pallet_balances = 10,
-		TransactionPayment: pallet_transaction_payment = 11,
-
-		// Governance
-		Sudo: pallet_sudo = 15,
-
-		// Collator support. The order of these 4 are important and shall not change.
-		Authorship: pallet_authorship = 20,
-		CollatorSelection: pallet_collator_selection = 21,
-		Session: pallet_session = 22,
-		Aura: pallet_aura = 23,
-		AuraExt: cumulus_pallet_aura_ext = 24,
-
-		// XCM helpers.
-		XcmpQueue: cumulus_pallet_xcmp_queue = 30,
-		PolkadotXcm: pallet_xcm = 31,
-		CumulusXcm: cumulus_pallet_xcm = 32,
-		DmpQueue: cumulus_pallet_dmp_queue = 33,
-
-		// Others specific to this parachain.
-		Contracts: pallet_contracts,
-		Assets: pallet_assets,
+		// Order should match with Runtime defined in runtime/src/lib.rs
+		System: frame_system,
 		RandomnessCollectiveFlip: pallet_insecure_randomness_collective_flip,
 		Utility: pallet_utility,
+		Timestamp: pallet_timestamp,
+		Balances: pallet_balances,
+		Authorship: pallet_authorship,
+		TransactionPayment: pallet_transaction_payment,
+		Sudo: pallet_sudo,
+		Contracts: pallet_contracts,
+		Assets: pallet_assets,
+
+		// Parachain support stuff.
+		ParachainSystem: cumulus_pallet_parachain_system,
+		ParachainInfo: parachain_info,
+
+		// Collator support. The order of these 4 are important and shall not change.
+		CollatorSelection: pallet_collator_selection,
+		Session: pallet_session,
+		Aura: pallet_aura,
+		AuraExt: cumulus_pallet_aura_ext,
+
+		// XCM helpers.
+		XcmpQueue: cumulus_pallet_xcmp_queue,
+		PolkadotXcm: pallet_xcm,
+		CumulusXcm: cumulus_pallet_xcm,
+		DmpQueue: cumulus_pallet_dmp_queue,
 	}
 );
 
@@ -762,7 +758,8 @@ impl_runtime_apis! {
 			Ok(batches)
 		}
 	}
-		impl pallet_contracts::ContractsApi<Block, AccountId, Balance, BlockNumber, Hash, EventRecord>
+
+	impl pallet_contracts::ContractsApi<Block, AccountId, Balance, BlockNumber, Hash, EventRecord>
 		for Runtime
 	{
 		fn call(

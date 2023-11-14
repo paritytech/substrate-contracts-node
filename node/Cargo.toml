@@ -1,13 +1,13 @@
 [package]
 name = "contracts-node"
-version = "0.33.0"
-authors = ["Parity Technologies <admin@parity.io>"]
+version.workspace = true
+authors.workspace = true
 description = "Substrate node configured for smart contracts via `pallet-contracts`."
-edition = "2021"
-license = "Unlicense"
+edition.workspace = true
+license.workspace = true
 build = "build.rs"
-homepage = "https://github.com/paritytech/substrate-contracts-node"
-repository = "https://github.com/paritytech/substrate-contracts-node"
+homepage.workspace = true
+repository.workspace = true
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
