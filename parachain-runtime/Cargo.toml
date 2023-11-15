@@ -1,6 +1,6 @@
 [package]
 name = "contracts-parachain-runtime"
-version = "0.33.0"
+version.workspace = true
 authors.workspace = true
 edition.workspace = true
 description = "Parachain Runtime configured for smart contracts via `pallet-contracts`."
