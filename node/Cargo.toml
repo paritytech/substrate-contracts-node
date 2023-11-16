@@ -25,8 +25,8 @@ jsonrpsee = { workspace = true }
 futures = { workspace = true }
 
 # Local
-contracts-parachain-runtime = { path = "../parachain-runtime" }
-contracts-node-runtime = { path = "../runtime" }
+contracts-parachain-runtime = { path = "../parachain-runtime", version = "0.35.0" }
+contracts-node-runtime = { path = "../runtime",  version = "0.35.0" }
 
 # Substrate
 frame-benchmarking = { workspace = true }
