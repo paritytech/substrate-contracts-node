@@ -9,6 +9,7 @@ include!(concat!(env!("OUT_DIR"), "/wasm_binary.rs"));
 mod assets_config;
 mod contracts_config;
 
+use polkadot_runtime_common::SlowAdjustingFeeUpdate;
 use frame_support::dispatch::DispatchClass;
 use frame_system::limits::{BlockLength, BlockWeights};
 use sp_api::impl_runtime_apis;
@@ -269,7 +270,7 @@ impl pallet_transaction_payment::Config for Runtime {
 	type OperationalFeeMultiplier = ConstU8<5>;
 	type WeightToFee = IdentityFee<Balance>;
 	type LengthToFee = IdentityFee<Balance>;
-	type FeeMultiplierUpdate = ();
+	type FeeMultiplierUpdate = SlowAdjustingFeeUpdate<Self>;
 }
 
 impl pallet_sudo::Config for Runtime {

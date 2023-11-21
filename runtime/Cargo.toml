@@ -41,6 +41,9 @@ sp-transaction-pool = { workspace = true }
 sp-version = { workspace = true }
 sp-genesis-builder = { workspace = true }
 
+# Polkadot
+polkadot-runtime-common = { workspace = true }
+
 # extra deps for setting up pallet-contracts
 pallet-contracts = { workspace = true }
 pallet-authorship  = { workspace = true }
