@@ -9,9 +9,9 @@ include!(concat!(env!("OUT_DIR"), "/wasm_binary.rs"));
 mod assets_config;
 mod contracts_config;
 
-use polkadot_runtime_common::SlowAdjustingFeeUpdate;
 use frame_support::dispatch::DispatchClass;
 use frame_system::limits::{BlockLength, BlockWeights};
+use polkadot_runtime_common::SlowAdjustingFeeUpdate;
 use sp_api::impl_runtime_apis;
 use sp_core::{crypto::KeyTypeId, OpaqueMetadata};
 use sp_runtime::{
