@@ -1401,6 +1401,7 @@ dependencies = [
  "pallet-transaction-payment-rpc-runtime-api",
  "pallet-utility",
  "parity-scale-codec",
+ "polkadot-runtime-common",
  "scale-info",
  "sp-api",
  "sp-block-builder",
