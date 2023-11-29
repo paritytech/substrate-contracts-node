@@ -18,8 +18,7 @@ for a production deployment, but a great fit for development and testing:_
   * By default, either manual or instant seal does not result in block finalization unless the `engine_finalizeBlock` 
     RPC is executed. However, it is possible to configure the finalization of sealed blocks to occur after a certain 
     amount of time by setting the `--finalize-delay-sec` option to a specific value, which specifies the number of seconds 
-    to delay before finalizing the blocks. Using a value of `0` would lead to instant finalization, with the blocks being 
-    finalized immediately upon being sealed.
+    to delay before finalizing the blocks. The default value is 1 second.
     ```shell
     ./target/release/substrate-contracts-node --finalize-delay-sec 5
     ```

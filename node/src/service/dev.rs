@@ -103,7 +103,7 @@ pub fn new_partial(
 
 pub fn new_full(
 	config: Configuration,
-	finalize_delay_sec: Option<u64>,
+	finalize_delay_sec: u64,
 ) -> Result<TaskManager, ServiceError> {
 	let sc_service::PartialComponents {
 		client,
@@ -208,24 +208,21 @@ pub fn new_full(
 	};
 
 	let authorship_future = sc_consensus_manual_seal::run_instant_seal(params);
-
-	if let Some(sec) = finalize_delay_sec {
-		let delayed_finalize_params = sc_consensus_manual_seal::DelayedFinalizeParams {
-			client,
-			spawn_handle: task_manager.spawn_handle(),
-			delay_sec: sec,
-		};
-
-		task_manager.spawn_essential_handle().spawn_blocking(
-			"delayed_finalize",
-			None,
-			sc_consensus_manual_seal::run_delayed_finalize(delayed_finalize_params),
-		);
-	}
-
 	task_manager
 		.spawn_essential_handle()
 		.spawn_blocking("instant-seal", None, authorship_future);
+
+	let delayed_finalize_params = sc_consensus_manual_seal::DelayedFinalizeParams {
+		client,
+		spawn_handle: task_manager.spawn_handle(),
+		delay_sec: finalize_delay_sec,
+	};
+	task_manager.spawn_essential_handle().spawn_blocking(
+		"delayed_finalize",
+		None,
+		sc_consensus_manual_seal::run_delayed_finalize(delayed_finalize_params),
+	);
+
 	network_starter.start_network();
 	Ok(task_manager)
 }
