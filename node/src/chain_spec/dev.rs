@@ -66,4 +66,3 @@ fn testnet_genesis(
 		},
 	})
 }
-

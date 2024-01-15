@@ -2,7 +2,7 @@
 
 use contracts_node_runtime::{self, opaque::Block, RuntimeApi};
 use futures::FutureExt;
-use sc_client_api::{Backend};
+use sc_client_api::Backend;
 pub use sc_executor::NativeElseWasmExecutor;
 use sc_service::{error::Error as ServiceError, Configuration, TaskManager};
 use sc_telemetry::{Telemetry, TelemetryWorker};

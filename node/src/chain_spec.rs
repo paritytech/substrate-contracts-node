@@ -151,4 +151,3 @@ fn testnet_genesis(
 		"sudo": { "key": Some(root) }
 	})
 }
-
