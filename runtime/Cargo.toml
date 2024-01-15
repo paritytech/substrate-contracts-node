@@ -13,8 +13,8 @@ build = "build.rs"
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-codec = { package = "parity-scale-codec", version = "3.6.5", default-features = false, features = ["derive"] }
-scale-info = { version = "2.9.0", default-features = false, features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "3.6.9", default-features = false, features = ["derive"] }
+scale-info = { version = "2.10.0", default-features = false, features = ["derive"] }
 
 pallet-aura = { workspace = true }
 pallet-balances = { workspace = true }
@@ -48,7 +48,6 @@ polkadot-runtime-common = { workspace = true }
 pallet-contracts = { workspace = true }
 pallet-authorship  = { workspace = true }
 pallet-utility = { workspace = true }
-pallet-contracts-primitives = { workspace = true }
 pallet-insecure-randomness-collective-flip = { workspace = true }
 pallet-assets = { workspace = true }
 
@@ -84,7 +83,6 @@ std = [
 	"pallet-contracts/std",
 	"pallet-assets/std",
 	"pallet-authorship/std",
-	"pallet-contracts-primitives/std",
 	"pallet-insecure-randomness-collective-flip/std",
 	"scale-info/std",
 	"sp-api/std",

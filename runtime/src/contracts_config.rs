@@ -84,4 +84,5 @@ impl pallet_contracts::Config for Runtime {
 	type Environment = ();
 	type Debug = ();
 	type Migrations = ();
+	type Xcm = ();
 }

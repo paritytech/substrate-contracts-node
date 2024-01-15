@@ -23,6 +23,7 @@ codec = { workspace = true }
 serde = { workspace = true }
 jsonrpsee = { workspace = true }
 futures = { workspace = true }
+serde_json = { workspace = true }
 
 # Local
 contracts-parachain-runtime = { path = "../parachain-runtime", version = "0.35.0" }
@@ -41,6 +42,7 @@ sc-consensus = { workspace = true }
 sc-executor = { workspace = true }
 sc-network = { workspace = true }
 sc-network-sync = { workspace = true }
+sp-keyring = { workspace = true }
 sc-rpc = { workspace = true }
 sc-service = { workspace = true }
 sc-sysinfo = { workspace = true }

@@ -16,10 +16,10 @@ use sc_service::config::{BasePath, PrometheusConfig};
 use sp_runtime::traits::AccountIdConversion;
 use std::net::SocketAddr;
 
-fn load_spec(id: &str) -> std::result::Result<Box<dyn sc_chain_spec::ChainSpec>, String> {
+
+fn load_spec(id: &str) -> std::result::Result<Box<dyn ChainSpec>, String> {
 	Ok(match id {
 		"" | "dev" => Box::new(chain_spec::dev::development_config().unwrap()),
-		"local" => Box::new(chain_spec::dev::local_testnet_config()?),
 		"contracts-parachain-local" => Box::new(chain_spec::local_testnet_config()),
 		path => Box::new(chain_spec::ChainSpec::from_json_file(std::path::PathBuf::from(path))?),
 	})
@@ -224,7 +224,8 @@ pub fn run() -> Result<()> {
 			let collator_options = cli.run.collator_options();
 
 			runner.run_node_until_exit(|config| async move {
-				if config.chain_spec.name() == "Development" { // TODO
+				if config.chain_spec.name() == "Development" {
+					println!("🚧 Running in DEV mode. This is not intended for production.");
 					return service::dev::new_full(config, cli.finalize_delay_sec.into()).map_err(sc_cli::Error::Service);
 				}
 
@@ -398,3 +399,4 @@ impl CliConfiguration<Self> for RelayChainCli {
 		self.base.base.node_name()
 	}
 }
+
