@@ -225,7 +225,6 @@ pub fn run() -> Result<()> {
 
 			runner.run_node_until_exit(|config| async move {
 				if config.chain_spec.name() == "Development" {
-					println!("🚧 Running in DEV mode. This is not intended for production.");
 					return service::dev::new_full(config, cli.finalize_delay_sec.into()).map_err(sc_cli::Error::Service);
 				}
 
