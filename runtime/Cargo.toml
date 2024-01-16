@@ -16,21 +16,24 @@ targets = ["x86_64-unknown-linux-gnu"]
 codec = { package = "parity-scale-codec", version = "3.6.9", default-features = false, features = ["derive"] }
 scale-info = { version = "2.10.0", default-features = false, features = ["derive"] }
 
+frame-executive = { workspace = true }
+frame-support = { workspace = true }
+frame-system = { workspace = true }
+frame-system-rpc-runtime-api = { workspace = true }
+frame-try-runtime = { workspace = true, optional = true }
 pallet-aura = { workspace = true }
 pallet-balances = { workspace = true }
-frame-support = { workspace = true }
 pallet-grandpa = { workspace = true }
 pallet-sudo = { workspace = true }
-frame-system = { workspace = true }
-frame-try-runtime = { workspace = true, optional = true }
 pallet-timestamp = { workspace = true }
 pallet-transaction-payment = { workspace = true }
-frame-executive = { workspace = true }
+pallet-transaction-payment-rpc-runtime-api = { workspace = true }
 sp-api = { workspace = true }
 sp-block-builder = { workspace = true }
 sp-consensus-aura = { workspace = true }
 sp-consensus-grandpa = { workspace = true }
 sp-core = { workspace = true }
+sp-genesis-builder = { workspace = true }
 sp-inherents = { workspace = true }
 sp-offchain = { workspace = true }
 sp-runtime = { workspace = true }
@@ -39,21 +42,16 @@ sp-std = { workspace = true }
 sp-storage = { workspace = true }
 sp-transaction-pool = { workspace = true }
 sp-version = { workspace = true }
-sp-genesis-builder = { workspace = true }
 
 # Polkadot
 polkadot-runtime-common = { workspace = true }
 
 # extra deps for setting up pallet-contracts
-pallet-contracts = { workspace = true }
-pallet-authorship  = { workspace = true }
-pallet-utility = { workspace = true }
-pallet-insecure-randomness-collective-flip = { workspace = true }
 pallet-assets = { workspace = true }
-
-# Used for the node template's RPCs
-frame-system-rpc-runtime-api = { workspace = true }
-pallet-transaction-payment-rpc-runtime-api = { workspace = true }
+pallet-authorship  = { workspace = true }
+pallet-contracts = { workspace = true }
+pallet-insecure-randomness-collective-flip = { workspace = true }
+pallet-utility = { workspace = true }
 
 # Used for runtime benchmarking
 frame-benchmarking = { workspace = true, optional = true }
@@ -73,17 +71,17 @@ std = [
 	"frame-system-rpc-runtime-api/std",
 	"frame-system/std",
 	"frame-try-runtime?/std",
+	"pallet-assets/std",
 	"pallet-aura/std",
+	"pallet-authorship/std",
 	"pallet-balances/std",
+	"pallet-contracts/std",
 	"pallet-grandpa/std",
+	"pallet-insecure-randomness-collective-flip/std",
 	"pallet-sudo/std",
 	"pallet-timestamp/std",
 	"pallet-transaction-payment-rpc-runtime-api/std",
 	"pallet-transaction-payment/std",
-	"pallet-contracts/std",
-	"pallet-assets/std",
-	"pallet-authorship/std",
-	"pallet-insecure-randomness-collective-flip/std",
 	"scale-info/std",
 	"sp-api/std",
 	"sp-block-builder/std",
@@ -99,6 +97,7 @@ std = [
 	"sp-storage/std",
 	"sp-transaction-pool/std",
 	"sp-version/std",
+	"polkadot-runtime-common/std",
 	"substrate-wasm-builder",
 ]
 runtime-benchmarks = [
