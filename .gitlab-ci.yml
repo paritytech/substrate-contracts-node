@@ -23,7 +23,7 @@ variables:
   GIT_STRATEGY:                    fetch
   GIT_DEPTH:                       100
   CARGO_INCREMENTAL:               0
-  WASMTIME                         8.0.1
+  WASMTIME:                        8.0.1
 
 .collect-artifacts:                &collect-artifacts
   artifacts:
