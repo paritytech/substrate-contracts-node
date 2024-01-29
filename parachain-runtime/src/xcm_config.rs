@@ -3,34 +3,35 @@ use super::{
 	Runtime, RuntimeCall, RuntimeEvent, RuntimeOrigin, WeightToFee, XcmpQueue,
 };
 use frame_support::{
-	match_types, parameter_types,
-	traits::{ConstU32, Everything, Nothing},
+	parameter_types,
+	traits::{ConstU32, Contains, Everything, Nothing},
 	weights::Weight,
 };
 use frame_system::EnsureRoot;
 use pallet_xcm::XcmPassthrough;
-use polkadot_parachain_primitives::primitives::Sibling;
 use polkadot_runtime_common::impls::ToAuthor;
 use xcm::latest::prelude::*;
+#[allow(deprecated)]
+use xcm_builder::CurrencyAdapter;
 use xcm_builder::{
 	AccountId32Aliases, AllowExplicitUnpaidExecutionFrom, AllowTopLevelPaidExecutionFrom,
-	CurrencyAdapter, DenyReserveTransferToRelayChain, DenyThenTry, EnsureXcmOrigin,
-	FixedWeightBounds, IsConcrete, NativeAsset, ParentIsPreset, RelayChainAsNative,
-	SiblingParachainAsNative, SignedAccountId32AsNative,
-	SignedToAccountId32, SovereignSignedViaLocation, TakeWeightCredit, TrailingSetTopicAsId,
-	UsingComponents, WithComputedOrigin, WithUniqueTopic,
+	DenyReserveTransferToRelayChain, DenyThenTry, EnsureXcmOrigin, FixedWeightBounds,
+	FrameTransactionalProcessor, IsConcrete, NativeAsset, ParentIsPreset, RelayChainAsNative,
+	SiblingParachainAsNative, SignedAccountId32AsNative, SignedToAccountId32,
+	SovereignSignedViaLocation, TakeWeightCredit, TrailingSetTopicAsId, UsingComponents,
+	WithComputedOrigin, WithUniqueTopic,
 };
 use xcm_executor::XcmExecutor;
 
 parameter_types! {
-	pub const TokenLocation: MultiLocation = Here.into_location();
-	pub const RelayLocation: MultiLocation = MultiLocation::parent();
+	pub const TokenLocation: Location = Here.into_location();
+	pub const RelayLocation: Location = Location::parent();
 	pub const RelayNetwork: Option<NetworkId> = None;
 	pub RelayChainOrigin: RuntimeOrigin = cumulus_pallet_xcm::Origin::Relay.into();
-	pub UniversalLocation: InteriorMultiLocation = Parachain(ParachainInfo::parachain_id().into()).into();
+	pub UniversalLocation: InteriorLocation = Parachain(ParachainInfo::parachain_id().into()).into();
 }
 
-/// Type for specifying how a `MultiLocation` can be converted into an `AccountId`. This is used
+/// Type for specifying how a `Location` can be converted into an `AccountId`. This is used
 /// when determining ownership of accounts for asset transacting and when attempting to use XCM
 /// `Transact` in order to determine the dispatch Origin.
 pub type LocationToAccountId = (
@@ -41,12 +42,13 @@ pub type LocationToAccountId = (
 );
 
 /// Means for transacting assets on this chain.
+#[allow(deprecated)]
 pub type LocalAssetTransactor = CurrencyAdapter<
 	// Use this currency:
 	Balances,
 	// Use this currency when it is a fungible asset matching the given location or name:
 	IsConcrete<RelayLocation>,
-	// Do a simple punn to convert an AccountId32 MultiLocation into a native chain account ID:
+	// Do a simple punn to convert an AccountId32 Location into a native chain account ID:
 	LocationToAccountId,
 	// Our chain's account ID type (we can't get away without mentioning it explicitly):
 	AccountId,
@@ -54,6 +56,7 @@ pub type LocalAssetTransactor = CurrencyAdapter<
 	(),
 >;
 
+#[allow(deprecated)]
 pub type LocalBalancesTransactor =
 	CurrencyAdapter<Balances, IsConcrete<TokenLocation>, LocationToAccountId, AccountId, ()>;
 
@@ -87,11 +90,11 @@ parameter_types! {
 	pub const MaxAssetsIntoHolding: u32 = 64;
 }
 
-match_types! {
-	pub type ParentOrParentsExecutivePlurality: impl Contains<MultiLocation> = {
-		MultiLocation { parents: 1, interior: Here } |
-		MultiLocation { parents: 1, interior: X1(Plurality { id: BodyId::Executive, .. }) }
-	};
+pub struct ParentOrParentsPlurality;
+impl Contains<Location> for ParentOrParentsPlurality {
+	fn contains(location: &Location) -> bool {
+		matches!(location.unpack(), (1, []) | (1, [Plurality { .. }]))
+	}
 }
 
 pub type Barrier = TrailingSetTopicAsId<
@@ -102,7 +105,7 @@ pub type Barrier = TrailingSetTopicAsId<
 			WithComputedOrigin<
 				(
 					AllowTopLevelPaidExecutionFrom<Everything>,
-					AllowExplicitUnpaidExecutionFrom<ParentOrParentsExecutivePlurality>,
+					AllowExplicitUnpaidExecutionFrom<ParentOrParentsPlurality>,
 					// ^^^ Parent and its exec plurality get free execution
 				),
 				UniversalLocation,
@@ -116,7 +119,6 @@ pub struct XcmConfig;
 impl xcm_executor::Config for XcmConfig {
 	type RuntimeCall = RuntimeCall;
 	type XcmSender = XcmRouter;
-	// How to withdraw and deposit an asset.
 	type AssetTransactor = AssetTransactors;
 	type OriginConverter = XcmOriginToTransactDispatchOrigin;
 	type IsReserve = NativeAsset;
@@ -140,6 +142,7 @@ impl xcm_executor::Config for XcmConfig {
 	type CallDispatcher = RuntimeCall;
 	type SafeCallFilter = Everything;
 	type Aliasers = Nothing;
+	type TransactionalProcessor = FrameTransactionalProcessor;
 }
 
 /// No local origins on this chain are allowed to dispatch XCM sends/executions.
@@ -156,7 +159,7 @@ pub type XcmRouter = WithUniqueTopic<(
 
 #[cfg(feature = "runtime-benchmarks")]
 parameter_types! {
-	pub ReachableDest: Option<MultiLocation> = Some(Parent.into());
+	pub ReachableDest: Option<Location> = Some(Parent.into());
 }
 
 impl pallet_xcm::Config for Runtime {

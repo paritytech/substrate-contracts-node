@@ -1,9 +1,5 @@
-use crate::{
-	chain_spec,
-	cli::{Cli, RelayChainCli, Subcommand},
-	service,
-	service::new_partial,
-};
+use std::net::SocketAddr;
+
 use contracts_parachain_runtime::Block;
 use cumulus_primitives_core::ParaId;
 use frame_benchmarking_cli::{BenchmarkCmd, SUBSTRATE_REFERENCE_HARDWARE};
@@ -14,7 +10,12 @@ use sc_cli::{
 };
 use sc_service::config::{BasePath, PrometheusConfig};
 use sp_runtime::traits::AccountIdConversion;
-use std::net::SocketAddr;
+
+use crate::{
+	chain_spec,
+	cli::{Cli, RelayChainCli, Subcommand},
+	service::{dev, new_partial},
+};
 
 fn load_spec(id: &str) -> std::result::Result<Box<dyn ChainSpec>, String> {
 	Ok(match id {
@@ -163,12 +164,12 @@ pub fn run() -> Result<()> {
 				cmd.run(config, polkadot_config)
 			})
 		},
-		Some(Subcommand::ExportGenesisState(cmd)) => {
+		Some(Subcommand::ExportGenesisHead(cmd)) => {
 			let runner = cli.create_runner(cmd)?;
 			runner.sync_run(|config| {
 				let partials = new_partial(&config)?;
 
-				cmd.run(&*config.chain_spec, &*partials.client)
+				cmd.run(partials.client)
 			})
 		},
 		Some(Subcommand::ExportGenesisWasm(cmd)) => {
@@ -224,7 +225,7 @@ pub fn run() -> Result<()> {
 
 			runner.run_node_until_exit(|config| async move {
 				if config.chain_spec.name() == "Development" {
-					return service::dev::new_full(config, cli.finalize_delay_sec.into()).map_err(sc_cli::Error::Service);
+					return dev::new_full(config, cli.finalize_delay_sec.into()).map_err(sc_cli::Error::Service);
 				}
 
 				let hwbench = (!cli.no_hardware_benchmarks)

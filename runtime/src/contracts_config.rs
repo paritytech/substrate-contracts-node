@@ -85,7 +85,7 @@ impl pallet_contracts::Config for Runtime {
 	type Debug = ();
 	type Migrations = ();
 	#[cfg(feature = "parachain")]
-    type Xcm = pallet_xcm::Pallet<Self>;
+	type Xcm = pallet_xcm::Pallet<Self>;
 	#[cfg(not(feature = "parachain"))]
-    type Xcm = ();
+	type Xcm = ();
 }
