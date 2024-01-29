@@ -28,6 +28,6 @@ chain = "contracts-parachain-local"
 
   [parachains.collator]
   name = "collator01"
-  rpc_port = 9944
+  ws_port = 9944
   command = "substrate-contracts-node"
-  args = [ "-lerror,runtime::contracts=debug,runtime::contracts::strace=trace" ]
+  args = [ "-lerror,runtime::contracts=trace,xcm=trace,runtime::xcm=trace,runtime::xcmp=info" ]

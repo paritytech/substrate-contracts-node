@@ -106,6 +106,7 @@ std = [
 	"pallet-insecure-randomness-collective-flip/std",
 	"pallet-session/std",
 	"pallet-sudo/std",
+	"pallet-xcm/std",
 	"pallet-timestamp/std",
 	"pallet-transaction-payment-rpc-runtime-api/std",
 	"pallet-transaction-payment/std",
@@ -178,4 +179,4 @@ try-runtime = [
 ]
 
 experimental = [ "pallet-aura/experimental" ]
-
+parachain = []
