@@ -14,11 +14,11 @@ targets = ["x86_64-unknown-linux-gnu"]
 substrate-wasm-builder = {workspace = true, optional = true }
 
 [dependencies]
-codec = { package = "parity-scale-codec", version = "3.6.5", default-features = false, features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "3.6.9", default-features = false, features = ["derive"] }
 hex-literal = { version = "0.4.1", optional = true }
 log = { version = "0.4.20", default-features = false }
-scale-info = { version = "2.9.0", default-features = false, features = ["derive"] }
-smallvec = "1.11.1"
+scale-info = { version = "2.10.0", default-features = false, features = ["derive"] }
+smallvec = "1.11.2"
 
 # Substrate
 frame-benchmarking = { workspace = true, optional = true }
@@ -32,6 +32,7 @@ pallet-aura = { workspace = true }
 pallet-authorship = { workspace = true }
 pallet-balances = { workspace = true }
 pallet-session = { workspace = true }
+pallet-message-queue = { workspace = true }
 pallet-sudo = { workspace = true }
 pallet-timestamp = { workspace = true }
 pallet-transaction-payment = { workspace = true }
@@ -47,6 +48,7 @@ sp-session = { workspace = true }
 sp-std = { workspace = true }
 sp-transaction-pool = { workspace = true }
 sp-version = { workspace = true }
+sp-genesis-builder = { workspace = true }
 
 # Polkadot
 pallet-xcm = { workspace = true }
@@ -68,11 +70,11 @@ cumulus-primitives-timestamp = { workspace = true }
 cumulus-primitives-utility = { workspace = true }
 pallet-collator-selection = { workspace = true }
 parachain-info = { workspace = true }
+parachains-common = { workspace = true }
 
 # extra deps for setting up pallet-contracts
 pallet-contracts = { workspace = true }
 pallet-utility = { workspace = true }
-pallet-contracts-primitives = { workspace = true }
 pallet-insecure-randomness-collective-flip = { workspace = true }
 pallet-assets = { workspace = true }
 
@@ -100,11 +102,11 @@ std = [
 	"pallet-authorship/std",
 	"pallet-balances/std",
 	"pallet-collator-selection/std",
-	"pallet-contracts-primitives/std",
 	"pallet-contracts/std",
 	"pallet-insecure-randomness-collective-flip/std",
 	"pallet-session/std",
 	"pallet-sudo/std",
+	"pallet-xcm/std",
 	"pallet-timestamp/std",
 	"pallet-transaction-payment-rpc-runtime-api/std",
 	"pallet-transaction-payment/std",
@@ -177,4 +179,4 @@ try-runtime = [
 ]
 
 experimental = [ "pallet-aura/experimental" ]
-
+parachain = []
