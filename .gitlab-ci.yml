@@ -34,7 +34,7 @@ variables:
       - artifacts/
 
 .docker-env:                       &docker-env
-  image:                           paritytech/ci-linux:production
+  image:                           paritytech/ci-unified:latest
   before_script:
     - cargo -vV
     - rustc -vV
