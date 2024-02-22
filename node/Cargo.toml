@@ -27,8 +27,8 @@ serde_json = { workspace = true }
 wasmtime = { workspace = true }
 
 # Local
-contracts-parachain-runtime = { path = "../parachain-runtime", features = ["parachain"], version = "0.36.0" }
-contracts-node-runtime = { path = "../runtime",  version = "0.36.0" }
+contracts-parachain-runtime = { path = "../parachain-runtime", features = ["parachain"], version = "0.37.0" }
+contracts-node-runtime = { path = "../runtime",  version = "0.37.0" }
 
 # Substrate
 frame-benchmarking = { workspace = true }
