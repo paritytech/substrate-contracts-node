@@ -15,14 +15,14 @@ command = "polkadot"
 
   [[relaychain.nodes]]
   name = "alice"
-  args = [ "--alice", "-lruntime=debug,parachain=trace" ]
+  args = [ "--alice", "-lerror,runtime::contracts=trace,xcm=trace,runtime::xcm=trace,runtime::xcmp=info" ]
 
   [[relaychain.nodes]]
   name = "bob"
-  args = [ "--bob", "-lruntime=debug,parachain=trace" ]
+  args = [ "--bob", "-lerror,runtime::contracts=trace,xcm=trace,runtime::xcm=trace,runtime::xcmp=info" ]
 
 [[parachains]]
-id = 100
+id = 1
 addToGenesis = true
 chain = "contracts-parachain-local"
 
