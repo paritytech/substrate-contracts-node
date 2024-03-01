@@ -1,4 +1,4 @@
-//! Benchmarking setup for pallet-template
+//! Benchmarking setup for pallet-contract-caller
 #![cfg(feature = "runtime-benchmarks")]
 use super::*;
 

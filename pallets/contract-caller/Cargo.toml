@@ -1,7 +1,7 @@
 [package]
-name = "pallet-template"
+name = "pallet-contract-caller"
 version = "4.0.0-dev"
-description = "FRAME pallet template for defining custom runtime logic."
+description = "Demonstrate calling an ink! contract from a pallet"
 authors = ["Substrate DevHub <https://github.com/substrate-developer-hub>"]
 homepage = "https://substrate.io"
 edition.workspace = true

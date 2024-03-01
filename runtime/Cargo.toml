@@ -58,7 +58,7 @@ frame-benchmarking = { workspace = true, optional = true }
 frame-system-benchmarking = { workspace = true , optional = true}
 
 # Local Dependencies
-pallet-template = { path = "../pallets/template", default-features = false }
+pallet-contract-caller = { path = "../pallets/contract-caller", default-features = false }
 
 [build-dependencies]
 substrate-wasm-builder = { workspace = true, optional = true }
