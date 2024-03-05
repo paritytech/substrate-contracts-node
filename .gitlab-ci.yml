@@ -90,7 +90,7 @@ build-mac:
   before_script:
     - unset CARGO_TARGET_DIR
   script:
-    - rustup component add rust-src
+    - rustup component add rust-src rustfmt
     - rustup target add wasm32-unknown-unknown
     - time cargo build --release --target aarch64-apple-darwin
     - rustup target add x86_64-apple-darwin
