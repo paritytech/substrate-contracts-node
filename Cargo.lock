@@ -6392,7 +6392,7 @@ dependencies = [
  "sp-core",
  "sp-io",
  "sp-runtime",
- "sp-std 14.0.0 (git+https://github.com/paritytech/polkadot-sdk?rev=e76b244853c52d523e1d5c7a28948573df60df46)",
+ "sp-std",
 ]
 
 [[package]]
