@@ -97,6 +97,7 @@ build-mac:
     - time cargo build --release --target x86_64-apple-darwin
     - mkdir -p ./artifacts/substrate-contracts-node-mac/
     - 'lipo
+        ./target/x86_64-apple-darwin/release/substrate-contracts-node
         ./target/aarch64-apple-darwin/release/substrate-contracts-node
         -create
         -output ./artifacts/substrate-contracts-node-mac/substrate-contracts-node'
