@@ -13,6 +13,9 @@ members = [
 	"runtime",
 	"parachain-runtime",
 ]
+exclude = [
+	"contracts",
+]
 
 [profile.release]
 panic = 'unwind'
