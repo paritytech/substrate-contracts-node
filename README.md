@@ -81,7 +81,7 @@ Once the node template is running locally, you can connect to it with frontends 
 - [ ] Check Substrate's [`node-template`](https://github.com/paritytech/polkadot-sdk/tree/master//substrate/bin/node-template/),
       which was renamed after the Polkadot release `1.8.0` to [`solochain-template`](https://github.com/paritytech/polkadot-sdk/tree/master/templates/solochain),
       for new commits between the new polkadot release branch and the one this repository is currently synced with.
-      The current branch is mentioned in the last realese.
+      The current branch is mentioned in the last release.
 - [ ] Apply each commit that happened in this `node-template` folder since the last sync.
 - [ ] Check commits for [`pallet-contracts`](https://github.com/paritytech/polkadot-sdk/tree/master/substrate/frame/contracts)
       since the last time someone synchronized this repository with Substrate
