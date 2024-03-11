@@ -21,7 +21,7 @@ frame-benchmarking = { workspace = true, default-features = false, optional = tr
 frame-support = { workspace = true, default-features = false }
 frame-system = { workspace = true, default-features = false }
 sp-std = { workspace = true, default-features = false }
-flipper = { path = "../../contracts/flipper", default-features = false, features = ["ink-as-dependency"] }
+flipper = { path = "contracts/flipper", default-features = false, features = ["ink-as-dependency"] }
 
 [dev-dependencies]
 sp-core = { workspace = true }
