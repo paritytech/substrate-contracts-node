@@ -78,29 +78,25 @@ Once the node template is running locally, you can connect to it with frontends 
 
 ## How to upgrade to new Polkadot release
 
-**Note: Now that this repo has upgraded to using dependencies from crates.io, this section
-needs to be updated to reflect the new process, once the first release of the crates from
-the new `polkadot-sdk` mono-repo happens**
-
-- [ ] Check Substrate's [`node-template`](https://github.com/paritytech/substrate/commits/master/bin/node-template)
+- [ ] Check Substrate's [`node-template`](https://github.com/paritytech/polkadot-sdk/tree/master//substrate/bin/node-template/),
+      which was renamed after the Polkadot release `1.8.0` to [`solochain-template`](https://github.com/paritytech/polkadot-sdk/tree/master/templates/solochain),
       for new commits between the new polkadot release branch and the one this repository is currently synced with.
-      The current branch is mentioned in this readme.
+      The current branch is mentioned in the last realese.
 - [ ] Apply each commit that happened in this `node-template` folder since the last sync.
-- [ ] Check commits for [`pallet-contracts`](https://github.com/paritytech/substrate/tree/master/frame/contracts)
+- [ ] Check commits for [`pallet-contracts`](https://github.com/paritytech/polkadot-sdk/tree/master/substrate/frame/contracts)
       since the last time someone synchronized this repository with Substrate
       in order to not miss any important changes.
-- [ ] Execute `diener update -s --branch my_polkadot_release_branch`. Manually upgrade the
-      `pallet-assets-chain-extension` dependency to the latest release branch and then
-      `cargo update -p pallet-contracts` for this repository. The specific crate which is mentioned
-      here is actually not important: since Substrate uses git references for its Substrate
-      dependencies it means that once one package is updated all are.
-- [ ] Increment the minor version number in `node/Cargo.toml` and `runtime/Cargo.toml`.
+- [ ] Execute `psvm -p ./Cargo.toml -v X.X.X`, to update the dependencies to the required version.
+      Replace `X.X.X` with the requested Polkadot release versions.
+- [ ] Increment the minor version number in `Cargo.toml` and `node/Cargo.toml`.
 - [ ] Execute `cargo run --release`. If successful, it should produce blocks
       and a new, up to date, `Cargo.lock` will be created.
-- [ ] Update this readme with the hash of the Substrate `master` commit
-      with which you synchronized. The hash appears two times in this
-      readme.
-- [ ] Create a PR with the changes, have it reviewed and merged.
+- [ ] Create a PR with the changes, have it reviewed.
+- [ ] Upload crates to `crates.io` using the commands below, replacing `XX` with your incremented version number:
+      `cargo release 0.XX.0 -v --no-tag --no-push -p contracts-node-runtime -p contracts-parachain-runtime --execute`
+      `cargo release 0.XX.0 -v --no-tag --no-push -p contracts-node --execute`
+      Note: Before uploading, perform a dry run to ensure that it will be successful.
+- [ ] Merge the release PR branch.
 - [ ] Replace `XX` in this command with your incremented version number and execute it:
       `git checkout main && git pull && git tag v0.XX.0 && git push origin v0.XX.0`.
       This will push a new tag with the version number to this repository.
@@ -109,5 +105,5 @@ the new `polkadot-sdk` mono-repo happens**
       [GitLab](https://gitlab.parity.io/parity/mirrors/substrate-contracts-node/-/pipelines).
       This draft release will contain a binary for Linux and Mac and appear
       under [Releases](https://github.com/paritytech/substrate-contracts-node/releases).
-      Add a description in the style of "Synchronized with [`polkadot-v1.0.0`](https://github.com/paritytech/substrate/tree/polkadot-v1.0.0) branch."
+      Add a description in the style of "Synchronized with [`polkadot-v1.8.0`](https://github.com/paritytech/polkadot-sdk/tree/release-polkadot-v1.8.0) branch."
       and publish it.
