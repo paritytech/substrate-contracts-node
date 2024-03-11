@@ -86,8 +86,8 @@ Once the node template is running locally, you can connect to it with frontends 
 - [ ] Check commits for [`pallet-contracts`](https://github.com/paritytech/polkadot-sdk/tree/master/substrate/frame/contracts)
       since the last time someone synchronized this repository with Substrate
       in order to not miss any important changes.
-- [ ] Execute `psvm -p ./Cargo.toml -v X.X.X`, to update the dependencies to the required version.
-      Replace `X.X.X` with the requested Polkadot release versions.
+- [ ] Execute `psvm -p ./Cargo.toml -v X.X.X`, to update the dependencies to the required versions.
+      Replace `X.X.X` with the requested Polkadot release version.
 - [ ] Increment the minor version number in `Cargo.toml` and `node/Cargo.toml`.
 - [ ] Execute `cargo run --release`. If successful, it should produce blocks
       and a new, up to date, `Cargo.lock` will be created.
