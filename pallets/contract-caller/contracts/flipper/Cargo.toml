@@ -6,6 +6,7 @@ edition = "2021"
 
 [dependencies]
 ink = { path = "/home/andrew/code/ink/crates/ink", default-features = false }
+contract-traits = { path = "../traits", default-features = false }
 
 [dev-dependencies]
 ink_e2e = { path = "/home/andrew/code/ink/crates/e2e" }
@@ -17,6 +18,7 @@ path = "lib.rs"
 default = ["std"]
 std = [
     "ink/std",
+    "contract-traits/std",
 ]
 ink-as-dependency = []
 e2e-tests = []

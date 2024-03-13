@@ -1,0 +1,18 @@
+[package]
+name = "contract-traits"
+version = "5.0.0"
+authors = ["Parity Technologies <admin@parity.io>"]
+edition = "2021"
+publish = false
+
+[dependencies]
+ink = { path = "/home/andrew/code/ink/crates/ink", default-features = false }
+
+[lib]
+path = "lib.rs"
+
+[features]
+default = ["std"]
+std = [
+    "ink/std",
+]

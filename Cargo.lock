@@ -1520,6 +1520,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "contract-traits"
+version = "5.0.0"
+dependencies = [
+ "ink",
+]
+
+[[package]]
 name = "contracts-node"
 version = "0.39.0"
 dependencies = [
@@ -3475,6 +3482,7 @@ dependencies = [
 name = "flipper"
 version = "0.1.0"
 dependencies = [
+ "contract-traits",
  "ink",
  "ink_e2e",
 ]
