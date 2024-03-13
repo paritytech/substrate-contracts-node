@@ -7203,9 +7203,9 @@ name = "pallet-contract-caller"
 version = "4.0.0-dev"
 dependencies = [
  "flipper",
- "frame-benchmarking",
  "frame-support",
  "frame-system",
+ "pallet-contracts",
  "parity-scale-codec",
  "scale-info",
  "sp-core",
