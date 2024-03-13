@@ -1467,9 +1467,9 @@ checksum = "cd7e35aee659887cbfb97aaf227ac12cad1a9d7c71e55ff3376839ed4e282d08"
 
 [[package]]
 name = "contract-build"
-version = "4.0.0-rc.4"
+version = "4.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a0cace153488962932541d89bc7e8e515cf1c4606ea45fe55826d59505078fa4"
+checksum = "9f4e6c03a261bc36c858fb67f12c21045d372b731b2239372584ded4648b3538"
 dependencies = [
  "anyhow",
  "blake2 0.10.6",
@@ -1507,9 +1507,9 @@ dependencies = [
 
 [[package]]
 name = "contract-metadata"
-version = "4.0.0-rc.4"
+version = "4.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "664ab6d50dbdba63b7c4e61ca9830252c69e0e507a20f2f74fc2c6b6582e3bf1"
+checksum = "71d239a78947aa2d0c63a9936754927551f275d3064a221384427c2c2ff1504b"
 dependencies = [
  "anyhow",
  "impl-serde",
@@ -4687,7 +4687,7 @@ dependencies = [
 
 [[package]]
 name = "ink"
-version = "5.0.0-rc.3"
+version = "5.0.0"
 dependencies = [
  "derive_more",
  "ink_env",
@@ -4703,14 +4703,14 @@ dependencies = [
 
 [[package]]
 name = "ink_allocator"
-version = "5.0.0-rc.3"
+version = "5.0.0"
 dependencies = [
  "cfg-if",
 ]
 
 [[package]]
 name = "ink_codegen"
-version = "5.0.0-rc.3"
+version = "5.0.0"
 dependencies = [
  "blake2 0.10.6",
  "derive_more",
@@ -4730,10 +4730,11 @@ dependencies = [
 
 [[package]]
 name = "ink_e2e"
-version = "5.0.0-rc.3"
+version = "5.0.0"
 dependencies = [
  "cargo_metadata 0.18.1",
  "contract-build",
+ "frame-support",
  "funty",
  "impl-serde",
  "ink",
@@ -4761,7 +4762,7 @@ dependencies = [
 
 [[package]]
 name = "ink_e2e_macro"
-version = "5.0.0-rc.3"
+version = "5.0.0"
 dependencies = [
  "darling 0.20.8",
  "derive_more",
@@ -4775,7 +4776,7 @@ dependencies = [
 
 [[package]]
 name = "ink_engine"
-version = "5.0.0-rc.3"
+version = "5.0.0"
 dependencies = [
  "blake2 0.10.6",
  "derive_more",
@@ -4789,7 +4790,7 @@ dependencies = [
 
 [[package]]
 name = "ink_env"
-version = "5.0.0-rc.3"
+version = "5.0.0"
 dependencies = [
  "blake2 0.10.6",
  "cfg-if",
@@ -4817,7 +4818,7 @@ dependencies = [
 
 [[package]]
 name = "ink_ir"
-version = "5.0.0-rc.3"
+version = "5.0.0"
 dependencies = [
  "blake2 0.10.6",
  "either",
@@ -4831,7 +4832,7 @@ dependencies = [
 
 [[package]]
 name = "ink_macro"
-version = "5.0.0-rc.3"
+version = "5.0.0"
 dependencies = [
  "ink_codegen",
  "ink_ir",
@@ -4845,7 +4846,7 @@ dependencies = [
 
 [[package]]
 name = "ink_metadata"
-version = "5.0.0-rc.3"
+version = "5.0.0"
 dependencies = [
  "derive_more",
  "impl-serde",
@@ -4860,14 +4861,14 @@ dependencies = [
 
 [[package]]
 name = "ink_prelude"
-version = "5.0.0-rc.3"
+version = "5.0.0"
 dependencies = [
  "cfg-if",
 ]
 
 [[package]]
 name = "ink_primitives"
-version = "5.0.0-rc.3"
+version = "5.0.0"
 dependencies = [
  "derive_more",
  "ink_prelude",
@@ -4880,7 +4881,7 @@ dependencies = [
 
 [[package]]
 name = "ink_storage"
-version = "5.0.0-rc.3"
+version = "5.0.0"
 dependencies = [
  "array-init",
  "cfg-if",
@@ -4897,7 +4898,7 @@ dependencies = [
 
 [[package]]
 name = "ink_storage_traits"
-version = "5.0.0-rc.3"
+version = "5.0.0"
 dependencies = [
  "ink_metadata",
  "ink_prelude",
@@ -12178,9 +12179,9 @@ dependencies = [
 
 [[package]]
 name = "scale-info"
-version = "2.10.0"
+version = "2.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7f7d66a1128282b7ef025a8ead62a4a9fcf017382ec53b8ffbf4d7bf77bd3c60"
+checksum = "2ef2175c2907e7c8bc0a9c3f86aeb5ec1f3b275300ad58a44d0c3ae379a5e52e"
 dependencies = [
  "bitvec",
  "cfg-if",
@@ -14464,9 +14465,9 @@ checksum = "3369f5ac52d5eb6ab48c6b4ffdc8efbcad6b89c765749064ba298f2c68a16a76"
 
 [[package]]
 name = "thiserror"
-version = "1.0.57"
+version = "1.0.58"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1e45bcbe8ed29775f228095caf2cd67af7a4ccf756ebff23a306bf3e8b47b24b"
+checksum = "03468839009160513471e86a034bb2c5c0e4baae3b43f79ffc55c4a5427b3297"
 dependencies = [
  "thiserror-impl",
 ]
@@ -14493,9 +14494,9 @@ dependencies = [
 
 [[package]]
 name = "thiserror-impl"
-version = "1.0.57"
+version = "1.0.58"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a953cb265bef375dae3de6663da4d3804eee9682ea80d8e2542529b73c531c81"
+checksum = "c61f3ba182994efc43764a46c018c347bc492c79f024e705f46567b418f6d4f7"
 dependencies = [
  "proc-macro2",
  "quote",
