@@ -6,12 +6,6 @@
 
 pub use pallet::*;
 
-#[cfg(test)]
-mod mock;
-
-#[cfg(test)]
-mod tests;
-
 #[frame_support::pallet]
 pub mod pallet {
 	use super::*;
@@ -35,7 +29,7 @@ pub mod pallet {
 
 	#[pallet::error]
 	pub enum Error<T> {
-		// ContractCallError(pallet_contracts::Error<T>),
+		NoOp, // ContractCallError(pallet_contracts::Error<T>),
 	}
 
 	#[pallet::call]

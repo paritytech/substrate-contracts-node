@@ -79,6 +79,7 @@ std = [
 	"pallet-authorship/std",
 	"pallet-balances/std",
 	"pallet-contracts/std",
+	"pallet-contract-caller/std",
 	"pallet-grandpa/std",
 	"pallet-insecure-randomness-collective-flip/std",
 	"pallet-sudo/std",
