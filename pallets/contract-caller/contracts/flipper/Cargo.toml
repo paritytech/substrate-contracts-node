@@ -10,11 +10,11 @@ authors = ["[your_name] <[your_email]>"]
 edition = "2021"
 
 [dependencies]
-ink = { path = "/home/andrew/code/ink/crates/ink", default-features = false }
+ink = { version = "5.0.0", default-features = false }
 flipper-traits = { path = "traits", default-features = false }
 
 [dev-dependencies]
-ink_e2e = { path = "/home/andrew/code/ink/crates/e2e" }
+ink_e2e = "5.0.0"
 frame-support = { version = "30.0.0", default-features = false }
 scale-value = "0.13.0"
 
