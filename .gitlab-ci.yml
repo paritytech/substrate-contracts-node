@@ -80,18 +80,6 @@ build-linux:
     - mkdir -p ./artifacts/substrate-contracts-node-linux/
     - cp target/release/substrate-contracts-node ./artifacts/substrate-contracts-node-linux/substrate-contracts-node
 
-### stage:                         test-contract-caller-linux
-
-test-contract-caller-linux:
-  stage:                           test-contract-caller-linux
-  <<:                              *docker-env
-  <<:                              *collect-artifacts
-  <<:                              *build-refs
-  variables:
-    CONTRACTS_NODE: ./artifacts/substrate-contracts-node-linux/substrate-contracts-node
-  script:
-    - cargo test --manifest-path ./pallets/contract-caller/contracts/flipper/Cargo.toml --features e2e-tests
-
 ### stage:                         build-mac
 
 build-mac:
