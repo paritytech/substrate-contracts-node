@@ -15,6 +15,10 @@ async fn instantiate_and_get<Client: E2EBackend>(mut client: Client) -> E2EResul
 		.await
 		.expect("instantiate failed");
 
+	let mut call_builder = contract.call_builder::<Flipper>();
+	let flip_dry_run = client.call(&ink_e2e::bob(), &call_builder.flip()).dry_run().await?;
+	let gas_required = flip_dry_run.exec_result.gas_required;
+
 	// call pallet dispatchable
 	client
 		.runtime_call(
@@ -24,8 +28,8 @@ async fn instantiate_and_get<Client: E2EBackend>(mut client: Client) -> E2EResul
 			vec![
 				scale_value::Value::from_bytes(contract.account_id),
 				scale_value::serde::to_value(frame_support::weights::Weight::from_parts(
-					1_000_000_000,
-					0,
+					gas_required.ref_time(),
+					gas_required.proof_size(),
 				))
 				.unwrap(),
 			],
@@ -34,8 +38,7 @@ async fn instantiate_and_get<Client: E2EBackend>(mut client: Client) -> E2EResul
 		.expect("runtime call failed");
 
 	// now check that the flip was executed via the pallet
-	let get_message = contract.call_builder::<Flipper>().get();
-	let get_result = client.call(&ink_e2e::alice(), &get_message).dry_run().await?;
+	let get_result = client.call(&ink_e2e::alice(), &call_builder.get()).dry_run().await?;
 
 	assert_eq!(get_result.return_value(), !initial_value);
 

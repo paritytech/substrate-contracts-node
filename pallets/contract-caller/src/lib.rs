@@ -1,6 +1,6 @@
 //! # Contract Caller
 //!
-//! todo: [AJ] docs
+//! Demonstrates calling into an `ink!` contract from a pallet.
 
 #![cfg_attr(not(feature = "std"), no_std)]
 
@@ -29,9 +29,7 @@ pub mod pallet {
 	pub enum Event<T: Config> {}
 
 	#[pallet::error]
-	pub enum Error<T> {
-		NoOp, // ContractCallError(pallet_contracts::Error<T>),
-	}
+	pub enum Error<T> { }
 
 	#[pallet::call]
 	impl<T: Config> Pallet<T>
@@ -69,9 +67,9 @@ pub mod pallet {
 			let weight = Weight::from_parts(params.ref_time_limit(), params.proof_size_limit());
 			let storage_deposit_limit = params.storage_deposit_limit().map(|limit| (*limit).into());
 
-			pallet_contracts::Pallet::<T>::bare_call(
-				who,
-				contract,
+			let result = pallet_contracts::Pallet::<T>::bare_call(
+				who.clone(),
+				contract.clone(),
 				value.into(),
 				weight,
 				storage_deposit_limit,
@@ -81,6 +79,8 @@ pub mod pallet {
 				pallet_contracts::Determinism::Enforced,
 			)
 			.result?;
+
+			assert!(!result.did_revert());
 
 			Ok(())
 		}
