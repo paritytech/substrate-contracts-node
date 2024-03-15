@@ -3483,8 +3483,10 @@ name = "flipper"
 version = "0.1.0"
 dependencies = [
  "contract-traits",
+ "frame-support",
  "ink",
  "ink_e2e",
+ "scale-value",
 ]
 
 [[package]]

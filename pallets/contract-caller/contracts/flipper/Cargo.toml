@@ -10,6 +10,8 @@ contract-traits = { path = "../traits", default-features = false }
 
 [dev-dependencies]
 ink_e2e = { path = "/home/andrew/code/ink/crates/e2e" }
+frame-support = { workspace = true }
+scale-value = "0.13.0"
 
 [lib]
 path = "lib.rs"

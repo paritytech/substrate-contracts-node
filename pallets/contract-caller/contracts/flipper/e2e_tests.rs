@@ -1,5 +1,5 @@
 use super::flipper::*;
-use ink_e2e::{ChainBackend, ContractsBackend, Value};
+use ink_e2e::{ChainBackend, ContractsBackend};
 
 type E2EResult<T> = Result<T, Box<dyn std::error::Error>>;
 
@@ -19,7 +19,12 @@ async fn instantiate_and_get<Client: E2EBackend>(mut client: Client) -> E2EResul
 			&ink_e2e::alice(),
 			"ContractCaller",
 			"contract_call_flip",
-			vec![Value::from_bytes(contract.account_id)],
+			vec![
+				scale_value::Value::from_bytes(contract.account_id),
+				scale_value::serde::to_value(
+					frame_support::weights::Weight::from_parts(1_000_000_000, 0),
+				).unwrap(),
+			],
 		)
 		.await
 		.expect("runtime call failed");
