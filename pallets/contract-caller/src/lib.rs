@@ -29,7 +29,7 @@ pub mod pallet {
 	pub enum Event<T: Config> {}
 
 	#[pallet::error]
-	pub enum Error<T> { }
+	pub enum Error<T> {}
 
 	#[pallet::call]
 	impl<T: Config> Pallet<T>
