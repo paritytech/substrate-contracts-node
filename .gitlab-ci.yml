@@ -16,6 +16,7 @@ default:
 stages:
   - fmt
   - build-linux
+  - test-contract-caller-linux
   - build-mac
   - publish
 
