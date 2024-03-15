@@ -1,3 +1,8 @@
+[workspace]
+members = [
+    "traits",
+]
+
 [package]
 name = "flipper"
 version = "0.1.0"
@@ -6,11 +11,11 @@ edition = "2021"
 
 [dependencies]
 ink = { path = "/home/andrew/code/ink/crates/ink", default-features = false }
-contract-traits = { path = "../traits", default-features = false }
+flipper-traits = { path = "traits", default-features = false }
 
 [dev-dependencies]
 ink_e2e = { path = "/home/andrew/code/ink/crates/e2e" }
-frame-support = { workspace = true }
+frame-support = { version = "30.0.0", default-features = false }
 scale-value = "0.13.0"
 
 [lib]
@@ -20,7 +25,7 @@ path = "lib.rs"
 default = ["std"]
 std = [
     "ink/std",
-    "contract-traits/std",
+    "flipper-traits/std",
 ]
 ink-as-dependency = []
 e2e-tests = []

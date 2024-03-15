@@ -2,7 +2,7 @@
 
 #[ink::contract]
 mod flipper {
-	use contract_traits::Flip;
+	use flipper_traits::Flip;
 
 	/// Defines the storage of your contract.
 	/// Add new fields to the below struct in order

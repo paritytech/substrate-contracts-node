@@ -22,7 +22,8 @@ frame-system = { workspace = true, default-features = false }
 sp-std = { workspace = true, default-features = false }
 
 pallet-contracts = { workspace = true, default-features = false }
-flipper = { path = "contracts/flipper", default-features = false, features = ["ink-as-dependency"] }
+flipper-traits = { path = "contracts/flipper/traits", default-features = false }
+ink = { path = "/home/andrew/code/ink/crates/ink", default-features = false }
 
 [dev-dependencies]
 sp-core = { workspace = true }
@@ -41,7 +42,7 @@ std = [
 	"sp-runtime/std",
 	"sp-std/std",
 	"pallet-contracts/std",
-	"flipper/std"
+	"flipper-traits/std"
 ]
 try-runtime = [
 	"frame-support/try-runtime",

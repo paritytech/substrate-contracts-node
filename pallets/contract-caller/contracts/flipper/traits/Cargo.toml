@@ -1,5 +1,5 @@
 [package]
-name = "contract-traits"
+name = "flipper-traits"
 version = "5.0.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 edition = "2021"
