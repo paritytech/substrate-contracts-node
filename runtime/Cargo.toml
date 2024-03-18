@@ -57,6 +57,9 @@ pallet-utility = { workspace = true }
 frame-benchmarking = { workspace = true, optional = true }
 frame-system-benchmarking = { workspace = true , optional = true}
 
+# Local Dependencies
+pallet-contract-caller = { path = "../pallets/contract-caller", default-features = false }
+
 [build-dependencies]
 substrate-wasm-builder = { workspace = true, optional = true }
 
@@ -76,6 +79,7 @@ std = [
 	"pallet-authorship/std",
 	"pallet-balances/std",
 	"pallet-contracts/std",
+	"pallet-contract-caller/std",
 	"pallet-grandpa/std",
 	"pallet-insecure-randomness-collective-flip/std",
 	"pallet-sudo/std",

@@ -12,6 +12,7 @@ members = [
 	"node",
 	"runtime",
 	"parachain-runtime",
+	"pallets/contract-caller",
 ]
 
 [profile.release]
