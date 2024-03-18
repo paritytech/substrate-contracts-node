@@ -23,7 +23,7 @@ sp-std = { workspace = true, default-features = false }
 
 pallet-contracts = { workspace = true, default-features = false }
 flipper-traits = { path = "contracts/flipper/traits", default-features = false }
-ink = { version = "5.0.0", default-features = false }
+ink = { git = "https://github.com/paritytech/ink/", branch = "aj/no-panic-handler", default-features = false, features = ["no-panic-handler", "no-allocator"] }
 
 [dev-dependencies]
 sp-core = { workspace = true }
@@ -42,7 +42,6 @@ std = [
 	"sp-runtime/std",
 	"sp-std/std",
 	"pallet-contracts/std",
-	"flipper-traits/std",
 	"ink/std"
 ]
 try-runtime = [
