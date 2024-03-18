@@ -23,7 +23,7 @@ sp-std = { workspace = true, default-features = false }
 
 pallet-contracts = { workspace = true, default-features = false }
 flipper-traits = { path = "contracts/flipper/traits", default-features = false }
-ink = { git = "https://github.com/paritytech/ink/", branch = "aj/no-panic-handler", default-features = false, features = ["no-panic-handler", "no-allocator"] }
+ink = { git = "https://github.com/paritytech/ink/", branch = "master", default-features = false, features = ["no-panic-handler", "no-allocator"] }
 
 [dev-dependencies]
 sp-core = { workspace = true }

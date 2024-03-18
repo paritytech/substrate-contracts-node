@@ -4330,7 +4330,7 @@ dependencies = [
 [[package]]
 name = "ink"
 version = "5.0.0"
-source = "git+https://github.com/paritytech/ink/?branch=aj/no-panic-handler#f93dfe6c70c00c95d2156b240678d86a4580632f"
+source = "git+https://github.com/paritytech/ink/?branch=master#72a671cd4d736b0c6c3f58e5a28a7c178b94e49a"
 dependencies = [
  "derive_more",
  "ink_env",
@@ -4347,7 +4347,7 @@ dependencies = [
 [[package]]
 name = "ink_allocator"
 version = "5.0.0"
-source = "git+https://github.com/paritytech/ink/?branch=aj/no-panic-handler#f93dfe6c70c00c95d2156b240678d86a4580632f"
+source = "git+https://github.com/paritytech/ink/?branch=master#72a671cd4d736b0c6c3f58e5a28a7c178b94e49a"
 dependencies = [
  "cfg-if",
 ]
@@ -4355,7 +4355,7 @@ dependencies = [
 [[package]]
 name = "ink_codegen"
 version = "5.0.0"
-source = "git+https://github.com/paritytech/ink/?branch=aj/no-panic-handler#f93dfe6c70c00c95d2156b240678d86a4580632f"
+source = "git+https://github.com/paritytech/ink/?branch=master#72a671cd4d736b0c6c3f58e5a28a7c178b94e49a"
 dependencies = [
  "blake2 0.10.6",
  "derive_more",
@@ -4376,7 +4376,7 @@ dependencies = [
 [[package]]
 name = "ink_engine"
 version = "5.0.0"
-source = "git+https://github.com/paritytech/ink/?branch=aj/no-panic-handler#f93dfe6c70c00c95d2156b240678d86a4580632f"
+source = "git+https://github.com/paritytech/ink/?branch=master#72a671cd4d736b0c6c3f58e5a28a7c178b94e49a"
 dependencies = [
  "blake2 0.10.6",
  "derive_more",
@@ -4391,7 +4391,7 @@ dependencies = [
 [[package]]
 name = "ink_env"
 version = "5.0.0"
-source = "git+https://github.com/paritytech/ink/?branch=aj/no-panic-handler#f93dfe6c70c00c95d2156b240678d86a4580632f"
+source = "git+https://github.com/paritytech/ink/?branch=master#72a671cd4d736b0c6c3f58e5a28a7c178b94e49a"
 dependencies = [
  "blake2 0.10.6",
  "cfg-if",
@@ -4420,7 +4420,7 @@ dependencies = [
 [[package]]
 name = "ink_ir"
 version = "5.0.0"
-source = "git+https://github.com/paritytech/ink/?branch=aj/no-panic-handler#f93dfe6c70c00c95d2156b240678d86a4580632f"
+source = "git+https://github.com/paritytech/ink/?branch=master#72a671cd4d736b0c6c3f58e5a28a7c178b94e49a"
 dependencies = [
  "blake2 0.10.6",
  "either",
@@ -4435,7 +4435,7 @@ dependencies = [
 [[package]]
 name = "ink_macro"
 version = "5.0.0"
-source = "git+https://github.com/paritytech/ink/?branch=aj/no-panic-handler#f93dfe6c70c00c95d2156b240678d86a4580632f"
+source = "git+https://github.com/paritytech/ink/?branch=master#72a671cd4d736b0c6c3f58e5a28a7c178b94e49a"
 dependencies = [
  "ink_codegen",
  "ink_ir",
@@ -4450,7 +4450,7 @@ dependencies = [
 [[package]]
 name = "ink_metadata"
 version = "5.0.0"
-source = "git+https://github.com/paritytech/ink/?branch=aj/no-panic-handler#f93dfe6c70c00c95d2156b240678d86a4580632f"
+source = "git+https://github.com/paritytech/ink/?branch=master#72a671cd4d736b0c6c3f58e5a28a7c178b94e49a"
 dependencies = [
  "derive_more",
  "impl-serde",
@@ -4466,7 +4466,7 @@ dependencies = [
 [[package]]
 name = "ink_prelude"
 version = "5.0.0"
-source = "git+https://github.com/paritytech/ink/?branch=aj/no-panic-handler#f93dfe6c70c00c95d2156b240678d86a4580632f"
+source = "git+https://github.com/paritytech/ink/?branch=master#72a671cd4d736b0c6c3f58e5a28a7c178b94e49a"
 dependencies = [
  "cfg-if",
 ]
@@ -4474,7 +4474,7 @@ dependencies = [
 [[package]]
 name = "ink_primitives"
 version = "5.0.0"
-source = "git+https://github.com/paritytech/ink/?branch=aj/no-panic-handler#f93dfe6c70c00c95d2156b240678d86a4580632f"
+source = "git+https://github.com/paritytech/ink/?branch=master#72a671cd4d736b0c6c3f58e5a28a7c178b94e49a"
 dependencies = [
  "derive_more",
  "ink_prelude",
@@ -4488,7 +4488,7 @@ dependencies = [
 [[package]]
 name = "ink_storage"
 version = "5.0.0"
-source = "git+https://github.com/paritytech/ink/?branch=aj/no-panic-handler#f93dfe6c70c00c95d2156b240678d86a4580632f"
+source = "git+https://github.com/paritytech/ink/?branch=master#72a671cd4d736b0c6c3f58e5a28a7c178b94e49a"
 dependencies = [
  "array-init",
  "cfg-if",
@@ -4506,7 +4506,7 @@ dependencies = [
 [[package]]
 name = "ink_storage_traits"
 version = "5.0.0"
-source = "git+https://github.com/paritytech/ink/?branch=aj/no-panic-handler#f93dfe6c70c00c95d2156b240678d86a4580632f"
+source = "git+https://github.com/paritytech/ink/?branch=master#72a671cd4d736b0c6c3f58e5a28a7c178b94e49a"
 dependencies = [
  "ink_metadata",
  "ink_prelude",

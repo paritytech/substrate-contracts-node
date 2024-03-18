@@ -6,7 +6,7 @@ edition = "2021"
 publish = false
 
 [dependencies]
-ink = { git = "https://github.com/paritytech/ink/", branch = "aj/no-panic-handler", default-features = false, features = ["no-panic-handler", "no-allocator"] }
+ink = { git = "https://github.com/paritytech/ink/", branch = "master", default-features = false, features = ["no-panic-handler", "no-allocator"] }
 
 [lib]
 path = "lib.rs"

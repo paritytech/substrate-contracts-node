@@ -10,11 +10,11 @@ authors = ["[your_name] <[your_email]>"]
 edition = "2021"
 
 [dependencies]
-ink = { git = "https://github.com/paritytech/ink/", branch = "aj/no-panic-handler", default-features = false, features = ["no-panic-handler", "no-allocator"] }
+ink = { git = "https://github.com/paritytech/ink/", branch = "master", default-features = false, features = ["no-panic-handler", "no-allocator"] }
 flipper-traits = { path = "traits", default-features = false }
 
 [dev-dependencies]
-ink_e2e = { git = "https://github.com/paritytech/ink/", package = "ink_e2e", branch = "aj/no-panic-handler" }
+ink_e2e = { git = "https://github.com/paritytech/ink/", package = "ink_e2e", branch = "master" }
 frame-support = { version = "30.0.0", default-features = false }
 scale-value = "0.13.0"
 
