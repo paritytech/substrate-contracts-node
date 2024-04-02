@@ -78,21 +78,34 @@ Once the node template is running locally, you can connect to it with frontends 
 
 ## How to upgrade to new Polkadot release
 
+We can have two types of releases:
+
+* Internal release: This type of release does not involve releasing the crates on crates.io. It involves using Git
+  references in the Cargo.toml dependencies. We utilize this type of release for faster iteration when we don't want
+  to wait for the substrate crates to be released.
+
+* Crate release: This is the preferable type of release, which involves specifying crate versions in the Cargo.toml
+  dependencies and releasing the crates on crates.io..
+
 - [ ] Check Substrate's [`node-template`](https://github.com/paritytech/polkadot-sdk/tree/master//substrate/bin/node-template/),
       which was renamed after the Polkadot release `1.8.0` to [`solochain-template`](https://github.com/paritytech/polkadot-sdk/tree/master/templates/solochain),
       for new commits between the new polkadot release branch and the one this repository is currently synced with.
       The current branch is mentioned in the last release.
 - [ ] Apply each commit that happened in this `node-template` folder since the last sync.
+- [ ] Check [`parachain-template`](https://github.com/paritytech/polkadot-sdk/tree/master/templates/parachain)
+      and apply each commit that has occurred in its folder since the last sync.
 - [ ] Check commits for [`pallet-contracts`](https://github.com/paritytech/polkadot-sdk/tree/master/substrate/frame/contracts)
       since the last time someone synchronized this repository with Substrate
       in order to not miss any important changes.
-- [ ] Execute `psvm -p ./Cargo.toml -v X.X.X`, to update the dependencies to the required versions.
+- [ ] (Crate release only) Execute `psvm -p ./Cargo.toml -v X.X.X`, to update the dependencies to the required versions.
       Replace `X.X.X` with the requested Polkadot release version.
+- [ ] (Internal release only)  Manually update the dependencies in Cargo.toml to the required Git SHA versions.
 - [ ] Increment the minor version number in `Cargo.toml` and `node/Cargo.toml`.
 - [ ] Execute `cargo run --release`. If successful, it should produce blocks
       and a new, up to date, `Cargo.lock` will be created.
 - [ ] Create a PR with the changes, have it reviewed.
-- [ ] Upload crates to `crates.io` using the commands below, replacing `XX` with your incremented version number:
+- [ ] (Crate release only) Upload crates to `crates.io` using the commands below, replacing `XX` with your incremented
+      version number:
       `cargo release 0.XX.0 -v --no-tag --no-push -p contracts-node-runtime -p contracts-parachain-runtime --execute`
       `cargo release 0.XX.0 -v --no-tag --no-push -p contracts-node --execute`
       Note: Before uploading, perform a dry run to ensure that it will be successful.
