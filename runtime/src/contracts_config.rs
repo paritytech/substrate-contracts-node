@@ -6,6 +6,7 @@ use frame_support::{
 	parameter_types,
 	traits::{ConstBool, ConstU32},
 };
+use frame_system::EnsureSigned;
 
 pub enum AllowBalancesCall {}
 
@@ -89,4 +90,7 @@ impl pallet_contracts::Config for Runtime {
 	type Xcm = pallet_xcm::Pallet<Self>;
 	#[cfg(not(feature = "parachain"))]
 	type Xcm = ();
+
+	type UploadOrigin = EnsureSigned<Self::AccountId>;
+	type InstantiateOrigin = EnsureSigned<Self::AccountId>;
 }
