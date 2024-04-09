@@ -31,64 +31,64 @@ contracts-parachain-runtime = { path = "../parachain-runtime", features = ["para
 contracts-node-runtime = { path = "../runtime",  version = "0.39.0" }
 
 # Substrate
-frame-benchmarking = { workspace = true }
-frame-benchmarking-cli = { workspace = true }
-pallet-transaction-payment-rpc = { workspace = true }
-sc-basic-authorship = { workspace = true }
-sc-chain-spec = { workspace = true }
-sc-cli = { workspace = true }
-sc-client-api = { workspace = true }
-sc-offchain = { workspace = true }
-sc-consensus = { workspace = true }
-sc-executor = { workspace = true }
-sc-network = { workspace = true }
-sc-network-sync = { workspace = true }
-sp-keyring = { workspace = true }
-sc-rpc = { workspace = true }
-sc-service = { workspace = true }
-sc-sysinfo = { workspace = true }
-sc-telemetry = { workspace = true }
-sc-tracing = { workspace = true }
-sc-transaction-pool = { workspace = true }
-sc-transaction-pool-api = { workspace = true }
-sp-api = { workspace = true }
-sp-block-builder = { workspace = true }
-sp-blockchain = { workspace = true }
-sp-consensus-aura = { workspace = true }
-sp-core = { workspace = true }
-sp-keystore = { workspace = true }
-sp-io = { workspace = true }
-sp-runtime = { workspace = true }
-sp-timestamp = { workspace = true }
-substrate-frame-rpc-system = { workspace = true }
-substrate-prometheus-endpoint = { workspace = true }
-try-runtime-cli = { workspace = true, optional = true }
+frame-benchmarking = { version = "31.0.0", workspace = true }
+frame-benchmarking-cli = { version = "35.0.1", workspace = true }
+pallet-transaction-payment-rpc = { version = "33.0.0", workspace = true }
+sc-basic-authorship = { version = "0.37.0", workspace = true }
+sc-chain-spec = { version = "30.0.1", workspace = true }
+sc-cli = { version = "0.39.0", workspace = true }
+sc-client-api = { version = "31.0.0", workspace = true }
+sc-offchain = { version = "32.0.0", workspace = true }
+sc-consensus = { version = "0.36.0", workspace = true }
+sc-executor = { version = "0.35.0", workspace = true }
+sc-network = { version = "0.37.0", workspace = true }
+sc-network-sync = { version = "0.36.0", workspace = true }
+sp-keyring = { version = "34.0.0", workspace = true }
+sc-rpc = { version = "32.0.0", workspace = true }
+sc-service = { version = "0.38.0", workspace = true }
+sc-sysinfo = { version = "30.0.0", workspace = true }
+sc-telemetry = { version = "17.0.0", workspace = true }
+sc-tracing = { version = "31.0.0", workspace = true }
+sc-transaction-pool = { version = "31.0.0", workspace = true }
+sc-transaction-pool-api = { version = "31.0.0", workspace = true }
+sp-api = { version = "29.0.0", workspace = true }
+sp-block-builder = { version = "29.0.0", workspace = true }
+sp-blockchain = { version = "31.0.0", workspace = true }
+sp-consensus-aura = { version = "0.35.0", workspace = true }
+sp-core = { version = "31.0.0", workspace = true }
+sp-keystore = { version = "0.37.0", workspace = true }
+sp-io = { version = "33.0.0", workspace = true }
+sp-runtime = { version = "34.0.0", workspace = true }
+sp-timestamp = { version = "29.0.0", workspace = true }
+substrate-frame-rpc-system = { version = "31.0.0", workspace = true }
+substrate-prometheus-endpoint = { version = "0.17.0", workspace = true }
+try-runtime-cli = { version = "0.41.0", workspace = true, optional = true }
 
 # extra for running solo-chain
-sp-consensus-grandpa = { workspace = true }
-sc-consensus-grandpa = { workspace = true }
-sc-consensus-aura = { workspace = true }
-sc-consensus-manual-seal = { workspace = true }
+sp-consensus-grandpa = { version = "16.0.0", workspace = true }
+sc-consensus-grandpa = { version = "0.22.0", workspace = true }
+sc-consensus-aura = { version = "0.37.0", workspace = true }
+sc-consensus-manual-seal = { version = "0.38.0", workspace = true }
 
 # Polkadot
-polkadot-cli = { workspace = true }
-polkadot-primitives = { workspace = true }
+polkadot-cli = { version = "10.0.0", workspace = true }
+polkadot-primitives = { version = "10.0.0", workspace = true }
 xcm = { workspace = true }
 
 # Cumulus
-cumulus-client-cli = { workspace = true }
-cumulus-client-collator = { workspace = true }
-cumulus-client-consensus-aura = { workspace = true }
-cumulus-client-consensus-common = { workspace = true }
-cumulus-client-consensus-proposer = { workspace = true }
-cumulus-client-service = { workspace = true }
-cumulus-primitives-core = { workspace = true }
-cumulus-primitives-parachain-inherent = { workspace = true }
-cumulus-relay-chain-interface = { workspace = true }
+cumulus-client-cli = { version = "0.10.0", workspace = true }
+cumulus-client-collator = { version = "0.10.0", workspace = true }
+cumulus-client-consensus-aura = { version = "0.10.0", workspace = true }
+cumulus-client-consensus-common = { version = "0.10.0", workspace = true }
+cumulus-client-consensus-proposer = { version = "0.10.0", workspace = true }
+cumulus-client-service = { version = "0.10.0", workspace = true }
+cumulus-primitives-core = { version = "0.10.0", workspace = true }
+cumulus-primitives-parachain-inherent = { version = "0.10.0", workspace = true }
+cumulus-relay-chain-interface = { version = "0.10.0", workspace = true }
 color-print = { workspace = true }
 
 [build-dependencies]
-substrate-build-script-utils = { workspace = true }
+substrate-build-script-utils = { version = "11.0.0", workspace = true }
 
 [features]
 default = []

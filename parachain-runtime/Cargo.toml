@@ -11,7 +11,7 @@ repository.workspace = true
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 [build-dependencies]
-substrate-wasm-builder = {workspace = true, optional = true }
+substrate-wasm-builder = { version = "20.0.0", workspace = true, optional = true }
 
 [dependencies]
 codec = { package = "parity-scale-codec", version = "3.6.9", default-features = false, features = ["derive"] }
@@ -21,62 +21,62 @@ scale-info = { version = "2.10.0", default-features = false, features = ["derive
 smallvec = "1.11.2"
 
 # Substrate
-frame-benchmarking = { workspace = true, optional = true }
-frame-executive = { workspace = true }
-frame-support = { workspace = true }
-frame-system = { workspace = true }
-frame-system-benchmarking = {workspace = true, optional = true}
-frame-system-rpc-runtime-api = { workspace = true }
-frame-try-runtime = { workspace = true, optional = true}
-pallet-aura = { workspace = true }
-pallet-authorship = { workspace = true }
-pallet-balances = { workspace = true }
-pallet-session = { workspace = true }
-pallet-message-queue = { workspace = true }
-pallet-sudo = { workspace = true }
-pallet-timestamp = { workspace = true }
-pallet-transaction-payment = { workspace = true }
-pallet-transaction-payment-rpc-runtime-api = { workspace = true }
-sp-api = { workspace = true }
-sp-block-builder = { workspace = true }
-sp-consensus-aura = { workspace = true }
-sp-core = { workspace = true }
-sp-inherents = { workspace = true }
-sp-offchain = { workspace = true }
-sp-runtime = { workspace = true }
-sp-session = { workspace = true }
-sp-std = { workspace = true }
-sp-transaction-pool = { workspace = true }
-sp-version = { workspace = true }
-sp-genesis-builder = { workspace = true }
+frame-benchmarking = { version = "31.0.0", workspace = true, optional = true }
+frame-executive = { version = "31.0.0", workspace = true }
+frame-support = { version = "31.0.0", workspace = true }
+frame-system = { version = "31.0.0", workspace = true }
+frame-system-benchmarking = { version = "31.0.0", workspace = true, optional = true }
+frame-system-rpc-runtime-api = { version = "29.0.0", workspace = true }
+frame-try-runtime = { version = "0.37.0", workspace = true, optional = true }
+pallet-aura = { version = "30.0.0", workspace = true }
+pallet-authorship = { version = "31.0.0", workspace = true }
+pallet-balances = { version = "31.0.0", workspace = true }
+pallet-session = { version = "31.0.0", workspace = true }
+pallet-message-queue = { version = "34.0.0", workspace = true }
+pallet-sudo = { version = "31.0.0", workspace = true }
+pallet-timestamp = { version = "30.0.0", workspace = true }
+pallet-transaction-payment = { version = "31.0.0", workspace = true }
+pallet-transaction-payment-rpc-runtime-api = { version = "31.0.0", workspace = true }
+sp-api = { version = "29.0.0", workspace = true }
+sp-block-builder = { version = "29.0.0", workspace = true }
+sp-consensus-aura = { version = "0.35.0", workspace = true }
+sp-core = { version = "31.0.0", workspace = true }
+sp-inherents = { version = "29.0.0", workspace = true }
+sp-offchain = { version = "29.0.0", workspace = true }
+sp-runtime = { version = "34.0.0", workspace = true }
+sp-session = { version = "30.0.0", workspace = true }
+sp-std = { version = "14.0.0", workspace = true }
+sp-transaction-pool = { version = "29.0.0", workspace = true }
+sp-version = { version = "32.0.0", workspace = true }
+sp-genesis-builder = { version = "0.10.0", workspace = true }
 
 # Polkadot
-pallet-xcm = { workspace = true }
-polkadot-parachain-primitives = { workspace = true }
-polkadot-runtime-common = { workspace = true }
+pallet-xcm = { version = "10.0.1", workspace = true }
+polkadot-parachain-primitives = { version = "9.0.0", workspace = true }
+polkadot-runtime-common = { version = "10.0.0", workspace = true }
 xcm = { workspace = true }
 xcm-builder = { workspace = true }
 xcm-executor = { workspace = true }
 
 # Cumulus
-cumulus-pallet-aura-ext = { workspace = true }
-cumulus-pallet-dmp-queue = { workspace = true }
-cumulus-pallet-parachain-system = { workspace = true }
-cumulus-pallet-session-benchmarking = { workspace = true }
-cumulus-pallet-xcm = { workspace = true }
-cumulus-pallet-xcmp-queue = { workspace = true }
-cumulus-primitives-core = { workspace = true }
-cumulus-primitives-timestamp = { workspace = true }
-cumulus-primitives-utility = { workspace = true }
-pallet-collator-selection = { workspace = true }
+cumulus-pallet-aura-ext = { version = "0.10.0", workspace = true }
+cumulus-pallet-dmp-queue = { version = "0.10.0", workspace = true }
+cumulus-pallet-parachain-system = { version = "0.10.0", workspace = true }
+cumulus-pallet-session-benchmarking = { version = "12.0.0", workspace = true }
+cumulus-pallet-xcm = { version = "0.10.0", workspace = true }
+cumulus-pallet-xcmp-queue = { version = "0.10.0", workspace = true }
+cumulus-primitives-core = { version = "0.10.0", workspace = true }
+cumulus-primitives-timestamp = { version = "0.10.0", workspace = true }
+cumulus-primitives-utility = { version = "0.10.0", workspace = true }
+pallet-collator-selection = { version = "12.0.0", workspace = true }
 parachain-info = { workspace = true }
-parachains-common = { workspace = true }
+parachains-common = { version = "10.0.0", workspace = true }
 
 # extra deps for setting up pallet-contracts
-pallet-contracts = { workspace = true }
-pallet-utility = { workspace = true }
-pallet-insecure-randomness-collective-flip = { workspace = true }
-pallet-assets = { workspace = true }
+pallet-contracts = { version = "30.0.0", workspace = true }
+pallet-utility = { version = "31.0.0", workspace = true }
+pallet-insecure-randomness-collective-flip = { version = "19.0.0", workspace = true }
+pallet-assets = { version = "32.0.0", workspace = true }
 
 [features]
 default = [
