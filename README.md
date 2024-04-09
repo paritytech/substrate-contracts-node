@@ -87,11 +87,10 @@ We can have two types of releases:
 * Crate release: This is the preferable type of release, which involves specifying crate versions in the Cargo.toml
   dependencies and releasing the crates on crates.io..
 
-- [ ] Check Substrate's [`node-template`](https://github.com/paritytech/polkadot-sdk/tree/master//substrate/bin/node-template/),
-      which was renamed after the Polkadot release `1.8.0` to [`solochain-template`](https://github.com/paritytech/polkadot-sdk/tree/master/templates/solochain),
+- [ ] Check Substrate's [`solochain-template`](https://github.com/paritytech/polkadot-sdk/tree/master/templates/solochain),
       for new commits between the new polkadot release branch and the one this repository is currently synced with.
       The current branch is mentioned in the last release.
-- [ ] Apply each commit that happened in this `node-template` folder since the last sync.
+- [ ] Apply each commit that happened in this `solochain-template` folder since the last sync.
 - [ ] Check [`parachain-template`](https://github.com/paritytech/polkadot-sdk/tree/master/templates/parachain)
       and apply each commit that has occurred in its folder since the last sync.
 - [ ] Check commits for [`pallet-contracts`](https://github.com/paritytech/polkadot-sdk/tree/master/substrate/frame/contracts)
