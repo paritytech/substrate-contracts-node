@@ -128,4 +128,3 @@ try-runtime = [
 	"pallet-assets/try-runtime",
 	"sp-runtime/try-runtime",
 ]
-experimental = [ "pallet-aura/experimental" ]
