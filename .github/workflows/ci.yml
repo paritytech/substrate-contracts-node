@@ -72,6 +72,10 @@ jobs:
   build-macos:
     timeout-minutes: 30
     runs-on: parity-macos
+    strategy:
+      fail-fast: true
+      matrix:
+        target: [aarch64-apple-darwin, x86_64-apple-darwin]
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: Set rust version from env file
@@ -89,7 +93,7 @@ jobs:
         with:
           cache: false
           toolchain: ${{ env.RUST_VERSION }}
-          target: wasm32-unknown-unknown,aarch64-apple-darwin,x86_64-apple-darwin
+          target: wasm32-unknown-unknown, ${{ matrix.target }}
           components: cargo, clippy, rust-docs, rust-src, rustfmt, rustc, rust-std
       - name: cargo info
         run: |
@@ -104,12 +108,13 @@ jobs:
           cache-all-crates: true
       - name: Run cargo build
         run: |
-          time cargo build --release --target aarch64-apple-darwin
-          time cargo build --release --target x86_64-apple-darwin
-          mkdir -p ./artifacts/substrate-contracts-node-mac/
-          lipo  ./target/x86_64-apple-darwin/release/substrate-contracts-node \
-                ./target/aarch64-apple-darwin/release/substrate-contracts-node  \
-                -create -output ./artifacts/substrate-contracts-node-mac/substrate-contracts-node
+          cargo build --release --target ${{ matrix.target }}
+          # cargo build --release --target aarch64-apple-darwin
+          # cargo build --release --target x86_64-apple-darwin
+          # mkdir -p ./artifacts/substrate-contracts-node-mac/
+          # lipo  ./target/x86_64-apple-darwin/release/substrate-contracts-node \
+          #       ./target/aarch64-apple-darwin/release/substrate-contracts-node  \
+          #       -create -output ./artifacts/substrate-contracts-node-mac/substrate-contracts-node
       - name: Upload artifacts
         uses: actions/upload-artifact@v4.3.6
         with:
