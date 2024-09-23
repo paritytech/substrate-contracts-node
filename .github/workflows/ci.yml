@@ -26,6 +26,7 @@ jobs:
     steps:
       - id: set_image
         run: echo "CI_IMAGE=${{ env.CI_IMAGE }}" >> $GITHUB_OUTPUT
+
   fmt:
     name: Cargo fmt
     runs-on: ubuntu-latest
@@ -35,15 +36,14 @@ jobs:
       image: ${{ needs.set-image.outputs.CI_IMAGE }}
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-
       - name: Rust Cache
         uses: Swatinem/rust-cache@23bce251a8cd2ffc3c1075eaa2367cf899916d84 # v2.7.3
         with:
           cache-on-failure: true
           cache-all-crates: true
-
       - name: Cargo fmt
         run: cargo +nightly fmt --all -- --check
+
   build-test-linux:
     name: Build Linux
     runs-on: parity-large
@@ -53,18 +53,22 @@ jobs:
       image: ${{ needs.set-image.outputs.CI_IMAGE }}
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-
       - name: Rust Cache
         uses: Swatinem/rust-cache@23bce251a8cd2ffc3c1075eaa2367cf899916d84 # v2.7.3
         with:
           cache-on-failure: true
           cache-all-crates: true
-
       - name: Build and Test Linux
         run: |
           cargo build --release
           cargo test --release --all
-
+          mkdir -p ./artifacts/substrate-contracts-node-linux/
+          cp target/release/substrate-contracts-node ./artifacts/substrate-contracts-node-linux/substrate-contracts-node
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4.3.6
+        with:
+          name: build-linux
+          path: ./artifacts
   build-macos:
     timeout-minutes: 30
     runs-on: parity-macos
@@ -100,12 +104,14 @@ jobs:
           cache-all-crates: true
       - name: Run cargo build
         run: |
-          # rustup component add rust-src rustfmt
-          # rustup target add wasm32-unknown-unknown aarch64-apple-darwin
           time cargo build --release --target aarch64-apple-darwin
-          # rustup target add x86_64-apple-darwin
           time cargo build --release --target x86_64-apple-darwin
           mkdir -p ./artifacts/substrate-contracts-node-mac/
           lipo  ./target/x86_64-apple-darwin/release/substrate-contracts-node \
                 ./target/aarch64-apple-darwin/release/substrate-contracts-node  \
                 -create -output ./artifacts/substrate-contracts-node-mac/substrate-contracts-node
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4.3.6
+        with:
+          name: build-macos
+          path: ./artifacts
