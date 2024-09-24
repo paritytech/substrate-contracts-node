@@ -143,11 +143,11 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4.1.7
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
           name: build-linux
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
           name: build-mac
       - name: Pack artifacts
@@ -156,7 +156,7 @@ jobs:
           tar -czvf ./substrate-contracts-node-mac-universal.tar.gz ./substrate-contracts-node-mac
           ls -la
       - name: Publish release
-        uses: ghalactic/github-release-from-tag@v5
+        uses: ghalactic/github-release-from-tag@cebdacac0ccd08933b8e7f278f4123723ad978eb # v5.4.0
         if: github.ref_type == 'tag'
         with:
           prerelease: false
