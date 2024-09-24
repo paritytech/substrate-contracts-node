@@ -136,3 +136,31 @@ jobs:
         with:
           name: build-macos
           path: ./artifacts
+  publish:
+    name: Publish release
+    runs-on: ubuntu-latest
+    needs: [build-test-linux, build-macos]
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4.1.7
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-linux
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-mac
+      - name: Pack artifacts
+        run: |
+          tar -czvf ./substrate-contracts-node-linux.tar.gz ./substrate-contracts-node-linux
+          tar -czvf ./substrate-contracts-node-mac-universal.tar.gz ./substrate-contracts-node-mac
+          ls -la
+      - name: Publish release
+        uses: ghalactic/github-release-from-tag@v5
+        if: github.ref_type == 'tag'
+        with:
+          prerelease: false
+          draft: true
+          assets: |
+            - path: substrate-contracts-node-linux.tar.gz
+            - path: substrate-contracts-node-mac-universal.tar.gz
