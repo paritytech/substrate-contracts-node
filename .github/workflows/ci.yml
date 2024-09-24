@@ -41,6 +41,12 @@ jobs:
         with:
           cache-on-failure: true
           cache-all-crates: true
+      - name: cargo info
+        run: |
+          echo "######## rustup show ########"
+          rustup show
+          echo "######## cargo --version ########"
+          cargo --version
       - name: Cargo fmt
         run: cargo +nightly fmt --all -- --check
 
@@ -48,7 +54,7 @@ jobs:
     name: Build Linux
     runs-on: parity-large
     timeout-minutes: 30
-    needs: [set-image]
+    needs: [set-image, fmt]
     container:
       image: ${{ needs.set-image.outputs.CI_IMAGE }}
     steps:
@@ -58,12 +64,22 @@ jobs:
         with:
           cache-on-failure: true
           cache-all-crates: true
+      - name: cargo info
+        run: |
+          echo "######## rustup show ########"
+          rustup show
+          echo "######## cargo --version ########"
+          cargo --version
       - name: Build and Test Linux
         run: |
+          echo "######## cargo build ########"
           cargo build --release
+          echo "######## cargo test ########"
           cargo test --release --all
+          echo "######## Packing artifacts ########"
           mkdir -p ./artifacts/substrate-contracts-node-linux/
           cp target/release/substrate-contracts-node ./artifacts/substrate-contracts-node-linux/substrate-contracts-node
+          ls -la ./artifacts/substrate-contracts-node-linux/
       - name: Upload artifacts
         uses: actions/upload-artifact@v4.3.6
         with:
@@ -72,6 +88,7 @@ jobs:
   build-macos:
     timeout-minutes: 30
     runs-on: parity-macos
+    needs: [fmt]
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: Set rust version from env file
@@ -104,12 +121,16 @@ jobs:
           cache-all-crates: true
       - name: Run cargo build
         run: |
+          echo "######## cargo build aarch64-apple-darwin ########"
           cargo build --release --target aarch64-apple-darwin
+          echo "######## cargo build x86_64-apple-darwin ########"
           cargo build --release --target x86_64-apple-darwin
+          echo "######## Packing artifacts ########"
           mkdir -p ./artifacts/substrate-contracts-node-mac/
           lipo  ./target/x86_64-apple-darwin/release/substrate-contracts-node \
                 ./target/aarch64-apple-darwin/release/substrate-contracts-node  \
                 -create -output ./artifacts/substrate-contracts-node-mac/substrate-contracts-node
+          ls -la ./artifacts/substrate-contracts-node-mac/
       - name: Upload artifacts
         uses: actions/upload-artifact@v4.3.6
         with:
