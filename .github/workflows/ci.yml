@@ -53,7 +53,7 @@ jobs:
   build-test-linux:
     name: Build Linux
     runs-on: parity-large
-    timeout-minutes: 30
+    timeout-minutes: 50
     needs: [set-image, fmt]
     container:
       image: ${{ needs.set-image.outputs.CI_IMAGE }}
