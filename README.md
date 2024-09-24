@@ -109,15 +109,17 @@ We can have two types of releases:
       `cargo release 0.XX.0 -v --no-tag --no-push -p contracts-node --execute`
       Note: Before uploading, perform a dry run to ensure that it will be successful.
 - [ ] Merge the release PR branch.
-- [ ] Replace `XX` in this command with your incremented version number and execute it:
-      ```bash
-      TAG="v0.XX.0"
-      git checkout main
-      git pull
-      git tag -a ${TAG} -m "${TAG}"
-      git push origin ${TAG}
-      ```
-      This will push a new tag with the version number to this repository.
+- [ ] Set the tag and run the following commands to push the tag. The tag must contain a message, otherwise the github action won't be able to create a release:
+  
+```bash
+TAG="v0.XX.0"
+git checkout main
+git pull
+git tag -a ${TAG} -m "${TAG}"
+git push origin ${TAG}
+```
+
+
 - [ ] After tag is pushed CI creates a GitHub draft release.
       This draft release will contain a binary for Linux and Mac and appear
       under [Releases](https://github.com/paritytech/substrate-contracts-node/releases).
