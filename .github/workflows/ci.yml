@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - v*
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
 
@@ -86,7 +88,7 @@ jobs:
           name: build-linux
           path: ./artifacts
   build-macos:
-    timeout-minutes: 30
+    timeout-minutes: 50
     runs-on: parity-macos
     needs: [fmt]
     steps:
