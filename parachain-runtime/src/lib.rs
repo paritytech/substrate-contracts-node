@@ -12,6 +12,9 @@ mod contracts_config;
 mod weights;
 mod xcm_config;
 
+extern crate alloc;
+
+use alloc::vec::Vec;
 use cumulus_pallet_parachain_system::RelayNumberStrictlyIncreases;
 use polkadot_runtime_common::xcm_sender::NoPriceForMessageDelivery;
 use smallvec::smallvec;
@@ -24,16 +27,11 @@ use sp_runtime::{
 	ApplyExtrinsicResult, MultiSignature,
 };
 
-use sp_std::prelude::*;
-#[cfg(feature = "std")]
-use sp_version::NativeVersion;
-use sp_version::RuntimeVersion;
-
 use cumulus_primitives_core::{AggregateMessageOrigin, ParaId};
 use frame_support::{
-	construct_runtime, derive_impl,
+	derive_impl,
 	dispatch::DispatchClass,
-	genesis_builder_helper::{build_config, create_default_config},
+	genesis_builder_helper::{build_state, get_preset},
 	parameter_types,
 	traits::{ConstBool, ConstU32, ConstU64, ConstU8, EitherOfDiverse, TransformOrigin},
 	weights::{
@@ -50,6 +48,9 @@ use pallet_xcm::{EnsureXcm, IsVoiceOfBody};
 use parachains_common::message_queue::{NarrowOriginToSibling, ParaIdToSibling};
 pub use sp_consensus_aura::sr25519::AuthorityId as AuraId;
 pub use sp_runtime::{MultiAddress, Perbill, Permill};
+#[cfg(feature = "std")]
+use sp_version::NativeVersion;
+use sp_version::RuntimeVersion;
 use xcm_config::{RelayLocation, XcmOriginToTransactDispatchOrigin};
 
 #[cfg(any(feature = "std", test))]
@@ -96,6 +97,13 @@ pub type SignedBlock = generic::SignedBlock<Block>;
 
 /// BlockId type as expected by this runtime.
 pub type BlockId = generic::BlockId<Block>;
+
+type ConsensusHook = cumulus_pallet_aura_ext::FixedVelocityConsensusHook<
+	Runtime,
+	RELAY_CHAIN_SLOT_DURATION_MILLIS,
+	BLOCK_PROCESSING_VELOCITY,
+	UNINCLUDED_SEGMENT_CAPACITY,
+>;
 
 /// The SignedExtension to the basic transaction logic.
 pub type SignedExtra = (
@@ -189,17 +197,20 @@ pub const VERSION: RuntimeVersion = RuntimeVersion {
 	state_version: 1,
 };
 
-/// This determines the average expected block time that we are targeting.
-/// Blocks will be produced at a minimum duration defined by `SLOT_DURATION`.
-/// `SLOT_DURATION` is picked up by `pallet_timestamp` which is in turn picked
-/// up by `pallet_aura` to implement `fn slot_duration()`.
-///
-/// Change this to adjust the block time.
-pub const MILLISECS_PER_BLOCK: u64 = 12000;
+mod block_times {
+	/// This determines the average expected block time that we are targeting. Blocks will be
+	/// produced at a minimum duration defined by `SLOT_DURATION`. `SLOT_DURATION` is picked up by
+	/// `pallet_timestamp` which is in turn picked up by `pallet_aura` to implement `fn
+	/// slot_duration()`.
+	///
+	/// Change this to adjust the block time.
+	pub const MILLISECS_PER_BLOCK: u64 = 6000;
 
-// NOTE: Currently it is not possible to change the slot duration after the chain has started.
-//       Attempting to do so will brick block production.
-pub const SLOT_DURATION: u64 = MILLISECS_PER_BLOCK;
+	// NOTE: Currently it is not possible to change the slot duration after the chain has started.
+	// Attempting to do so will brick block production.
+	pub const SLOT_DURATION: u64 = MILLISECS_PER_BLOCK;
+}
+pub use block_times::*;
 
 // Time is measured by number of blocks.
 pub const MINUTES: BlockNumber = 60_000 / (MILLISECS_PER_BLOCK as BlockNumber);
@@ -222,20 +233,23 @@ const AVERAGE_ON_INITIALIZE_RATIO: Perbill = Perbill::from_percent(5);
 /// `Operational` extrinsics.
 const NORMAL_DISPATCH_RATIO: Perbill = Perbill::from_percent(75);
 
-/// We allow for 0.5 of a second of compute with a 12 second average block time.
+/// We allow for 2 seconds of compute with a 6 second average block time.
 const MAXIMUM_BLOCK_WEIGHT: Weight = Weight::from_parts(
-	WEIGHT_REF_TIME_PER_SECOND.saturating_div(2),
+	WEIGHT_REF_TIME_PER_SECOND.saturating_mul(2),
 	cumulus_primitives_core::relay_chain::MAX_POV_SIZE as u64,
 );
 
-/// Maximum number of blocks simultaneously accepted by the Runtime, not yet included
-/// into the relay chain.
-const UNINCLUDED_SEGMENT_CAPACITY: u32 = 1;
-/// How many parachain blocks are processed by the relay chain per parent. Limits the
-/// number of blocks authored per slot.
-const BLOCK_PROCESSING_VELOCITY: u32 = 1;
-/// Relay chain slot duration, in milliseconds.
-const RELAY_CHAIN_SLOT_DURATION_MILLIS: u32 = 6000;
+mod async_backing_params {
+	/// Maximum number of blocks simultaneously accepted by the Runtime, not yet included
+	/// into the relay chain.
+	pub(crate) const UNINCLUDED_SEGMENT_CAPACITY: u32 = 3;
+	/// How many parachain blocks are processed by the relay chain per parent. Limits the
+	/// number of blocks authored per slot.
+	pub(crate) const BLOCK_PROCESSING_VELOCITY: u32 = 1;
+	/// Relay chain slot duration, in milliseconds.
+	pub(crate) const RELAY_CHAIN_SLOT_DURATION_MILLIS: u32 = 6000;
+}
+pub(crate) use async_backing_params::*;
 
 /// The version information used to identify this runtime when compiled natively.
 #[cfg(feature = "std")]
@@ -347,7 +361,7 @@ parameter_types! {
 
 impl pallet_transaction_payment::Config for Runtime {
 	type RuntimeEvent = RuntimeEvent;
-	type OnChargeTransaction = pallet_transaction_payment::CurrencyAdapter<Balances, ()>;
+	type OnChargeTransaction = pallet_transaction_payment::FungibleAdapter<Balances, ()>;
 	type WeightToFee = WeightToFee;
 	type LengthToFee = ConstantMultiplier<Balance, TransactionByteFee>;
 	type FeeMultiplierUpdate = SlowAdjustingFeeUpdate<Self>;
@@ -377,12 +391,7 @@ impl cumulus_pallet_parachain_system::Config for Runtime {
 	type XcmpMessageHandler = XcmpQueue;
 	type ReservedXcmpWeight = ReservedXcmpWeight;
 	type CheckAssociatedRelayNumber = RelayNumberStrictlyIncreases;
-	type ConsensusHook = cumulus_pallet_aura_ext::FixedVelocityConsensusHook<
-		Runtime,
-		RELAY_CHAIN_SLOT_DURATION_MILLIS,
-		BLOCK_PROCESSING_VELOCITY,
-		UNINCLUDED_SEGMENT_CAPACITY,
-	>;
+	type ConsensusHook = ConsensusHook;
 }
 
 impl parachain_info::Config for Runtime {}
@@ -408,8 +417,8 @@ impl pallet_message_queue::Config for Runtime {
 	// The XCMP queue pallet is only ever able to handle the `Sibling(ParaId)` origin:
 	type QueueChangeHandler = NarrowOriginToSibling<XcmpQueue>;
 	type QueuePausedQuery = NarrowOriginToSibling<XcmpQueue>;
-	type HeapSize = sp_core::ConstU32<{ 64 * 1024 }>;
-	type MaxStale = sp_core::ConstU32<8>;
+	type HeapSize = ConstU32<{ 64 * 1024 }>;
+	type MaxStale = ConstU32<8>;
 	type ServiceWeight = MessageQueueServiceWeight;
 	type IdleMaxServiceWeight = ();
 }
@@ -422,7 +431,9 @@ impl cumulus_pallet_xcmp_queue::Config for Runtime {
 	type VersionWrapper = ();
 	// Enqueue XCMP messages from siblings for later processing.
 	type XcmpQueue = TransformOrigin<MessageQueue, AggregateMessageOrigin, ParaId, ParaIdToSibling>;
-	type MaxInboundSuspended = sp_core::ConstU32<1_000>;
+	type MaxInboundSuspended = ConstU32<1_000>;
+	type MaxActiveOutboundChannels = ConstU32<128>;
+	type MaxPageSize = ConstU32<{ 1 << 16 }>;
 	type ControllerOrigin = EnsureRoot<AccountId>;
 	type ControllerOriginConverter = XcmOriginToTransactDispatchOrigin;
 	type WeightInfo = ();
@@ -495,37 +506,69 @@ impl pallet_utility::Config for Runtime {
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
-construct_runtime!(
-	pub struct Runtime {
-		// Order should match with Runtime defined in runtime/src/lib.rs
-		System: frame_system,
-		RandomnessCollectiveFlip: pallet_insecure_randomness_collective_flip,
-		Utility: pallet_utility,
-		Timestamp: pallet_timestamp,
-		Balances: pallet_balances,
-		Authorship: pallet_authorship,
-		TransactionPayment: pallet_transaction_payment,
-		Sudo: pallet_sudo,
-		Contracts: pallet_contracts,
-		Assets: pallet_assets,
+#[frame_support::runtime]
+mod runtime {
 
-		// Parachain support stuff.
-		ParachainSystem: cumulus_pallet_parachain_system,
-		ParachainInfo: parachain_info,
+	#[runtime::runtime]
+	#[runtime::derive(
+		RuntimeCall,
+		RuntimeEvent,
+		RuntimeError,
+		RuntimeOrigin,
+		RuntimeFreezeReason,
+		RuntimeHoldReason,
+		RuntimeSlashReason,
+		RuntimeLockId,
+		RuntimeTask
+	)]
+	pub struct Runtime;
 
-		// Collator support. The order of these 4 are important and shall not change.
-		CollatorSelection: pallet_collator_selection,
-		Session: pallet_session,
-		Aura: pallet_aura,
-		AuraExt: cumulus_pallet_aura_ext,
+	// Order should match with Runtime defined in runtime/src/lib.rs
+	#[runtime::pallet_index(0)]
+	pub type System = frame_system;
+	#[runtime::pallet_index(1)]
+	pub type RandomnessCollectiveFlip = pallet_insecure_randomness_collective_flip;
+	#[runtime::pallet_index(2)]
+	pub type Utility = pallet_utility;
+	#[runtime::pallet_index(3)]
+	pub type Timestamp = pallet_timestamp;
+	#[runtime::pallet_index(4)]
+	pub type Balances = pallet_balances;
+	#[runtime::pallet_index(5)]
+	pub type Authorship = pallet_authorship;
+	#[runtime::pallet_index(6)]
+	pub type TransactionPayment = pallet_transaction_payment;
+	#[runtime::pallet_index(7)]
+	pub type Sudo = pallet_sudo;
+	#[runtime::pallet_index(8)]
+	pub type Contracts = pallet_contracts;
+	#[runtime::pallet_index(9)]
+	pub type Assets = pallet_assets;
+	// Parachain support.
+	#[runtime::pallet_index(10)]
+	pub type ParachainSystem = cumulus_pallet_parachain_system;
+	#[runtime::pallet_index(11)]
+	pub type ParachainInfo = parachain_info;
 
-		// XCM helpers.
-		XcmpQueue: cumulus_pallet_xcmp_queue,
-		PolkadotXcm: pallet_xcm,
-		CumulusXcm: cumulus_pallet_xcm,
-		MessageQueue: pallet_message_queue,
-	}
-);
+	// Collator support. The order of these 4 are important and shall not change.
+	#[runtime::pallet_index(12)]
+	pub type CollatorSelection = pallet_collator_selection;
+	#[runtime::pallet_index(13)]
+	pub type Session = pallet_session;
+	#[runtime::pallet_index(14)]
+	pub type Aura = pallet_aura;
+	#[runtime::pallet_index(15)]
+	pub type AuraExt = cumulus_pallet_aura_ext;
+	// XCM helpers.
+	#[runtime::pallet_index(16)]
+	pub type XcmpQueue = cumulus_pallet_xcmp_queue;
+	#[runtime::pallet_index(17)]
+	pub type PolkadotXcm = pallet_xcm;
+	#[runtime::pallet_index(18)]
+	pub type CumulusXcm = cumulus_pallet_xcm;
+	#[runtime::pallet_index(19)]
+	pub type MessageQueue = pallet_message_queue;
+}
 
 #[cfg(feature = "runtime-benchmarks")]
 mod benches {
@@ -553,14 +596,24 @@ const CONTRACTS_DEBUG_OUTPUT: pallet_contracts::DebugInfo =
 	pallet_contracts::DebugInfo::UnsafeDebug;
 const CONTRACTS_EVENTS: pallet_contracts::CollectEvents =
 	pallet_contracts::CollectEvents::UnsafeCollect;
+
 impl_runtime_apis! {
 	impl sp_consensus_aura::AuraApi<Block, AuraId> for Runtime {
 		fn slot_duration() -> sp_consensus_aura::SlotDuration {
-			sp_consensus_aura::SlotDuration::from_millis(Aura::slot_duration())
+			sp_consensus_aura::SlotDuration::from_millis(SLOT_DURATION)
 		}
 
 		fn authorities() -> Vec<AuraId> {
 			pallet_aura::Authorities::<Runtime>::get().into_inner()
+		}
+	}
+
+	impl cumulus_primitives_aura::AuraUnincludedSegmentApi<Block> for Runtime {
+		fn can_build_upon(
+			included_hash: <Block as BlockT>::Hash,
+			slot: cumulus_primitives_aura::Slot
+		) -> bool {
+			ConsensusHook::can_build_upon(included_hash, slot)
 		}
 	}
 
@@ -587,7 +640,7 @@ impl_runtime_apis! {
 			Runtime::metadata_at_version(version)
 		}
 
-		fn metadata_versions() -> sp_std::vec::Vec<u32> {
+		fn metadata_versions() -> Vec<u32> {
 			Runtime::metadata_versions()
 		}
 	}
@@ -741,7 +794,7 @@ impl_runtime_apis! {
 
 			use frame_system_benchmarking::Pallet as SystemBench;
 			impl frame_system_benchmarking::Config for Runtime {
-				fn setup_set_code_requirements(code: &sp_std::vec::Vec<u8>) -> Result<(), BenchmarkError> {
+				fn setup_set_code_requirements(code: &Vec<u8>) -> Result<(), BenchmarkError> {
 					ParachainSystem::initialize_for_set_code_benchmark(code.len() as u32);
 					Ok(())
 				}
@@ -834,12 +887,16 @@ impl_runtime_apis! {
 	}
 
 	impl sp_genesis_builder::GenesisBuilder<Block> for Runtime {
-		fn create_default_config() -> Vec<u8> {
-			create_default_config::<RuntimeGenesisConfig>()
+		fn build_state(config: Vec<u8>) -> sp_genesis_builder::Result {
+			build_state::<RuntimeGenesisConfig>(config)
 		}
 
-		fn build_config(config: Vec<u8>) -> sp_genesis_builder::Result {
-			build_config::<RuntimeGenesisConfig>(config)
+		fn get_preset(id: &Option<sp_genesis_builder::PresetId>) -> Option<Vec<u8>> {
+			get_preset::<RuntimeGenesisConfig>(id, |_| None)
+		}
+
+		fn preset_names() -> Vec<sp_genesis_builder::PresetId> {
+			Default::default()
 		}
 	}
 }

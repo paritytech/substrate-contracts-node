@@ -26,6 +26,7 @@ use cumulus_relay_chain_interface::{OverseerHandle, RelayChainInterface};
 
 // Substrate Imports
 use frame_benchmarking_cli::SUBSTRATE_REFERENCE_HARDWARE;
+use prometheus_endpoint::Registry;
 use sc_client_api::Backend;
 use sc_consensus::ImportQueue;
 use sc_executor::{HeapAllocStrategy, WasmExecutor, DEFAULT_HEAP_ALLOC_STRATEGY};
@@ -35,7 +36,6 @@ use sc_service::{Configuration, PartialComponents, TFullBackend, TFullClient, Ta
 use sc_telemetry::{Telemetry, TelemetryHandle, TelemetryWorker, TelemetryWorkerHandle};
 use sc_transaction_pool_api::OffchainTransactionPoolFactory;
 use sp_keystore::KeystorePtr;
-use substrate_prometheus_endpoint::Registry;
 
 type ParachainExecutor = WasmExecutor<ParachainHostFunctions>;
 
@@ -332,7 +332,6 @@ fn build_import_queue(
 			let timestamp = sp_timestamp::InherentDataProvider::from_system_time();
 			Ok(timestamp)
 		},
-		slot_duration,
 		&task_manager.spawn_essential_handle(),
 		config.prometheus_registry(),
 		telemetry,
@@ -359,11 +358,6 @@ fn start_consensus(
 		self as basic_aura, Params as BasicAuraParams,
 	};
 
-	// NOTE: because we use Aura here explicitly, we can use `CollatorSybilResistance::Resistant`
-	// when starting the network.
-
-	let slot_duration = cumulus_client_consensus_aura::slot_duration(&*client)?;
-
 	let proposer_factory = sc_basic_authorship::ProposerFactory::with_proof_recording(
 		task_manager.spawn_handle(),
 		client.clone(),
@@ -386,12 +380,10 @@ fn start_consensus(
 		block_import,
 		para_client: client,
 		relay_client: relay_chain_interface,
-		sync_oracle,
 		keystore,
 		collator_key,
 		para_id,
 		overseer_handle,
-		slot_duration,
 		relay_chain_slot_duration,
 		proposer,
 		collator_service,
@@ -400,10 +392,9 @@ fn start_consensus(
 		collation_request_receiver: None,
 	};
 
-	let fut =
-		basic_aura::run::<Block, sp_consensus_aura::sr25519::AuthorityPair, _, _, _, _, _, _, _>(
-			params,
-		);
+	let fut = basic_aura::run::<Block, sp_consensus_aura::sr25519::AuthorityPair, _, _, _, _, _, _>(
+		params,
+	);
 	task_manager.spawn_essential_handle().spawn("aura", None, fut);
 
 	Ok(())
