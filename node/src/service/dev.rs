@@ -3,7 +3,6 @@
 use contracts_node_runtime::{self, opaque::Block, RuntimeApi};
 use futures::FutureExt;
 use sc_client_api::Backend;
-pub use sc_executor::NativeElseWasmExecutor;
 use sc_service::{error::Error as ServiceError, Configuration, TaskManager};
 use sc_telemetry::{Telemetry, TelemetryWorker};
 use sc_transaction_pool_api::OffchainTransactionPoolFactory;
@@ -29,8 +28,11 @@ impl sc_executor::NativeExecutionDispatch for ExecutorDispatch {
 	}
 }
 
-pub(crate) type FullClient =
-	sc_service::TFullClient<Block, RuntimeApi, NativeElseWasmExecutor<ExecutorDispatch>>;
+pub(crate) type FullClient = sc_service::TFullClient<
+	Block,
+	RuntimeApi,
+	sc_executor::WasmExecutor<sp_io::SubstrateHostFunctions>,
+>;
 type FullBackend = sc_service::TFullBackend<Block>;
 type FullSelectChain = sc_consensus::LongestChain<FullBackend, Block>;
 
@@ -43,7 +45,7 @@ pub fn new_partial(
 		FullSelectChain,
 		sc_consensus::DefaultImportQueue<Block>,
 		sc_transaction_pool::FullPool<Block, FullClient>,
-		(Option<Telemetry>,),
+		Option<Telemetry>,
 	>,
 	ServiceError,
 > {
@@ -58,7 +60,7 @@ pub fn new_partial(
 		})
 		.transpose()?;
 
-	let executor = sc_service::new_native_or_wasm_executor(config);
+	let executor = sc_service::new_wasm_executor(config);
 
 	let (client, backend, keystore_container, task_manager) =
 		sc_service::new_full_parts::<Block, RuntimeApi, _>(
@@ -97,11 +99,13 @@ pub fn new_partial(
 		keystore_container,
 		select_chain,
 		transaction_pool,
-		other: (telemetry,),
+		other: (telemetry),
 	})
 }
 
-pub fn new_full(
+pub fn new_full<
+	N: sc_network::NetworkBackend<Block, <Block as sp_runtime::traits::Block>::Hash>,
+>(
 	config: Configuration,
 	finalize_delay_sec: u64,
 ) -> Result<TaskManager, ServiceError> {
@@ -113,22 +117,28 @@ pub fn new_full(
 		keystore_container,
 		select_chain,
 		transaction_pool,
-		other: (mut telemetry,),
+		other: mut telemetry,
 	} = new_partial(&config)?;
 
-	let net_config = sc_network::config::FullNetworkConfiguration::new(&config.network);
+	let net_config = sc_network::config::FullNetworkConfiguration::<
+		Block,
+		<Block as sp_runtime::traits::Block>::Hash,
+		N,
+	>::new(&config.network);
+	let metrics = N::register_notification_metrics(config.prometheus_registry());
 
 	let (network, system_rpc_tx, tx_handler_controller, network_starter, sync_service) =
 		sc_service::build_network(sc_service::BuildNetworkParams {
 			config: &config,
-			net_config,
 			client: client.clone(),
 			transaction_pool: transaction_pool.clone(),
 			spawn_handle: task_manager.spawn_handle(),
 			import_queue,
+			net_config,
 			block_announce_validator_builder: None,
 			warp_sync_params: None,
 			block_relay: None,
+			metrics,
 		})?;
 
 	if config.offchain_worker.enabled {
@@ -143,7 +153,7 @@ pub fn new_full(
 				transaction_pool: Some(OffchainTransactionPoolFactory::new(
 					transaction_pool.clone(),
 				)),
-				network_provider: network.clone(),
+				network_provider: Arc::new(network.clone()),
 				enable_http_requests: true,
 				custom_extensions: |_| vec![],
 			})
@@ -164,8 +174,8 @@ pub fn new_full(
 		})
 	};
 
-	sc_service::spawn_tasks(sc_service::SpawnTasksParams {
-		network: network.clone(),
+	let _rpc_handlers = sc_service::spawn_tasks(sc_service::SpawnTasksParams {
+		network,
 		client: client.clone(),
 		keystore: keystore_container.keystore(),
 		task_manager: &mut task_manager,
@@ -174,7 +184,7 @@ pub fn new_full(
 		backend,
 		system_rpc_tx,
 		tx_handler_controller,
-		sync_service: sync_service.clone(),
+		sync_service,
 		config,
 		telemetry: telemetry.as_mut(),
 	})?;
