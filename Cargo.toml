@@ -72,12 +72,10 @@ sp-keyring = { version = "39.0.0", default-features = false }
 sp-block-builder = { version = "34.0.0", default-features = false }
 sp-blockchain = { version = "37.0.1" }
 sp-consensus-aura = { version = "0.40.0", default-features = false }
-sp-consensus-beefy = { version = "22.1.0", default-features = false }
 sp-core = { version = "34.0.0", default-features = false }
 sp-inherents = { version = "34.0.0", default-features = false }
 sp-io = { version = "38.0.0", default-features = false }
 sp-keystore = { version = "0.40.0" }
-sp-mmr-primitives = { version = "34.1.0", default-features = false }
 sp-offchain = { version = "34.0.0", default-features = false }
 sp-runtime = { version = "39.0.1", default-features = false }
 sp-session = { version = "36.0.0", default-features = false }

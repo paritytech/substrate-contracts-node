@@ -7,7 +7,6 @@ use sc_cli::{
 	NetworkParams, Result, RpcEndpoint, SharedParams, SubstrateCli,
 };
 use sc_service::config::{BasePath, PrometheusConfig};
-use sp_runtime::traits::AccountIdConversion;
 
 use crate::{
 	chain_spec,
