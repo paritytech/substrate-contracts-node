@@ -42,8 +42,10 @@ pallet-transaction-payment-rpc-runtime-api = { workspace = true }
 sp-api = { workspace = true }
 sp-block-builder = { workspace = true }
 sp-consensus-aura = { workspace = true }
+sp-consensus-beefy = { workspace = true }
 sp-core = { workspace = true }
 sp-inherents = { workspace = true }
+sp-mmr-primitives = { workspace = true }
 sp-offchain = { workspace = true }
 sp-runtime = { workspace = true }
 sp-session = { workspace = true }
@@ -123,8 +125,10 @@ std = [
 	"sp-api/std",
 	"sp-block-builder/std",
 	"sp-consensus-aura/std",
+	"sp-consensus-beefy/std",
 	"sp-core/std",
 	"sp-inherents/std",
+	"sp-mmr-primitives/std",
 	"sp-offchain/std",
 	"sp-runtime/std",
 	"sp-session/std",
