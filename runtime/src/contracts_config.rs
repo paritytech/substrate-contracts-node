@@ -28,6 +28,7 @@ fn schedule<T: pallet_contracts::Config>() -> pallet_contracts::Schedule<T> {
 	pallet_contracts::Schedule {
 		limits: pallet_contracts::Limits {
 			runtime_memory: 1024 * 1024 * 1024,
+			validator_runtime_memory: 1024 * 1024 * 1024 * 2,
 			..Default::default()
 		},
 		..Default::default()
