@@ -1,10 +1,10 @@
-use contracts_node_runtime::{AccountId, RuntimeGenesisConfig, Signature, WASM_BINARY};
+use contracts_node_runtime::{AccountId, Signature, WASM_BINARY};
 use sc_service::ChainType;
 use sp_core::{sr25519, Pair, Public};
 use sp_runtime::traits::{IdentifyAccount, Verify};
 
 /// Specialized `ChainSpec`. This is a specialization of the general Substrate ChainSpec type.
-pub type ChainSpec = sc_service::GenericChainSpec<RuntimeGenesisConfig>;
+pub type ChainSpec = sc_service::GenericChainSpec;
 
 /// Generate a crypto pair from seed.
 pub fn get_from_seed<TPublic: Public>(seed: &str) -> <TPublic::Pair as Pair>::Public {
@@ -24,35 +24,31 @@ where
 }
 
 pub fn development_config() -> Result<ChainSpec, String> {
-	Ok(ChainSpec::builder(
-		WASM_BINARY.ok_or_else(|| "Development wasm not available".to_string())?,
-		None,
-	)
-	.with_name("Development")
-	.with_id("dev")
-	.with_protocol_id("dev")
-	.with_chain_type(ChainType::Development)
-	.with_genesis_config_patch(testnet_genesis(
-		// Sudo account
-		get_account_id_from_seed::<sr25519::Public>("Alice"),
-		// Pre-funded accounts
-		vec![
+	Ok(ChainSpec::builder(WASM_BINARY.expect("Development wasm not available"), Default::default())
+		.with_name("Development")
+		.with_id("dev")
+		.with_chain_type(ChainType::Development)
+		.with_genesis_config_patch(testnet_genesis(
+			// Sudo account
 			get_account_id_from_seed::<sr25519::Public>("Alice"),
-			get_account_id_from_seed::<sr25519::Public>("Alice//stash"),
-			get_account_id_from_seed::<sr25519::Public>("Bob"),
-			get_account_id_from_seed::<sr25519::Public>("Bob//stash"),
-			get_account_id_from_seed::<sr25519::Public>("Charlie"),
-			get_account_id_from_seed::<sr25519::Public>("Charlie//stash"),
-			get_account_id_from_seed::<sr25519::Public>("Dave"),
-			get_account_id_from_seed::<sr25519::Public>("Dave//stash"),
-			get_account_id_from_seed::<sr25519::Public>("Eve"),
-			get_account_id_from_seed::<sr25519::Public>("Eve//stash"),
-			get_account_id_from_seed::<sr25519::Public>("Ferdie"),
-			get_account_id_from_seed::<sr25519::Public>("Ferdie//stash"),
-		],
-		true,
-	))
-	.build())
+			// Pre-funded accounts
+			vec![
+				get_account_id_from_seed::<sr25519::Public>("Alice"),
+				get_account_id_from_seed::<sr25519::Public>("Alice//stash"),
+				get_account_id_from_seed::<sr25519::Public>("Bob"),
+				get_account_id_from_seed::<sr25519::Public>("Bob//stash"),
+				get_account_id_from_seed::<sr25519::Public>("Charlie"),
+				get_account_id_from_seed::<sr25519::Public>("Charlie//stash"),
+				get_account_id_from_seed::<sr25519::Public>("Dave"),
+				get_account_id_from_seed::<sr25519::Public>("Dave//stash"),
+				get_account_id_from_seed::<sr25519::Public>("Eve"),
+				get_account_id_from_seed::<sr25519::Public>("Eve//stash"),
+				get_account_id_from_seed::<sr25519::Public>("Ferdie"),
+				get_account_id_from_seed::<sr25519::Public>("Ferdie//stash"),
+			],
+			true,
+		))
+		.build())
 }
 
 /// Configure initial storage state for FRAME modules.

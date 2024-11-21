@@ -27,8 +27,8 @@ serde_json = { workspace = true }
 wasmtime = { workspace = true }
 
 # Local
-contracts-parachain-runtime = { path = "../parachain-runtime", features = ["parachain"], version = "0.41.0" }
-contracts-node-runtime = { path = "../runtime",  version = "0.41.0" }
+contracts-parachain-runtime = { path = "../parachain-runtime", features = ["parachain"], version = "0.42.0" }
+contracts-node-runtime = { path = "../runtime",  version = "0.42.0" }
 
 # Substrate
 frame-benchmarking = { workspace = true }
@@ -61,7 +61,7 @@ sp-io = { workspace = true }
 sp-runtime = { workspace = true }
 sp-timestamp = { workspace = true }
 substrate-frame-rpc-system = { workspace = true }
-substrate-prometheus-endpoint = { workspace = true }
+prometheus-endpoint = { workspace = true }
 try-runtime-cli = { workspace = true, optional = true }
 
 # extra for running solo-chain
@@ -71,7 +71,7 @@ sc-consensus-aura = { workspace = true }
 sc-consensus-manual-seal = { workspace = true }
 
 # Polkadot
-polkadot-cli = { workspace = true }
+polkadot-cli = { features = ["rococo-native"], workspace = true }
 polkadot-primitives = { workspace = true }
 xcm = { workspace = true }
 
