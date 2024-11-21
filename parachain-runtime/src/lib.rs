@@ -6,9 +6,9 @@
 #[cfg(feature = "std")]
 include!(concat!(env!("OUT_DIR"), "/wasm_binary.rs"));
 
-// mod contracts_config;
 mod assets_config;
 mod contracts_config;
+mod revive_config;
 mod weights;
 mod xcm_config;
 
@@ -543,30 +543,32 @@ mod runtime {
 	#[runtime::pallet_index(8)]
 	pub type Contracts = pallet_contracts;
 	#[runtime::pallet_index(9)]
+	pub type Revive = pallet_revive;
+	#[runtime::pallet_index(10)]
 	pub type Assets = pallet_assets;
 	// Parachain support.
-	#[runtime::pallet_index(10)]
-	pub type ParachainSystem = cumulus_pallet_parachain_system;
 	#[runtime::pallet_index(11)]
+	pub type ParachainSystem = cumulus_pallet_parachain_system;
+	#[runtime::pallet_index(12)]
 	pub type ParachainInfo = parachain_info;
 
 	// Collator support. The order of these 4 are important and shall not change.
-	#[runtime::pallet_index(12)]
-	pub type CollatorSelection = pallet_collator_selection;
 	#[runtime::pallet_index(13)]
-	pub type Session = pallet_session;
+	pub type CollatorSelection = pallet_collator_selection;
 	#[runtime::pallet_index(14)]
-	pub type Aura = pallet_aura;
+	pub type Session = pallet_session;
 	#[runtime::pallet_index(15)]
+	pub type Aura = pallet_aura;
+	#[runtime::pallet_index(16)]
 	pub type AuraExt = cumulus_pallet_aura_ext;
 	// XCM helpers.
-	#[runtime::pallet_index(16)]
-	pub type XcmpQueue = cumulus_pallet_xcmp_queue;
 	#[runtime::pallet_index(17)]
-	pub type PolkadotXcm = pallet_xcm;
+	pub type XcmpQueue = cumulus_pallet_xcmp_queue;
 	#[runtime::pallet_index(18)]
-	pub type CumulusXcm = cumulus_pallet_xcm;
+	pub type PolkadotXcm = pallet_xcm;
 	#[runtime::pallet_index(19)]
+	pub type CumulusXcm = cumulus_pallet_xcm;
+	#[runtime::pallet_index(20)]
 	pub type MessageQueue = pallet_message_queue;
 }
 
@@ -590,12 +592,14 @@ type EventRecord = frame_system::EventRecord<
 	<Runtime as frame_system::Config>::Hash,
 >;
 
-// Prints debug output of the `contracts` pallet to stdout if the node is
-// started with `-lruntime::contracts=debug`.
+// Prints debug output of the `revive` pallet to stdout if the node is
+// started with `-lruntime::revive=trace` or `-lruntime::contracts=debug`.
 const CONTRACTS_DEBUG_OUTPUT: pallet_contracts::DebugInfo =
 	pallet_contracts::DebugInfo::UnsafeDebug;
 const CONTRACTS_EVENTS: pallet_contracts::CollectEvents =
 	pallet_contracts::CollectEvents::UnsafeCollect;
+const REVIVE_DEBUG_OUTPUT: pallet_revive::DebugInfo = pallet_revive::DebugInfo::UnsafeDebug;
+const REVIVE_EVENTS: pallet_revive::CollectEvents = pallet_revive::CollectEvents::UnsafeCollect;
 
 impl_runtime_apis! {
 	impl sp_consensus_aura::AuraApi<Block, AuraId> for Runtime {
@@ -819,6 +823,75 @@ impl_runtime_apis! {
 		}
 	}
 
+	impl pallet_revive::ReviveApi<Block, AccountId, Balance, BlockNumber, Hash, EventRecord> for Runtime
+	{
+		fn call(
+			origin: AccountId,
+			dest: AccountId,
+			value: Balance,
+			gas_limit: Option<Weight>,
+			storage_deposit_limit: Option<Balance>,
+			input_data: Vec<u8>,
+		) -> pallet_revive::ContractExecResult<Balance, EventRecord> {
+			Revive::bare_call(
+				RuntimeOrigin::signed(origin),
+				dest,
+				value,
+				gas_limit.unwrap_or(RuntimeBlockWeights::get().max_block),
+				storage_deposit_limit.unwrap_or(u128::MAX),
+				input_data,
+				REVIVE_DEBUG_OUTPUT,
+				REVIVE_EVENTS,
+			)
+		}
+
+		fn instantiate(
+			origin: AccountId,
+			value: Balance,
+			gas_limit: Option<Weight>,
+			storage_deposit_limit: Option<Balance>,
+			code: pallet_revive::Code<Hash>,
+			data: Vec<u8>,
+			salt: Vec<u8>,
+		) -> pallet_revive::ContractInstantiateResult<AccountId, Balance, EventRecord>
+		{
+			Revive::bare_instantiate(
+				RuntimeOrigin::signed(origin),
+				value,
+				gas_limit.unwrap_or(RuntimeBlockWeights::get().max_block),
+				storage_deposit_limit.unwrap_or(u128::MAX),
+				code,
+				data,
+				salt,
+				REVIVE_DEBUG_OUTPUT,
+				REVIVE_EVENTS,
+			)
+		}
+
+		fn upload_code(
+			origin: AccountId,
+			code: Vec<u8>,
+			storage_deposit_limit: Option<Balance>,
+		) -> pallet_revive::CodeUploadResult<Hash, Balance>
+		{
+			Revive::bare_upload_code(
+				RuntimeOrigin::signed(origin),
+				code,
+				storage_deposit_limit.unwrap_or(u128::MAX),
+			)
+		}
+
+		fn get_storage(
+			address: AccountId,
+			key: Vec<u8>,
+		) -> pallet_revive::GetStorageResult {
+			Revive::get_storage(
+				address,
+				key
+			)
+		}
+	}
+
 	impl pallet_contracts::ContractsApi<Block, AccountId, Balance, BlockNumber, Hash, EventRecord>
 		for Runtime
 	{
@@ -885,6 +958,7 @@ impl_runtime_apis! {
 			Contracts::get_storage(address, key)
 		}
 	}
+
 
 	impl sp_genesis_builder::GenesisBuilder<Block> for Runtime {
 		fn build_state(config: Vec<u8>) -> sp_genesis_builder::Result {
