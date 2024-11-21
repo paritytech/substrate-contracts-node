@@ -109,12 +109,18 @@ We can have two types of releases:
       `cargo release 0.XX.0 -v --no-tag --no-push -p contracts-node --execute`
       Note: Before uploading, perform a dry run to ensure that it will be successful.
 - [ ] Merge the release PR branch.
-- [ ] Replace `XX` in this command with your incremented version number and execute it:
-      `git checkout main && git pull && git tag v0.XX.0 && git push origin v0.XX.0`.
-      This will push a new tag with the version number to this repository.
-- [ ] We have set this repository up in a way that tags à la `vX.X.X` trigger
-      a CI run that creates a GitHub draft release. You can observe CI runs on
-      [GitLab](https://gitlab.parity.io/parity/mirrors/substrate-contracts-node/-/pipelines).
+- [ ] Set the tag and run the following commands to push the tag. The tag must contain a message, otherwise the github action won't be able to create a release:
+  
+```bash
+TAG="v0.XX.0"
+git checkout main
+git pull
+git tag -a ${TAG} -m "${TAG}"
+git push origin ${TAG}
+```
+
+
+- [ ] After tag is pushed CI creates a GitHub draft release.
       This draft release will contain a binary for Linux and Mac and appear
       under [Releases](https://github.com/paritytech/substrate-contracts-node/releases).
       Add a description in the style of "Synchronized with [`polkadot-v1.8.0`](https://github.com/paritytech/polkadot-sdk/tree/release-polkadot-v1.8.0) branch."
