@@ -128,3 +128,4 @@ try-runtime = [
   "pallet-contracts/try-runtime",
   "sp-runtime/try-runtime",
 ]
+parachain = []
