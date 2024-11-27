@@ -29,8 +29,8 @@ wasmtime = { workspace = true }
 # Local
 contracts-parachain-runtime = { path = "../parachain-runtime", features = [
   "parachain",
-], version = "0.43.0" }
-contracts-node-runtime = { path = "../runtime", version = "0.43.0" }
+], version = "0.42.0" }
+contracts-node-runtime = { path = "../runtime", version = "0.42.0" }
 
 # Substrate
 frame-benchmarking = { workspace = true }

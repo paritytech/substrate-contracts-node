@@ -1406,7 +1406,7 @@ checksum = "cd7e35aee659887cbfb97aaf227ac12cad1a9d7c71e55ff3376839ed4e282d08"
 
 [[package]]
 name = "contracts-node"
-version = "0.43.0"
+version = "0.42.0"
 dependencies = [
  "clap",
  "color-print",
@@ -1472,7 +1472,7 @@ dependencies = [
 
 [[package]]
 name = "contracts-node-runtime"
-version = "0.43.0"
+version = "0.42.0"
 dependencies = [
  "frame-benchmarking",
  "frame-executive",
@@ -1515,7 +1515,7 @@ dependencies = [
 
 [[package]]
 name = "contracts-parachain-runtime"
-version = "0.43.0"
+version = "0.42.0"
 dependencies = [
  "cumulus-pallet-aura-ext",
  "cumulus-pallet-dmp-queue",
