@@ -95,10 +95,10 @@ substrate-build-script-utils = { workspace = true }
 [features]
 default = []
 runtime-benchmarks = [
-  "contracts-parachain-runtime/runtime-benchmarks",
-  "polkadot-cli/runtime-benchmarks",
+	"contracts-parachain-runtime/runtime-benchmarks",
+	"polkadot-cli/runtime-benchmarks",
 ]
 try-runtime = [
-  "try-runtime-cli/try-runtime",
-  "contracts-parachain-runtime/try-runtime",
+	"try-runtime-cli/try-runtime",
+	"contracts-parachain-runtime/try-runtime",
 ]
