@@ -1,0 +1,1 @@
+../../runtime/src/revive_config.rs

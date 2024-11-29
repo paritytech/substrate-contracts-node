@@ -3,7 +3,7 @@ name = "contracts-parachain-runtime"
 version.workspace = true
 authors.workspace = true
 edition.workspace = true
-description = "Parachain Runtime configured for smart contracts via `pallet-contracts`."
+description = "Parachain Runtime configured for smart contracts via `pallet-contracts` and `pallet-revive`."
 license.workspace = true
 homepage.workspace = true
 repository.workspace = true
@@ -11,13 +11,13 @@ repository.workspace = true
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 [build-dependencies]
-substrate-wasm-builder = {workspace = true, optional = true }
+substrate-wasm-builder = { workspace = true, optional = true }
 
 [dependencies]
-codec = { package = "parity-scale-codec", version = "3.6.9", default-features = false, features = ["derive"] }
+codec = { features = ["derive"], workspace = true }
 hex-literal = { version = "0.4.1", optional = true }
-log = { version = "0.4.20", default-features = false }
-scale-info = { version = "2.11.1", default-features = false, features = ["derive"] }
+log = { version = "0.4.21", default-features = false }
+scale-info = { workspace = true }
 smallvec = "1.11.2"
 
 # Substrate
@@ -25,9 +25,9 @@ frame-benchmarking = { workspace = true, optional = true }
 frame-executive = { workspace = true }
 frame-support = { workspace = true }
 frame-system = { workspace = true }
-frame-system-benchmarking = {workspace = true, optional = true}
+frame-system-benchmarking = { workspace = true, optional = true }
 frame-system-rpc-runtime-api = { workspace = true }
-frame-try-runtime = { workspace = true, optional = true}
+frame-try-runtime = { workspace = true, optional = true }
 pallet-aura = { workspace = true }
 pallet-authorship = { workspace = true }
 pallet-balances = { workspace = true }
@@ -65,6 +65,7 @@ cumulus-pallet-parachain-system = { workspace = true }
 cumulus-pallet-session-benchmarking = { workspace = true }
 cumulus-pallet-xcm = { workspace = true }
 cumulus-pallet-xcmp-queue = { workspace = true }
+cumulus-primitives-aura = { workspace = true }
 cumulus-primitives-core = { workspace = true }
 cumulus-primitives-timestamp = { workspace = true }
 cumulus-primitives-utility = { workspace = true }
@@ -72,16 +73,15 @@ pallet-collator-selection = { workspace = true }
 parachain-info = { workspace = true }
 parachains-common = { workspace = true }
 
-# extra deps for setting up pallet-contracts
+# extra deps for setting up pallet-contracts and pallet-revive
 pallet-contracts = { workspace = true }
+pallet-revive = { workspace = true }
 pallet-utility = { workspace = true }
 pallet-insecure-randomness-collective-flip = { workspace = true }
 pallet-assets = { workspace = true }
 
 [features]
-default = [
-	"std",
-]
+default = ["std"]
 std = [
 	"codec/std",
 	"cumulus-pallet-aura-ext/std",
@@ -89,6 +89,7 @@ std = [
 	"cumulus-pallet-parachain-system/std",
 	"cumulus-pallet-xcm/std",
 	"cumulus-pallet-xcmp-queue/std",
+	"cumulus-primitives-aura/std",
 	"cumulus-primitives-core/std",
 	"cumulus-primitives-timestamp/std",
 	"cumulus-primitives-utility/std",
@@ -103,6 +104,7 @@ std = [
 	"pallet-balances/std",
 	"pallet-collator-selection/std",
 	"pallet-contracts/std",
+	"pallet-revive/std",
 	"pallet-insecure-randomness-collective-flip/std",
 	"pallet-session/std",
 	"pallet-sudo/std",
@@ -168,6 +170,8 @@ try-runtime = [
 	"pallet-authorship/try-runtime",
 	"pallet-balances/try-runtime",
 	"pallet-collator-selection/try-runtime",
+	"pallet-contracts/try-runtime",
+	"pallet-revive/try-runtime",
 	"pallet-session/try-runtime",
 	"pallet-sudo/try-runtime",
 	"pallet-timestamp/try-runtime",
